@@ -1,0 +1,132 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.speech-sender {
+  width: fit-content;
+  align-items: flex-end;
+  max-width: 150px;
+	position: relative;
+	background: #3cc83e;
+	border-radius: .4em;
+  margin-left: 110px;
+}
+
+
+.speech-sender:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 90%;
+	width: 0;
+	height: 0;
+  border: 10px solid transparent;
+	border-top-color: #3cc83e;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -8.5px;
+	margin-bottom: -20px;
+  padding-bottom: 12px;
+}
+
+.speech-receiver {
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 150px;
+	position: relative;
+	background: #40a1dd;
+	border-radius: .4em;
+}
+
+.speech-receiver:after {
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 16%;
+	width: 0;
+	height: 0;
+  border: 10px solid transparent;
+	border-top-color: #40a1dd;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -8.5px;
+	margin-bottom: -20px;
+  padding-bottom: 12px;
+}
+
+.card-footer {
+  justify-content: space-between;
+  padding: 4%;
+}
+
+.z-index {
+  z-index: 500;
+}
+
+.left {
+  margin-left: 250px;
+}
+
+.icon:hover {
+  fill: #DA4567;
+}
+
+.mar-t {
+  margin-top: 0px;
+}
+
+.category-button {
+  background-color: #1e3b50;
+  align-content: center;
+  margin-bottom: 3px;
+  text-align: center;
+  margin-left: 40px;
+}
+
+.drop-button {
+  background-color: #1e3b50;
+}
+
+.chat {
+  position: fixed;
+  bottom: 10%;
+  right: 17%;
+  border-radius: 5%;
+  margin-right: 50px;
+}
+
+.border {
+  border-radius: 2%;
+  border: solid #1e3b50 2px;
+}
+
+.border-text-area {
+  border-radius: 6%;
+  border: solid #1e3b50 2px;
+}
+
+.mobile-dropDown {
+  position: absolute;
+  top: 64px;
+  background-color: #1e3b50;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  color:aqua;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+} */
