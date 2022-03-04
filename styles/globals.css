@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.card-footer {
+  justify-content: space-between;
+  padding: 4%;
+}
+
+.z-index {
+  z-index: 500;
+}
+
+.icon:hover {
+  fill: #DA4567;
+}
+
+.mar-t {
+  margin-top: 0px;
+}
+
+.category-button {
+  background-color: #1e3b50;
+  align-content: center;
+  margin-bottom: 3px;
+  text-align: center;
+  margin-left: 40px;
+}
+
+.drop-button {
+  background-color: #1e3b50;
+}
+
+.chat {
+  position: fixed;
+  bottom: 10%;
+  right: 13%;
+  border-radius: 5%;
+}
+
+.border {
+  border-radius: 2%;
+  border: solid #1e3b50 2px;
+}
+
+.border-text-area {
+  border-radius: 6%;
+  border: solid #1e3b50 2px;
+}
+
+/* html,
+body {
+  padding: 0;
+  margin: 0;
+  color:aqua;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+} */
