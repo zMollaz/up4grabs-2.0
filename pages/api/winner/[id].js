@@ -13,5 +13,4 @@ export default async function winnerHandler(req, res) {
     });
     res.json({ winner });
   }
-
 }

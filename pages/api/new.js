@@ -1,5 +1,5 @@
 import axios from "axios";
-import dayjs from 'dayjs';
+import dayjs from "dayjs";
 const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
 
@@ -18,11 +18,11 @@ export default async function formHandler(req, res) {
     return res.status(405).json({ messsage: "Method not allowed" });
   }
   const retrievedState = req.body.state;
-  const categoryToInteger = Number(retrievedState.category_id)
+  const categoryToInteger = Number(retrievedState.category_id);
   const user = req.body.user.id;
   const imageUrl = await uploadToWebApi(retrievedState);
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  const startDate = dayjs(Date.now()).format('YYYY-MM-DDTHH:mm:ss')
+  const startDate = dayjs(Date.now()).format("YYYY-MM-DDTHH:mm:ss");
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
@@ -31,7 +31,7 @@ export default async function formHandler(req, res) {
     start_date: startDate,
     end_date: endDate,
   };
-  
+
   const savedListing = await prisma.listings.create({
     data: newListing,
   });

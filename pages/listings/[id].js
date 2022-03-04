@@ -79,7 +79,7 @@ export default function ListingPage(props) {
       user_id: user.id,
       listing_id: props.listingId,
     });
-    
+
     const getResponse = await axios.get(`/api/likes/${props.listingId}`);
     const biddings = getResponse.data.likes;
     setBidCount(biddings.length);
@@ -120,13 +120,13 @@ export default function ListingPage(props) {
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                 </button>
-                </div>
-                 <div className="flex flex-col">
+              </div>
+              <div className="flex flex-col">
                 <button className="bg-gray-dark mt-[10px] ml-[105px] items-center w-40 btn gap-2">
-                  Bid Count 
+                  Bid Count
                   <div className="badge badge-secondary">{bidCount}</div>
                 </button>
-                </div>
+              </div>
             </div>
             <div className="lg:w-[60%] w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0 xs:flex xs:flex-col xs:items-center">
               <h2 className="text-sm title-font text-gray-dark tracking-widest">

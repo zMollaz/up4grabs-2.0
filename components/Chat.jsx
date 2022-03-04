@@ -3,7 +3,7 @@ import { UsersContext } from "../context/UsersContext";
 import io from "Socket.IO-client";
 
 let socket;
-export default function Chat({ handleClick, setDisplay }) {
+export default function Chat() {
   // let socket; //might need to move it back outside the component if a bug happen
 
   const [text, setText] = useState("");
@@ -27,10 +27,9 @@ export default function Chat({ handleClick, setDisplay }) {
     socketInitializer();
 
     return () => {
-      socket.disconnect() // gives an error after some time, invistigaet later
-      console.log("disconnected")
+      socket.disconnect(); // gives an error after some time, invistigaet later
+      console.log("disconnected");
     };
-    
   }, []);
 
   const changeHandler = (e) => {
@@ -55,43 +54,47 @@ export default function Chat({ handleClick, setDisplay }) {
   return (
     <div className="rounded chat absolute container w-3">
       <div className="margin-bottom align-items-center border-chat overflow-auto d-flex flex-column align-items-stretch flex-shrink-0 bg-t-gray shadow-md shadow-2xl">
-        <div className="d-flex align-items-center flex-shrink-0 p-2 link-dark text-decoration-none border-bottom">
-        </div>
+        <div className="d-flex align-items-center flex-shrink-0 p-2 link-dark text-decoration-none border-bottom"></div>
         <div
           className="list-group list-group-flush text-black w-[250px] border-bottom scrollarea"
-          style={{ 
+          style={{
             minHeight: "250px",
-            maxHeight: "250px"
-           }}
+            maxHeight: "250px",
+          }}
         >
-        
           {messages.map((message, index) => {
-            const position = message.sender === user.name ? "speech-receiver" : " speech-sender"
-              return (
-                <div 
-                key={index}
-                className={`flex flex-col ${position} m-2`}>
-                  <div className="d-flex w-fit align-items-center justify-content-between">
-                    <strong className="mb-1 p-1">@{message.sender}</strong>
-                  </div>
-                  <div className="mb-1 p-1 break-words w-full items-end small">{message.content}</div>
+            const position =
+              message.sender === user.name
+                ? "speech-receiver"
+                : " speech-sender";
+            return (
+              <div key={index} className={`flex flex-col ${position} m-2`}>
+                <div className="d-flex w-fit align-items-center justify-content-between">
+                  <strong className="mb-1 p-1">@{message.sender}</strong>
                 </div>
-              );
+                <div className="mb-1 p-1 break-words w-full items-end small">
+                  {message.content}
+                </div>
+              </div>
+            );
           })}
-        <div>
-          <br/>
-          <br/>
+          <div>
+            <br />
+            <br />
+          </div>
         </div>
+        <form
+          onSubmit={submitHandler}
+          className=" chat-css border-text-area shadow-md shadow-2xl"
+        >
+          <input
+            className="w-[240px] form-control overflow-auto text-black rounded"
+            placeholder=" Write a message               ➢ "
+            value={text}
+            onChange={changeHandler}
+          />
+        </form>
       </div>
-      <form onSubmit={submitHandler} className=" chat-css border-text-area shadow-md shadow-2xl">
-        <input
-          className="w-[240px] form-control overflow-auto text-black rounded"
-          placeholder=" Write a message               ➢ "
-          value={text}
-          onChange={changeHandler}
-        />
-      </form>
-    </div>
     </div>
   );
 }

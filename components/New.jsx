@@ -21,7 +21,7 @@ export default function New({ handleClick, setDisplay }) {
     const newState = { ...state, [name]: value };
     setState(newState);
   };
-  
+
   const saveListing = async (e) => {
     e.preventDefault();
     const response = await fetch("/api/new", {
@@ -137,42 +137,41 @@ export default function New({ handleClick, setDisplay }) {
             />
           </div>
           <div className="flex items-center right-0 top-0 s-between w-full">
-          <div>
-          <label
-            htmlFor="end_date"
-            className="flow-root mt-2 font-bold text-sm text-gray-dark  "
-            >
-            Draw Date
-          </label>
-            <input
-              onChange={changeHandler}
-              value={state.end_date}
-              name="end_date"
-              className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 block w-[210px] p-2.5"
-              type="date"
-              id="start"
-              min="2020-01-01"
-              max="2024-12-31"
+            <div>
+              <label
+                htmlFor="end_date"
+                className="flow-root mt-2 font-bold text-sm text-gray-dark  "
+              >
+                Draw Date
+              </label>
+              <input
+                onChange={changeHandler}
+                value={state.end_date}
+                name="end_date"
+                className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 block w-[210px] p-2.5"
+                type="date"
+                id="start"
+                min="2020-01-01"
+                max="2024-12-31"
               />
-              </div>
-              <div>
-
-            <select
-              name="category_id"
-              onChange={changeHandler}
-              className="font-bold category-button mt-8 text-md rounded-md"
-              defaultValue={0}
-            >
-              <option disabled value={0}>
-              Category
-              </option>
-              <option value={1}>Furniture</option>
-              <option value={2}>Toys/Games</option>
-              <option value={3}>Electronics</option>
-              <option value={4}>Home Appliances</option>
-              <option value={5}>Books</option>
-            </select>
-              </div>
+            </div>
+            <div>
+              <select
+                name="category_id"
+                onChange={changeHandler}
+                className="font-bold category-button mt-8 text-md rounded-md"
+                defaultValue={0}
+              >
+                <option disabled value={0}>
+                  Category
+                </option>
+                <option value={1}>Furniture</option>
+                <option value={2}>Toys/Games</option>
+                <option value={3}>Electronics</option>
+                <option value={4}>Home Appliances</option>
+                <option value={5}>Books</option>
+              </select>
+            </div>
           </div>
           <div className="flex justify-center">
             <div className="max-w-2xl rounded-lg bg-gray-50">

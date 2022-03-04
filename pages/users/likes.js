@@ -56,15 +56,17 @@ export default function UserLikes(props) {
           aria-hidden="true"
           className="max-w-fill h-full relative overflow-y-auto overflow-x-auto right-0 left-0 top-4 z-100 justify-center items-center h-modal md:h-full md:inset-0"
         > */}
-          {/* <div className=" flex-1 flex-col inset-0  w-full  h-full md:h-auto"> */}
-            <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
-              {filteredLikes.length > 0 ? (
-                parsedListings
-              ) : (
-                <div className="h-full">You currently have no biddings to display</div>
-              )}
+        {/* <div className=" flex-1 flex-col inset-0  w-full  h-full md:h-auto"> */}
+        <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
+          {filteredLikes.length > 0 ? (
+            parsedListings
+          ) : (
+            <div className="h-full">
+              You currently have no biddings to display
             </div>
-          {/* </div> */}
+          )}
+        </div>
+        {/* </div> */}
         {/* </div> */}
       </Layout>
     </ListingsContext.Provider>

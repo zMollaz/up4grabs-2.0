@@ -57,8 +57,7 @@ export default function Countdown({
     if (itemWinner) {
       axios
         .post("/api/email", data)
-        .then((response) => {
-        })
+        .then((response) => {})
         .catch((error) => console.log(error));
 
       const winnerData = {
@@ -67,8 +66,7 @@ export default function Countdown({
       };
       axios
         .post("/api/winner", winnerData)
-        .then((response) => {
-        })
+        .then((response) => {})
         .catch((error) => console.log(error));
       return itemWinner;
     }
@@ -78,20 +76,21 @@ export default function Countdown({
     if (timeUp) {
       randomWinner(users, listingItem);
       setTimeout(() => {
-
-        axios.get(`/api/winner/${listingItem.id}`)
-        .then((response)=>{
-          const resWinner = response.data.winner;
-          const getWinner = users.find((user) => user.id === resWinner.user_id);
-          setWinner(getWinner)
-        })
-        .catch((err) => console.log(err))
-      }, 400)
-    }   
+        axios
+          .get(`/api/winner/${listingItem.id}`)
+          .then((response) => {
+            const resWinner = response.data.winner;
+            const getWinner = users.find(
+              (user) => user.id === resWinner.user_id
+            );
+            setWinner(getWinner);
+          })
+          .catch((err) => console.log(err));
+      }, 400);
+    }
 
     //might need clean up because of memory leak
   }, [timeUp]);
-
 
   return (
     <>

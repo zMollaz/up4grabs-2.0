@@ -1,26 +1,26 @@
 import ListingItem from "./ListingItem";
-import dayjs from 'dayjs';
-import relativeTime from 'dayjs/plugin/relativeTime';
-import { useContext } from 'react';
-import {ListingsContext} from "../context/ListingsContext";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { useContext } from "react";
+import { ListingsContext } from "../context/ListingsContext";
 
-export default function Listings(props) {
-  const {filteredListings} = useContext(ListingsContext)
-  
+export default function Listings() {
+  const { filteredListings } = useContext(ListingsContext);
+
   const myDate = function (date) {
-    dayjs.extend(relativeTime)
+    dayjs.extend(relativeTime);
     return dayjs(date).fromNow();
   };
 
   const parsedListings = filteredListings.map((listing) => {
     return (
-        <ListingItem
-          title={listing.title}
-          img={listing.img_src}
-          date={myDate(listing.start_date)}
-          id={listing.id}
-          key={listing.id}
-        />
+      <ListingItem
+        title={listing.title}
+        img={listing.img_src}
+        date={myDate(listing.start_date)}
+        id={listing.id}
+        key={listing.id}
+      />
     );
   });
   return (

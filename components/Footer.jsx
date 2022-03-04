@@ -17,32 +17,32 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
   return (
     <footer className="z-index bottom-0 rounded fixed flex-row lg:items-end flex lg:justify-between lg:px-4 lg:py-2 footer bg-gray-dark font-bold text-md text-neutral-content ">
       <div className="lg:items-end lg:flex">
-          <svg
-            onClick={() => setTimeUp((prev) => !prev)}
-            className="h-8 w-8 text-white pt-1"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <path d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1" />{" "}
-            <path
-              d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1"
-              transform="rotate(120 12 13)"
-            />{" "}
-            <path
-              d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1"
-              transform="rotate(240 12 13)"
-            />
-          </svg>
+        <svg
+          onClick={() => setTimeUp((prev) => !prev)}
+          className="h-8 w-8 text-white pt-1"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1" />{" "}
+          <path
+            d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1"
+            transform="rotate(120 12 13)"
+          />{" "}
+          <path
+            d="M12 17l-2 2l2 2m-2 -2h9a2 2 0 0 0 1.75 -2.75l-.55 -1"
+            transform="rotate(240 12 13)"
+          />
+        </svg>
       </div>
-        <p className="mt-1">Up4Grabs © 2022 - All rights reserved</p>
+      <p className="mt-1">Up4Grabs © 2022 - All rights reserved</p>
       {chatDisplay && (
         <DynamicComponentWithNoSSR
           handleClick={handleClickChat}
@@ -52,7 +52,10 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
 
       <div className="flex lg:items-center">
         {(showChat || listingOwner) && (
-          <span onClick={handleClickChat} className="text-white btn btn-sm input input-ghost">
+          <span
+            onClick={handleClickChat}
+            className="text-white btn btn-sm input input-ghost"
+          >
             <svg
               className="h-6 w-6 text-white"
               fill="none"

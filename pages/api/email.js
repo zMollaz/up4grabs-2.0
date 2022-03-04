@@ -22,16 +22,15 @@ export default async function emailHandler(req, res) {
         listingImage: req.body.listingImage,
       },
       // template_id: "d-9c1463d498324294b040e2b08e5c3313",  //template 1
-      template_id: "d-9b54ba70537b492192ade1c98b7df59b",     //template 2
+      template_id: "d-9b54ba70537b492192ade1c98b7df59b", //template 2
     };
 
     sgMail
       .send(message)
       .then((response) => {
-        console.log("Email sent!")
+        console.log("Email sent!");
         res.json({ response });
-    })
+      })
       .catch((error) => console.log(error.message));
-
   }
 }

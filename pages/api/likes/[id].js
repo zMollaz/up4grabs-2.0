@@ -14,5 +14,4 @@ export default async function likeHandler(req, res) {
 
     res.json({ likes });
   }
-  
 }

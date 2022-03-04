@@ -4,7 +4,7 @@ import { useState, useContext } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { UsersContext } from "../context/UsersContext";
 
-export default function Navbar(props) {
+export default function Navbar() {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { users, user, switchUser, loaded } = useContext(UsersContext); //with this line can import into any component and access users/ state level step-up
   // const [searchValue, setSearchValue] = useState("");
