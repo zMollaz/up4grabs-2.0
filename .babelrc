@@ -1,7 +1,0 @@
-// add a . before babel rc and remove .txt to revert back to original file format
-
-
-{
-  "presets": ["next/babel"],
-  "plugins": []
-}

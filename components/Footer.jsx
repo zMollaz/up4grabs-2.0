@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { UsersContext } from "../context/UsersContext";
-import dynamic from "next/dynamic";
-const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
-  ssr: false,
-});
+// import dynamic from "next/dynamic";
+// const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
+//   ssr: false,
+// });
 
 export default function Footer({ setTimeUp, winner, listingItem }) {
   const { user, users } = useContext(UsersContext);
@@ -43,12 +43,12 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
         </svg>
       </div>
       <p className="mt-1">Up4Grabs © 2022 - All rights reserved</p>
-      {chatDisplay && (
+      {/* {chatDisplay && (
         <DynamicComponentWithNoSSR
           handleClick={handleClickChat}
           setDisplay={setChatDisplay}
         />
-      )}
+      )} */}
 
       <div className="flex lg:items-center">
         {(showChat || listingOwner) && (
