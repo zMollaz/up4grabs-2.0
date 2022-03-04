@@ -1,0 +1,168 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.speech-sender {
+  width: fit-content;
+  align-items: flex-end;
+  max-width: 150px;
+	position: relative;
+	background: #3cc83e;
+	border-radius: .4em;
+  margin-left: 110px;
+  filter: drop-shadow(6px 5px 4px #227423);
+}
+
+
+.speech-sender:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 90%;
+	width: 0;
+	height: 0;
+  border: 10px solid transparent;
+	border-top-color: #3cc83e;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -8.5px;
+	margin-bottom: -20px;
+  padding-bottom: 12px;
+}
+
+.speech-receiver {
+  align-items: flex-start;
+  width: fit-content;
+  max-width: 150px;
+	position: relative;
+	background: #40a1dd;
+	border-radius: .4em;
+  filter: drop-shadow(6px 5px 4px #245f85);
+
+}
+
+.speech-receiver:after {
+  content: '';
+	position: absolute;
+	bottom: 0;
+	left: 16%;
+	width: 0;
+	height: 0;
+  border: 10px solid transparent;
+	border-top-color: #40a1dd;
+	border-bottom: 0;
+	border-left: 0;
+	margin-left: -8.5px;
+	margin-bottom: -20px;
+  padding-bottom: 12px;
+}
+
+.card-footer {
+  justify-content: space-between;
+  padding: 4%;
+}
+
+.z-index {
+  z-index: 500;
+}
+
+
+
+.icon:hover {
+  fill: #DA4567;
+}
+
+.mar-t {
+  margin-top: 0px;
+}
+
+.category-button {
+  background-color: #1e3b50;
+  align-content: center;
+  margin-bottom: 3px;
+  text-align: center;
+  margin-left: 40px;
+  height: 45px;
+  width: 190px;
+}
+
+.drop-button {
+  background-color: #1e3b50;
+}
+
+.chat {
+  position: fixed;
+  bottom: 8%;
+  right: 0%;
+  border-radius: 5%;
+  margin-right: 270px;
+}
+
+.border {
+  border-radius: 2%;
+  border: solid #1e3b50 2px;
+}
+
+.border-chat {
+  border-radius: 2%;
+  border: solid #1e3b50 5px;
+}
+
+.border-text-area {
+  border-radius: 15%;
+  background-color: #dddddd;
+  /* border: solid #1e3b50 5px; */
+}
+
+.chat-css {
+  position: absolute;
+  bottom: 2%;
+  margin-left: 5px;
+
+}
+
+.margin-bottom {
+  padding-bottom: 100px;
+}
+
+.mobile-dropDown {
+  position: absolute;
+  top: 64px;
+  background-color: #1e3b50;
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+
+@media (min-width: 500px) and (max-width: 768px) {
+  .hidden-mobile {
+    display: none;
+  } 
+  .full-modal {
+    width: 100vw;
+    height: 100vh;
+    top:0%;
+  } 
+}
+
+
+@media (min-width: 768px)  {
+  .mobile-menu {
+    display: none;
+  }
+}
+
+
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  height:75%;
+  width:50vh;
+  transform: translate(-50%, -50%);
+}
+
+.margin {
+padding-top: 25px;
+background-color: #f7f9fb;
+padding-bottom: 75px;
+}
