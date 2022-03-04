@@ -1,3 +1,11 @@
+//before
+
+// {
+//   "extends": ["next/babel","next/core-web-vitals"]
+// }
+
+//after
+
 {
-  "extends": ["next/babel","next/core-web-vitals"]
-}
+  "parser": "babel-eslint"
+ }
