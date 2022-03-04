@@ -1,0 +1,35 @@
+{
+  "name": "up4grabs",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db-format": "npx prisma format",
+    "db-migrate": "npx prisma migrate dev",
+    "db-reset": "npx prisma migrate reset",
+    "db-seed": "node prisma/seeds.js"
+  },
+  "dependencies": {
+    "@prisma/client": "^3.9.2",
+    "autoprefixer": "^10.4.2",
+    "axios": "^0.26.0",
+    "daisyui": "^1.25.4",
+    "filereader": "^0.10.3",
+    "mapbox-gl": "^2.7.0",
+    "moment": "^2.29.1",
+    "next": "12.0.10",
+    "postcss": "^8.4.6",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
+    "react-map-gl": "^7.0.6",
+    "react-moment": "^1.1.1"
+  },
+  "devDependencies": {
+    "eslint": "8.8.0",
+    "eslint-config-next": "12.0.10",
+    "prisma": "^3.9.2",
+    "tailwindcss": "^3.0.19"
+  }
+}
