@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       Int            @id @default(autoincrement())
+  name     String?
+  email    String         @unique
+  password String?
+  Sender   Conversation[] @relation("sender_id")
+  Receiver Conversation[] @relation("receiver_id")
+  messages  Message[]
+}
+
+model Categories {
+  id       Int     @id @default(autoincrement())
+  category String?
+}
+
+model Listings {
+  id          Int     @id @default(autoincrement())
+  user_id     Int
+  category_id Int?
+  title       String?
+  description String?
+  img_src     String?
+  start_date  String?
+  end_date    String?
+  postal_code String?
+}
+
+model Biddings {
+  id         Int @id @default(autoincrement())
+  user_id    Int
+  listing_id Int
+}
+
+model Conversation {
+  id          Int       @id @default(autoincrement())
+  sender_id   Int
+  receiver_id Int
+  sender      User      @relation(name: "sender_id", fields: [sender_id], references: [id])
+  receiver    User      @relation(name: "receiver_id", fields: [receiver_id], references: [id])
+  messages    Message[]
+}
+
+model Message {
+  id              Int          @id @default(autoincrement())
+  content         String
+  timestamp       DateTime     @default(now())
+  sender_id       Int
+  User            User         @relation(fields: [sender_id], references: [id])
+  conversation_id Int
+  Conversation    Conversation @relation(fields: [conversation_id], references: [id])
+
+}
+
+enum Role {
+  USER
+  ADMIN
+}
