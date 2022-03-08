@@ -6,7 +6,7 @@ import prisma from "../lib/prisma";
 import { ListingsContext } from "../context/ListingsContext";
 import useListings from "../hooks/useListings";
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const defaultListings = await prisma.listings.findMany();
   const users = await prisma.user.findMany();
 
