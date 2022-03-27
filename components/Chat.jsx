@@ -14,9 +14,10 @@ export default function Chat() {
     });
 
     const channel = pusher.subscribe("chat");
+
     console.log("chat connected");
+
     channel.bind("chat-event", function (data) {
-      console.log(222, data);
       setMessages((prevState) => [
         ...prevState,
         { sender: data.sender.name, content: data.message },

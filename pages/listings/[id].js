@@ -17,7 +17,7 @@ const DynamicComponentWithNoSSR = dynamic(
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiYWVsbW9sbGF6IiwiYSI6ImNremJpcmY4ZDJlbjIyb28yZWt3NjF5MmMifQ.03oFENowylydeoRfp732qg";
 
-export async function getServerSideProps(context) {
+export const getServerSideProps = async (context) => {
   const listingItem = await prisma.listings.findUnique({
     where: {
       id: Number(context.params.id),
@@ -31,6 +31,11 @@ export async function getServerSideProps(context) {
   });
 
   const users = await prisma.user.findMany();
+  const listingWinner = await prisma.Winners.findFirst({
+    where: {
+      listing_id: Number(context.params.id),
+    },
+  });
   const defaultListings = await prisma.listings.findMany();
   const listingId = Number(context.params.id);
   const response = await axios.get(
@@ -48,16 +53,22 @@ export async function getServerSideProps(context) {
       defaultListings,
       listingId,
       biddings,
+      listingWinner,
     },
   };
-}
+};
 
 export default function ListingPage(props) {
+
+  const findWinner = props.users.find(
+    (user) => user.id === props.listingWinner?.user_id
+  );
+  
   const { title, description, img_src, end_date } = props.listingItem;
   const { user, users } = useContext(UsersContext);
   const [color, setColor] = useState("none");
   const [timeUp, setTimeUp] = useState(false);
-  const [winner, setWinner] = useState({});
+  const [winner, setWinner] = useState(findWinner || {});
   const [bidCount, setBidCount] = useState(0);
 
   const likeHistory = async () => {
@@ -223,4 +234,3 @@ export default function ListingPage(props) {
     </ListingsContext.Provider>
   );
 }
-//test t

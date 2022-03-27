@@ -88,13 +88,15 @@ export default function Countdown({
           .catch((err) => console.log(err));
       }, 400);
     }
+    console.log(444, winner.name);
 
     //might need clean up because of memory leak
   }, [timeUp]);
-
+  // }, []);
   return (
     <>
-      {!timeUp ? (
+      {/* {!timeUp ? ( */}
+      {!winner.name ? (
         <div className="py-2 border-gray-200 text-red text-xl grid grid-flow-col gap-2 text-center auto-cols-max">
           {data} until draw!
         </div>
