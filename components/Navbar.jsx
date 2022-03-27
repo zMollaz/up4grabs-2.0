@@ -44,7 +44,7 @@ export default function Navbar() {
 
   const clickableOutsideInput = (e) => {
     e.stopPropagation();
-  }
+  };
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
@@ -63,7 +63,7 @@ export default function Navbar() {
   return (
     <div
       onClick={handleClickNav}
-      className="navbar rounded sticky flex content-between top-0 z-index shadow-lg bg-gray-dark text-off-white"
+      className="navbar rounded sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white w-screen"
     >
       <div className="lg:hidden flex items-center">
         <button
@@ -106,7 +106,7 @@ export default function Navbar() {
             </svg> */}
             <a
               onClick={handleCLickUserIcon}
-              className={`${userIconHidden} btn input input-ghost btn-sm rounded-btn mb-1.5`}
+              className={`xs:${userIconHidden} sm:${userIconHidden} btn input input-ghost btn-sm rounded-btn mb-1.5`}
             >
               <svg
                 className="h-7 w-7 text-white"
@@ -129,7 +129,7 @@ export default function Navbar() {
               onChange={(e) => {
                 switchUser(e.target.value);
               }}
-              className={`${userListHidden} text-white w-20 btn btn-sm input input-ghost mb-1.5`}
+              className={`xs:${userListHidden} sm:${userListHidden} text-white w-20 btn btn-sm input input-ghost mb-1.5`}
               value={user.id}
             >
               <option value="0" className="" disabled>
@@ -228,7 +228,7 @@ export default function Navbar() {
             </a>
           </Link>
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-3">
+            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -310,7 +310,7 @@ export default function Navbar() {
         </a>
       </div> */}
 
-      <div className="flex-1 lg:flex-none">
+      <div className=" ">
         <div className="form-control">
           <input
             defaultValue={searchValue}
@@ -329,13 +329,13 @@ export default function Navbar() {
             }}
             type="text"
             // placeholder="Search"
-            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-60 sm:w-28 md:w-24 lg:w-32 sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
+            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-60 sm:w-28 md:w-24 lg:w-[90%] sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
           />
         </div>
         {/* for the search icon copy the starting a tag till the ending a tag  */}
         <a
           onClick={handleCLickSearchIcon}
-          className="btn btn-sm input input-ghost lg:mr-5"
+          className="btn btn-sm input input-ghost lg:mr-5 xs:mr-0 xs:justify-self-end"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
