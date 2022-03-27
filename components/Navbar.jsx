@@ -10,6 +10,8 @@ export default function Navbar() {
   // const [searchValue, setSearchValue] = useState("");
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
+  const [hideUserIcon, setHideUserIcon] = useState(false);
+  const [hideUserList, setHideUserList] = useState(true);
 
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
@@ -20,6 +22,8 @@ export default function Navbar() {
   };
 
   const isHidden = showDropdown ? "hidden" : "";
+  const userIconHidden = hideUserIcon ? "hidden" : "";
+  const userListHidden = hideUserList ? "hidden" : "";
 
   const userList = users.map((oneUser) => {
     return (
@@ -30,7 +34,7 @@ export default function Navbar() {
   });
 
   return (
-    <div className="navbar rounded sticky sm:flex top-0 z-index shadow-lg bg-gray-dark text-off-white">
+    <div className="navbar rounded sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white">
       <div className="md:hidden lg:hidden flex items-center">
         <button
           onClick={handleDropdown}
@@ -52,6 +56,38 @@ export default function Navbar() {
       </div>
       {/* Mobile menu  */}
       <div className={`${isHidden} mobile-menu flex-col mobile-dropDown`}>
+        <div className="flex ">
+          <label htmlFor="select-user">
+            <svg
+              className={`${userIconHidden} mb-50 h-6 w-6 text-white mt-1 `}
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+              />
+            </svg>
+          </label>
+          {loaded && (
+            <select
+              name="users"
+              onChange={(e) => {
+                switchUser(e.target.value);
+              }}
+              className={`${userListHidden} text-white w-20 btn btn-sm input input-ghost`}
+              value={user.id}
+            >
+              <option value="0" className="" disabled>
+                Switch user
+              </option>
+              {userList}
+            </select>
+          )}
+        </div>
         <ul className="">
           <li>
             <Link href="#listings">

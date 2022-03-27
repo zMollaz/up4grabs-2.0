@@ -127,7 +127,8 @@
 
 .mobile-dropDown {
   position: absolute;
-  top: 64px;
+  top: 85px;
+  left:0;
   background-color: #1e3b50;
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
