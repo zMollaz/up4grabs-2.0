@@ -10,20 +10,35 @@ export default function Navbar() {
   // const [searchValue, setSearchValue] = useState("");
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
-  const [hideUserIcon, setHideUserIcon] = useState(false);
-  const [hideUserList, setHideUserList] = useState(true);
+  const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
+  const [hideUserList, setHideUserList] = useState(user ? false : true);
+  const [hideSearchBar, setHideSearchBar] = useState(true);
+  const [hidelogo, setHideLogo] = useState(false);
 
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
   };
 
   const handleDropdown = () => {
-    setShowDropdown(!showDropdown);
+    setShowDropdown((prev) => !prev);
+  };
+
+  const handleCLickUserIcon = () => {
+    setHideUserIcon((prev) => !prev);
+    setHideUserList((prev) => !prev);
+  };
+
+  const handleCLickSearchIcon = () => {
+    onSearch(searchValue)
+    setHideSearchBar((prev) => !prev);
+    setHideLogo((prev) => !prev);
   };
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
   const userListHidden = hideUserList ? "hidden" : "";
+  const searchBarHidden = hideSearchBar ? "hidden" : "";
+  const logoHidden = hidelogo ? "hidden" : "";
 
   const userList = users.map((oneUser) => {
     return (
@@ -35,7 +50,7 @@ export default function Navbar() {
 
   return (
     <div className="navbar rounded sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white">
-      <div className="md:hidden lg:hidden flex items-center">
+      <div className="lg:hidden flex items-center">
         <button
           onClick={handleDropdown}
           className="pr-2 outline-none mobile-menu-button"
@@ -55,22 +70,43 @@ export default function Navbar() {
         </button>
       </div>
       {/* Mobile menu  */}
-      <div className={`${isHidden} mobile-menu flex-col mobile-dropDown`}>
-        <div className="flex ">
+      <div
+        className={`${isHidden} mobile-menu flex-col mobile-dropDown items-center`}
+      >
+        <div className="">
           <label htmlFor="select-user">
-            <svg
-              className={`${userIconHidden} mb-50 h-6 w-6 text-white mt-1 `}
+            {/* <svg
+              xmlns="http://www.w3.org/2000/svg"
+              className="h-7 w-7 btn btn-sm input input-ghost text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
+              strokeWidth={2}
             >
               <path
                 strokeLinecap="round"
                 strokeLinejoin="round"
-                strokeWidth="2"
                 d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
               />
-            </svg>
+            </svg> */}
+            <a
+              onClick={handleCLickUserIcon}
+              className={`${userIconHidden} btn input input-ghost btn-sm rounded-btn mb-1.5`}
+            >
+              <svg
+                className="h-7 w-7 text-white"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+                />
+              </svg>
+            </a>
           </label>
           {loaded && (
             <select
@@ -78,7 +114,7 @@ export default function Navbar() {
               onChange={(e) => {
                 switchUser(e.target.value);
               }}
-              className={`${userListHidden} text-white w-20 btn btn-sm input input-ghost`}
+              className={`${userListHidden} text-white w-20 btn btn-sm input input-ghost mb-1.5`}
               value={user.id}
             >
               <option value="0" className="" disabled>
@@ -91,7 +127,7 @@ export default function Navbar() {
         <ul className="">
           <li>
             <Link href="#listings">
-              <a className="ml-2.5 mt-0.5 btn input input-ghost btn-sm rounded-btn">
+              <a className="btn input input-ghost btn-sm rounded-btn mb-1.5">
                 <svg
                   className="w-7 h-7  text-white"
                   width="24"
@@ -116,12 +152,12 @@ export default function Navbar() {
             </Link>
           </li>
           <Link href="/users/likes">
-            <a className="mt-1 btn input input-ghost btn-sm rounded-btn mx-3">
+            <a className=" btn input input-ghost btn-sm rounded-btn mb-1.5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block w-6 h-6  hover:fill-red hover:text-red stroke-current"
+                className="inline-block w-7 h-7  hover:fill-red hover:text-red stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -135,10 +171,10 @@ export default function Navbar() {
         </ul>
         <a
           onClick={handleClickNew}
-          className="mb-2 mt-1 btn input input-ghost btn-sm rounded-btn"
+          className=" btn input input-ghost btn-sm rounded-btn mb-1.5 mx-2"
         >
           <svg
-            className="h-6 w-6 text-white "
+            className="h-7 w-7 text-white "
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -156,7 +192,7 @@ export default function Navbar() {
 
       {/* large-screen size */}
 
-      <div className="flex-none pr-2 mr-2">
+      <div className={`${logoHidden} pr-2 mr-2`}>
         <Link href="/">
           <a className="text-4xl mt-2 font-lucky font- font-bold">Up4Grabs</a>
         </Link>
@@ -168,12 +204,12 @@ export default function Navbar() {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="#listings">
-            <a className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn">
+            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn">
               Listings
             </a>
           </Link>
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn mx-3">
+            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -192,7 +228,7 @@ export default function Navbar() {
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn"
+            className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn"
           >
             <svg
               className="mt-0.5 h-6 w-6 text-white "
@@ -211,6 +247,50 @@ export default function Navbar() {
           </a>
         </div>
       </div>
+
+      {/* <div className="flex-1 lg:flex-none">
+        <div className="form-control">
+          <input
+            defaultValue={searchValue}
+            onChange={(e) => {
+              setSearchValue(e.target.value);
+              onSearch(searchValue);
+              if (e.target.value === "") {
+                onSearch("");
+              }
+            }}
+            onKeyDown={(e) => {
+              if (e.keyCode === 13) {
+                onSearch(searchValue);
+              }
+            }}
+            type="text"
+            // placeholder="Search"
+            className="ml-2 mr-2 md:w-24 lg:w-32 focus:bg-white text-white btn btn-sm input input-ghost h-7"
+          />
+        </div>
+        <a
+        // for the search icon copy the starting a tag till the ending a tag 
+          onClick={() => onSearch(searchValue)}
+          className="btn btn-sm input input-ghost lg:mr-5"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-6 w-6 "
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+        </a>
+      </div> */}
+
       <div className="flex-1 lg:flex-none">
         <div className="form-control">
           <input
@@ -229,12 +309,12 @@ export default function Navbar() {
             }}
             type="text"
             // placeholder="Search"
-            className="ml-2 mr-2 w-32 focus:bg-white text-white btn btn-sm input input-ghost h-7"
+            className={`ml-2 mr-2 xs:${searchBarHidden} sm:${searchBarHidden} md:w-24 lg:w-32 md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
           />
         </div>
         {/* for the search icon copy the starting a tag till the ending a tag  */}
         <a
-          onClick={() => onSearch(searchValue)}
+          onClick={handleCLickSearchIcon}
           className="btn btn-sm input input-ghost lg:mr-5"
         >
           <svg
@@ -254,10 +334,10 @@ export default function Navbar() {
         </a>
       </div>
       <div>
-        <div className="flex ">
+        <div className="md:flex lg:flex xs:hidden sm:hidden">
           <label htmlFor="select-user">
             <svg
-              className="mb-50 h-6 w-6 text-white mt-1"
+              className="mb-50 h-6 w-6 text-white mt-1 "
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -276,7 +356,7 @@ export default function Navbar() {
               onChange={(e) => {
                 switchUser(e.target.value);
               }}
-              className=" text-white w-29 btn btn-sm input input-ghost"
+              className=" text-white w-[145px] btn btn-sm input input-ghost"
               value={user.id}
             >
               <option value="0" className="" disabled>
