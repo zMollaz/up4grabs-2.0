@@ -133,7 +133,7 @@
   border-bottom-right-radius: 10%;
 }
 
-@media (min-width: 500px) and (max-width: 768px) {
+/* @media (min-width: 500px) and (max-width: 768px) {
   .hidden-mobile {
     display: none;
   } 
@@ -149,7 +149,7 @@
   .mobile-menu {
     display: none;
   }
-}
+} */
 
 
 .center {

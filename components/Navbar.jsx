@@ -30,8 +30,8 @@ export default function Navbar() {
   });
 
   return (
-    <div className="navbar rounded sticky sm:flex flex-wrap  top-0 z-index shadow-lg bg-gray-dark text-off-white">
-      <div className="md:hidden flex items-center">
+    <div className="navbar rounded sticky sm:flex top-0 z-index shadow-lg bg-gray-dark text-off-white">
+      <div className="md:hidden lg:hidden flex items-center">
         <button
           onClick={handleDropdown}
           className="pr-2 outline-none mobile-menu-button"
@@ -130,14 +130,14 @@ export default function Navbar() {
       )}
 
       <div className="flex-1">
-        <div className="items-stretch lg:flex">
+        <div className="items-stretch flex">
           <Link href="#listings">
-            <a className="hidden-mobile btn input input-ghost btn-sm rounded-btn">
+            <a className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn">
               Listings
             </a>
           </Link>
           <Link href="/users/likes">
-            <a className="hidden-mobile btn input input-ghost btn-sm rounded-btn mx-3">
+            <a className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn mx-3">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -156,7 +156,7 @@ export default function Navbar() {
 
           <a
             onClick={handleClickNew}
-            className="hidden-mobile btn input input-ghost btn-sm rounded-btn"
+            className="xs:hidden sm:hidden md:inline lg:inline btn input input-ghost btn-sm rounded-btn"
           >
             <svg
               className="mt-0.5 h-6 w-6 text-white "
