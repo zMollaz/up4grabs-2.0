@@ -13,7 +13,7 @@ export default function Navbar() {
   const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
   const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
-  const [hidelogo, setHideLogo] = useState(false);
+  const [hideLogo, setHideLogo] = useState(false);
 
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
@@ -29,16 +29,28 @@ export default function Navbar() {
   };
 
   const handleCLickSearchIcon = () => {
-    onSearch(searchValue)
+    onSearch(searchValue);
     setHideSearchBar((prev) => !prev);
     setHideLogo((prev) => !prev);
   };
+
+  const handleClickNav = () => {
+    if (hideLogo) {
+      
+      setHideSearchBar((prev) => !prev);
+      setHideLogo((prev) => !prev);
+    }
+  };
+
+  const clickableOutsideInput = (e) => {
+    e.stopPropagation();
+  }
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
   const userListHidden = hideUserList ? "hidden" : "";
   const searchBarHidden = hideSearchBar ? "hidden" : "";
-  const logoHidden = hidelogo ? "hidden" : "";
+  const logoHidden = hideLogo ? "hidden" : "";
 
   const userList = users.map((oneUser) => {
     return (
@@ -49,7 +61,10 @@ export default function Navbar() {
   });
 
   return (
-    <div className="navbar rounded sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white">
+    <div
+      onClick={handleClickNav}
+      className="navbar rounded sticky flex content-between top-0 z-index shadow-lg bg-gray-dark text-off-white"
+    >
       <div className="lg:hidden flex items-center">
         <button
           onClick={handleDropdown}
@@ -192,9 +207,13 @@ export default function Navbar() {
 
       {/* large-screen size */}
 
-      <div className={`${logoHidden} pr-2 mr-2`}>
+      <div
+        className={`xs:${logoHidden} sm:inline-flex md:inline-flex  pr-2 mr-2`}
+      >
         <Link href="/">
-          <a className="text-4xl mt-2 font-lucky font- font-bold">Up4Grabs</a>
+          <a className="text-4xl md:text-3xl lg:text-4xl mt-2 font-lucky font- font-bold">
+            Up4Grabs
+          </a>
         </Link>
       </div>
       {newDisplay && (
@@ -295,6 +314,7 @@ export default function Navbar() {
         <div className="form-control">
           <input
             defaultValue={searchValue}
+            onClick={clickableOutsideInput}
             onChange={(e) => {
               setSearchValue(e.target.value);
               onSearch(searchValue);
@@ -309,7 +329,7 @@ export default function Navbar() {
             }}
             type="text"
             // placeholder="Search"
-            className={`ml-2 mr-2 xs:${searchBarHidden} sm:${searchBarHidden} md:w-24 lg:w-32 md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
+            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-60 sm:w-28 md:w-24 lg:w-32 sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
           />
         </div>
         {/* for the search icon copy the starting a tag till the ending a tag  */}
