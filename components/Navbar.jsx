@@ -3,8 +3,9 @@ import New from "../components/New";
 import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { UsersContext } from "../context/UsersContext";
+import onClickOutside from "react-onclickoutside";
 
-export default function Navbar() {
+const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { users, user, switchUser, loaded } = useContext(UsersContext); //with this line can import into any component and access users/ state level step-up
   // const [searchValue, setSearchValue] = useState("");
@@ -23,6 +24,10 @@ export default function Navbar() {
 
   const handleDropdown = () => {
     setShowDropdown((prev) => !prev);
+  };
+
+  Navbar.handleClickOutside = () => {
+    setShowDropdown(true);
   };
 
   const handleCLickUserIcon = () => {
@@ -104,20 +109,6 @@ export default function Navbar() {
       >
         <div className="">
           <label htmlFor="select-user">
-            {/* <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="h-7 w-7 btn btn-sm input input-ghost text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-              strokeWidth={2}
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg> */}
             <a
               onClick={handleCLickUserIcon}
               className={`xs:${userIconHidden} sm:${userIconHidden} md:hidden lg:hidden btn input input-ghost btn-sm rounded-btn mb-1.5`}
@@ -280,55 +271,11 @@ export default function Navbar() {
           </a>
         </div>
       </div>
-
-      {/* <div className="flex-1 lg:flex-none">
-        <div className="form-control">
-          <input
-            defaultValue={searchValue}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-              onSearch(searchValue);
-              if (e.target.value === "") {
-                onSearch("");
-              }
-            }}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) {
-                onSearch(searchValue);
-              }
-            }}
-            type="text"
-            // placeholder="Search"
-            className="ml-2 mr-2 md:w-24 lg:w-32 focus:bg-white text-white btn btn-sm input input-ghost h-7"
-          />
-        </div>
-        <a
-        // for the search icon copy the starting a tag till the ending a tag 
-          onClick={() => onSearch(searchValue)}
-          className="btn btn-sm input input-ghost lg:mr-5"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 "
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </a>
-      </div> */}
-
       <div className=" ">
         <div className="form-control">
           <input
             ref={searchInput}
-            placeHolder="Search up4grabs"
+            placeholder="Search"
             defaultValue={searchValue}
             onClick={clickableOutsideInput}
             onBlur={handleOnBlurSearchInput}
@@ -393,7 +340,7 @@ export default function Navbar() {
               onChange={(e) => {
                 switchUser(e.target.value);
               }}
-              className=" text-white w-[145px] btn btn-sm input input-ghost"
+              className=" text-white w-fit btn btn-sm input input-ghost"
               value={user.id}
             >
               <option value="0" className="" disabled>
@@ -406,4 +353,10 @@ export default function Navbar() {
       </div>
     </div>
   );
-}
+};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => Navbar.handleClickOutside,
+};
+
+export default onClickOutside(Navbar, clickOutsideConfig);
