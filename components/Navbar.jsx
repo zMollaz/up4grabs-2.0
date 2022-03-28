@@ -81,7 +81,7 @@ const Navbar = () => {
   return (
     <div
       onClick={handleClickNav}
-      className="navbar sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white"
+      className="navbar sticky rounded-b flex top-0 z-index shadow-lg bg-gray-dark text-off-white"
     >
       <div className="lg:hidden flex items-center ml-2">
         <button
