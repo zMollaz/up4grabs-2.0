@@ -1,6 +1,6 @@
 import Link from "next/link";
 import New from "../components/New";
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { UsersContext } from "../context/UsersContext";
 
@@ -14,6 +14,8 @@ export default function Navbar() {
   const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
+
+  const searchInput = useRef(null);
 
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
@@ -32,11 +34,22 @@ export default function Navbar() {
     onSearch(searchValue);
     setHideSearchBar((prev) => !prev);
     setHideLogo((prev) => !prev);
+    setTimeout(() => {
+      searchInput.current.focus();
+    }, 50);
+  };
+
+  const handleOnBlurSearchInput = () => {
+    setHideSearchBar((prev) => !prev);
+    setHideLogo((prev) => !prev);
+  };
+
+  const handleOnBlurDropDown = () => {
+    setShowDropdown((prev) => !prev);
   };
 
   const handleClickNav = () => {
     if (hideLogo) {
-      
       setHideSearchBar((prev) => !prev);
       setHideLogo((prev) => !prev);
     }
@@ -65,7 +78,7 @@ export default function Navbar() {
       onClick={handleClickNav}
       className="navbar rounded sticky flex top-0 z-index shadow-lg bg-gray-dark text-off-white w-screen"
     >
-      <div className="lg:hidden flex items-center">
+      <div className="lg:hidden flex items-center ml-2">
         <button
           onClick={handleDropdown}
           className="pr-2 outline-none mobile-menu-button"
@@ -86,6 +99,7 @@ export default function Navbar() {
       </div>
       {/* Mobile menu  */}
       <div
+        onBlur={handleOnBlurDropDown}
         className={`${isHidden} mobile-menu flex-col mobile-dropDown items-center`}
       >
         <div className="">
@@ -106,7 +120,7 @@ export default function Navbar() {
             </svg> */}
             <a
               onClick={handleCLickUserIcon}
-              className={`xs:${userIconHidden} sm:${userIconHidden} btn input input-ghost btn-sm rounded-btn mb-1.5`}
+              className={`xs:${userIconHidden} sm:${userIconHidden} md:hidden lg:hidden btn input input-ghost btn-sm rounded-btn mb-1.5`}
             >
               <svg
                 className="h-7 w-7 text-white"
@@ -129,7 +143,7 @@ export default function Navbar() {
               onChange={(e) => {
                 switchUser(e.target.value);
               }}
-              className={`xs:${userListHidden} sm:${userListHidden} text-white w-20 btn btn-sm input input-ghost mb-1.5`}
+              className={`xs:${userListHidden} sm:${userListHidden} md:hidden lg:hidden text-white w-20 btn btn-sm input input-ghost mb-1.5`}
               value={user.id}
             >
               <option value="0" className="" disabled>
@@ -211,7 +225,7 @@ export default function Navbar() {
         className={`xs:${logoHidden} sm:inline-flex md:inline-flex  pr-2 mr-2`}
       >
         <Link href="/">
-          <a className="text-4xl md:text-3xl lg:text-4xl mt-2 font-lucky font- font-bold">
+          <a className="text-4xl md:text-3xl lg:text-4xl mt-2 ml-2 font-lucky font- font-bold">
             Up4Grabs
           </a>
         </Link>
@@ -223,7 +237,7 @@ export default function Navbar() {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="#listings">
-            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn">
+            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn font-bold">
               Listings
             </a>
           </Link>
@@ -233,7 +247,7 @@ export default function Navbar() {
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="mb-2 inline-block w-6 h-6  hover:fill-red hover:text-red stroke-current"
+                className="mb-2 inline-block w-7 h-7  hover:fill-red hover:text-red stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -250,7 +264,7 @@ export default function Navbar() {
             className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn"
           >
             <svg
-              className="mt-0.5 h-6 w-6 text-white "
+              className="mt-0.5 h-7 w-7 text-white "
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -313,8 +327,11 @@ export default function Navbar() {
       <div className=" ">
         <div className="form-control">
           <input
+            ref={searchInput}
+            placeHolder="Search up4grabs"
             defaultValue={searchValue}
             onClick={clickableOutsideInput}
+            onBlur={handleOnBlurSearchInput}
             onChange={(e) => {
               setSearchValue(e.target.value);
               onSearch(searchValue);
