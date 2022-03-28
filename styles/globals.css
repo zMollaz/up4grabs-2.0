@@ -127,13 +127,14 @@
 
 .mobile-dropDown {
   position: absolute;
-  top: 64px;
+  top: 85px;
+  left:0;
   background-color: #1e3b50;
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
 }
 
-@media (min-width: 500px) and (max-width: 768px) {
+/* @media (min-width: 500px) and (max-width: 768px) {
   .hidden-mobile {
     display: none;
   } 
@@ -149,7 +150,7 @@
   .mobile-menu {
     display: none;
   }
-}
+} */
 
 
 .center {
