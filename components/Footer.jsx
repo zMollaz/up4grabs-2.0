@@ -15,7 +15,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
   };
 
   return (
-    <footer className="z-index bottom-0 rounded fixed flex-row lg:items-end flex lg:justify-between lg:px-4 lg:py-2 footer bg-gray-dark font-bold text-md text-neutral-content">
+    <footer className="z-index bottom-0 rounded fixed flex items-end justify-between lg:px-4 lg:py-2 footer bg-gray-dark font-bold text-md text-neutral-content">
       <div className="lg:items-end lg:flex">
         <svg
           onClick={() => setTimeUp((prev) => !prev)}
@@ -42,7 +42,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
           />
         </svg>
       </div>
-      <p className="mt-1">Up4Grabs © 2022 - All rights reserved</p>
+      <p className="mt-1 self-center lg:text-md md:text-md xs:text-[6px] sm:text-[21px]">Up4Grabs © 2022 - All rights reserved</p>
       {chatDisplay && (
         <DynamicComponentWithNoSSR
           handleClick={handleClickChat}
@@ -50,7 +50,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
         />
       )}
 
-      <div className="flex lg:items-center">
+      <div className="flex items-center">
         {(showChat || listingOwner) && (
           <span
             onClick={handleClickChat}
