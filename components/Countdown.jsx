@@ -97,7 +97,7 @@ export default function Countdown({
     <>
       {/* {!timeUp ? ( */}
       {!winner.name ? (
-        <div className="py-2 border-gray-200 text-red xs:text-[18.5px] sm:text-lg md:text-xl lg:text-lg grid grid-flow-col gap-2 text-center auto-cols-max">
+        <div className="py-2 border-gray-200 text-red xs:text-[16px] sm:text-lg md:text-xl lg:text-lg grid grid-flow-col gap-2 text-center auto-cols-max">
           {data} <strong>until draw!</strong>
         </div>
       ) : (

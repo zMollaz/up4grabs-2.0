@@ -106,10 +106,10 @@ export default function ListingPage(props) {
       >
         <section className="text-gray-700 body-font overflow-hidden bg-white">
           <div className="lg:flex lg:flex-row lg:items-start xs:flex xs:flex-col xs:items-center pb-[270px]">
-            <div className="w-70 ml-4 flex flex-col ">
+            <div className="w-full flex flex-col items-center">
               <img
                 alt="ecommerce"
-                className=" w-[430px] sticky self-start mt-6 mr-50 object-contain rounded border border-gray-200"
+                className=" xs:w-[90%] sm:w-[65%] md:w-[65%] lg:w-[90%] lg:ml-6 sticky mt-6  object-contain rounded border border-gray-200"
                 src={img_src}
               />
               <div className="font-lucky w-42 pt-6 flex justify-center items-baseline text-4xl text-gray-dark">
@@ -132,8 +132,8 @@ export default function ListingPage(props) {
                   </svg>
                 </button>
               </div>
-              <div className="flex flex-col">
-                <button className="bg-gray-dark mt-[10px] ml-[105px] items-center w-40 btn gap-2">
+              <div className="flex ">
+                <button className="bg-gray-dark mt-[10px]  w-40 btn gap-2">
                   Bid Count
                   <div className="badge badge-secondary">{bidCount}</div>
                 </button>
@@ -159,10 +159,10 @@ export default function ListingPage(props) {
                   listingItem={props.listingItem}
                 />
               </div>
-              <p className="leading-relaxed flex-1 w-full pb-5 border-b-2 border-gray-light  mt-4 text-gray-dark ">
+              <p className="leading-relaxed flex-1 w-[90%] pb-5 border-b-2 border-gray-light  mt-4 text-gray-dark ">
                 {description}
               </p>
-              <div className="flex justify-around">
+              <div className="flex justify-center w-[95%]">
                 <Map
                   initialViewState={{
                     longitude: props.coordinates.longitude,
@@ -172,10 +172,10 @@ export default function ListingPage(props) {
                   style={{
                     width: 400,
                     height: 300,
-                    alignSelf: "end",
+                    // alignSelf: "end",
                     position: "relative",
-                    marginLeft: "80px",
-                    marginTop: "70px",
+                    marginLeft: "5%",
+                    marginTop: "8%",
                     border: "2px solid",
                     borderColor: "#31708e",
                     borderRadius: "8px",
@@ -188,7 +188,7 @@ export default function ListingPage(props) {
                     longitude={props.coordinates.longitude}
                   />
                 </Map>
-                <span className="flex h-10 ml-4 pl-3 py-12 border-gray-light">
+                <span className="flex-col h-10 pl-[2%] pt-[8%] border-gray-light">
                   <a className="text-gray-dark">
                     <svg
                       fill="currentColor"
