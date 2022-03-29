@@ -97,13 +97,13 @@ export default function Countdown({
     <>
       {/* {!timeUp ? ( */}
       {!winner.name ? (
-        <div className="py-2 border-gray-200 text-red text-xl grid grid-flow-col gap-2 text-center auto-cols-max">
-          {data} until draw!
+        <div className="py-2 border-gray-200 text-red xs:text-[18.5px] sm:text-lg md:text-xl lg:text-lg grid grid-flow-col gap-2 text-center auto-cols-max">
+          {data} <strong>until draw!</strong>
         </div>
       ) : (
         <div className="flex mt-3 ">
           <div className="m-auto ">
-            <div className="bg-[#DCFCE7] shadow-md px-4 flex flex-row rounded-lg animate-bounce">
+            <div className="bg-[#DCFCE7] shadow-md px-4 flex rounded-lg animate-bounce">
               <svg
                 className="h-8 w-8 text-[#15803D]"
                 width="24"
@@ -123,8 +123,8 @@ export default function Countdown({
                 <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />{" "}
                 <circle cx="5" cy="9" r="2" /> <circle cx="19" cy="9" r="2" />
               </svg>
-              <b className="p-1 text-[#15803D]">Our lucky winner is</b>
-              <p className="p-1 text-[#15803D] font-bold font-lucky mt-1">
+              <b className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl">Our lucky winner is</b>
+              <p className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold font-lucky mt-1">
                 {winner?.name}
               </p>
             </div>

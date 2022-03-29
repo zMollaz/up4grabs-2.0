@@ -145,32 +145,6 @@ const Navbar = () => {
           )}
         </div>
         <ul className="">
-          <li>
-            <Link href="#listings">
-              <a className="btn input input-ghost btn-sm rounded-btn mb-1.5">
-                <svg
-                  className="w-7 h-7  text-white"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                  fill="none"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                >
-                  {" "}
-                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                  <path d="M9 5H7a2 2 0 0 0 -2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2V7a2 2 0 0 0 -2 -2h-2" />{" "}
-                  <rect x="9" y="3" width="6" height="4" rx="2" />{" "}
-                  <line x1="9" y1="12" x2="9.01" y2="12" />{" "}
-                  <line x1="13" y1="12" x2="15" y2="12" />{" "}
-                  <line x1="9" y1="16" x2="9.01" y2="16" />{" "}
-                  <line x1="13" y1="16" x2="15" y2="16" />
-                </svg>
-              </a>
-            </Link>
-          </li>
           <Link href="/users/likes">
             <a className=" btn input input-ghost btn-sm rounded-btn mb-1.5">
               <svg
@@ -227,11 +201,6 @@ const Navbar = () => {
 
       <div className="flex-1">
         <div className="items-stretch flex">
-          <Link href="#listings">
-            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn font-bold">
-              Listings
-            </a>
-          </Link>
           <Link href="/users/likes">
             <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-2">
               <svg
