@@ -339,6 +339,7 @@ const Navbar = () => {
               name="users"
               onChange={(e) => {
                 switchUser(e.target.value);
+                
               }}
               className=" text-white w-fit btn btn-sm input input-ghost"
               value={user.id}
