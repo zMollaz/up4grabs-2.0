@@ -4,6 +4,8 @@ import FacebookProvider from "next-auth/providers/facebook";
 import GoogleProvider from "next-auth/providers/google";
 import EmailProvider from "next-auth/providers/email";
 import CredentialsProvider from "next-auth/providers/credentials";
+const { PrismaClient } = require("@prisma/client");
+const prisma = new PrismaClient();
 
 export default NextAuth({
   providers: [
@@ -33,12 +35,17 @@ export default NextAuth({
       // e.g. domain, username, password, 2FA token, etc.
       // You can pass any HTML attribute to the <input> tag through the object.
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        email: { label: "Email", type: "text", placeholder: "enter your email" },
+        password: { label: "Password", type: "password", placeholder: "enter your password" },
       },
       async authorize(credentials, req) {
         // Add logic here to look up the user from the credentials supplied
-        const user = { id: 1, name: "Hisham", email: "Hisham@example.com" };
+        const dbUser = await prisma.user.findFirst({
+          where: {
+            email: credentials.email,
+          },
+        });
+        const user = { id: dbUser.id, name: dbUser.name, email: dbUser.email };
 
         if (user) {
           // Any object returned will be saved in `user` property of the JWT

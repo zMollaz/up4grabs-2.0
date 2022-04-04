@@ -5,7 +5,7 @@ const Auth = () => {
   if (session) {
     return (
       <>
-        <strong> {session.user.email} </strong> <br />
+        <strong> {session.user.name} </strong> <br />
         <svg
           className="h-7 w-7 text-white ml-2"
           onClick={() => signOut()}
