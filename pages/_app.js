@@ -2,8 +2,9 @@ import "../styles/globals.css";
 import useUsers from "../hooks/useUsers";
 import { UsersContext } from "../context/UsersContext";
 import Head from "next/head";
+import { SessionProvider } from "next-auth/react";
 
-const MyApp = ({ Component, pageProps }) => {
+const MyApp = ({ Component, pageProps: { session, ...pageProps } }) => {
   return (
     <UsersContext.Provider value={useUsers()}>
       <Head>
@@ -16,7 +17,9 @@ const MyApp = ({ Component, pageProps }) => {
           rel="stylesheet"
         /> */}
       </Head>
-      <Component {...pageProps} />
+      <SessionProvider session={session}>
+        <Component {...pageProps} />
+      </SessionProvider>
     </UsersContext.Provider>
   );
 };

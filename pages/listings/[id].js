@@ -59,11 +59,10 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function ListingPage(props) {
-
   const findWinner = props.users.find(
     (user) => user.id === props.listingWinner?.user_id
   );
-  
+
   const { title, description, img_src, end_date } = props.listingItem;
   const { user, users } = useContext(UsersContext);
   const [color, setColor] = useState("none");
