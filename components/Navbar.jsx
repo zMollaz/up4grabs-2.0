@@ -240,7 +240,6 @@ const Navbar = () => {
             </svg>
           </a>
         </div>
-        <Auth/>
       </div>
       <div className=" ">
         <div className="form-control">
@@ -289,7 +288,9 @@ const Navbar = () => {
         </a>
       </div>
       <div>
-        <div className="md:flex lg:flex xs:hidden sm:hidden">
+        <Auth />
+
+        {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
           <label htmlFor="select-user">
             <svg
               className="mb-50 h-6 w-6 text-white mt-1 "
@@ -321,7 +322,7 @@ const Navbar = () => {
               {userList}
             </select>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
