@@ -4,6 +4,7 @@ import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { UsersContext } from "../context/UsersContext";
 import onClickOutside from "react-onclickoutside";
+import Auth from "../components/Auth";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
@@ -239,6 +240,7 @@ const Navbar = () => {
             </svg>
           </a>
         </div>
+        <Auth/>
       </div>
       <div className=" ">
         <div className="form-control">

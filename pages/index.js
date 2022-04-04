@@ -5,7 +5,6 @@ import PageBreak from "../components/PageBreak";
 import prisma from "../lib/prisma";
 import { ListingsContext } from "../context/ListingsContext";
 import useListings from "../hooks/useListings";
-import { useSession, signIn, signOut } from "next-auth/react";
 
 export const getServerSideProps = async () => {
   const defaultListings = await prisma.listings.findMany();
@@ -17,29 +16,13 @@ export const getServerSideProps = async () => {
 };
 //add somehting like Array.isArayy && map function
 export default function Home(props) {
-  const { data: session } = useSession();
-  if (session) {
-    return (
-      <>
-        Signed in as {session.user.email} <br />
-        <button onClick={() => signOut()}>Sign out</button>
-      </>
-    );
-  }
   return (
-    <>
-      Not signed in <br />
-      <button onClick={() => signIn()}>Sign in</button>
-    </>
+    <ListingsContext.Provider value={useListings(props)}>
+      <Layout>
+        <Header />
+        <PageBreak />
+        <Listings />
+      </Layout>
+    </ListingsContext.Provider>
   );
-
-  // return (
-  //   <ListingsContext.Provider value={useListings(props)}>
-  //     <Layout>
-  //       <Header />
-  //       <PageBreak />
-  //       <Listings />
-  //     </Layout>
-  //   </ListingsContext.Provider>
-  // );
 }
