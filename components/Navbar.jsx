@@ -225,7 +225,7 @@ const Navbar = () => {
             className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn"
           >
             <svg
-              className="mt-0.5 h-7 w-7 text-white "
+              className="pt-0.5 h-7 w-7 text-white "
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
