@@ -4,6 +4,7 @@ import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { UsersContext } from "../context/UsersContext";
 import onClickOutside from "react-onclickoutside";
+import Auth from "../components/Auth";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
@@ -287,7 +288,9 @@ const Navbar = () => {
         </a>
       </div>
       <div>
-        <div className="md:flex lg:flex xs:hidden sm:hidden">
+        <Auth />
+
+        {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
           <label htmlFor="select-user">
             <svg
               className="mb-50 h-6 w-6 text-white mt-1 "
@@ -319,7 +322,7 @@ const Navbar = () => {
               {userList}
             </select>
           )}
-        </div>
+        </div> */}
       </div>
     </div>
   );
