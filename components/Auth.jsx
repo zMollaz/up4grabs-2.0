@@ -28,13 +28,8 @@ const Auth = () => {
   }
 
   return (
-    // <>
-    //   <button className="font-bold" onClick={() => signIn()}>
-    //     Sign in
-    //   </button>
-    // </>
-    <button onClick={() => signIn()}>
-      Sign in with Email
+    <button className="font-bold" onClick={() => signIn()}>
+      Sign in
     </button>
   );
 };

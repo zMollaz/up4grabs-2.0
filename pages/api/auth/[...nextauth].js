@@ -60,10 +60,10 @@ export default NextAuth({
     }),
   ],
   pages: {
-    signIn: "/auth/email-signin",
+    signIn: "/auth/signin",
     // signOut: "/auth/signout",
     error: "/auth/error", // Error code passed in query string as ?error=
-    verifyRequest: "/auth/verify-request", // (used for check email message)
+    // verifyRequest: "/auth/verify-request", // (used for check email message)
     newUser: "/auth/register", // New users will be directed here on first sign in (leave the property out if not of interest)
   },
   secret: process.env.JWT_SECRET,
