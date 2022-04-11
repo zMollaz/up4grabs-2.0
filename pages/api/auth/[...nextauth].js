@@ -12,23 +12,9 @@ import prisma from "../../../lib/prisma";
 export default NextAuth({
   adapter: PrismaAdapter(prisma),
   providers: [
-    // OAuth authentication providers...
-    // AppleProvider({
-    //   clientId: process.env.APPLE_ID,
-    //   clientSecret: process.env.APPLE_SECRET,
-    // }),
-    // FacebookProvider({
-    //   clientId: process.env.FACEBOOK_ID,
-    //   clientSecret: process.env.FACEBOOK_SECRET,
-    // }),
-    // GoogleProvider({
-    //   clientId: process.env.GOOGLE_ID,
-    //   clientSecret: process.env.GOOGLE_SECRET,
-    // }),
-    // // Passwordless / email sign in
     EmailProvider({
       server: process.env.EMAIL_SERVER,
-      from: process.env.EMAIL_FROM
+      from: process.env.EMAIL_FROM,
     }),
     CredentialsProvider({
       // The name to display on the sign in form (e.g. "Sign in with...")
@@ -73,6 +59,13 @@ export default NextAuth({
       */
     }),
   ],
+  pages: {
+    signIn: "/auth/email-signin",
+    // signOut: "/auth/signout",
+    error: "/auth/error", // Error code passed in query string as ?error=
+    verifyRequest: "/auth/verify-request", // (used for check email message)
+    newUser: "/auth/register", // New users will be directed here on first sign in (leave the property out if not of interest)
+  },
   secret: process.env.JWT_SECRET,
 });
 
