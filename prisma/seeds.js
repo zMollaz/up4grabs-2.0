@@ -291,21 +291,6 @@ const main = async () => {
   //   skipDuplicates: true,
   // });
 
-  await prisma.conversation.createMany({
-    data: [{ sender_id: 1, receiver_id: 2 }],
-    skipDuplicates: true,
-  });
-
-  await prisma.message.createMany({
-    data: [
-      {
-        sender_id: 1,
-        conversation_id: 1,
-        content: "Congratulations you've been selected as the winner!",
-      },
-    ],
-    skipDuplicates: true,
-  });
   console.log("Seeding done!!");
 };
 
