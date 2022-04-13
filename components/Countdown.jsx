@@ -47,7 +47,10 @@ export default function Countdown({
     const biddings = response.data.likes;
     const bidders = biddings.map((bidding) => bidding.user_id);
     const winnerId = bidders[Math.floor(Math.random() * bidders.length)];
-    const itemWinner = users.find((user) => user.id === winnerId);
+    const itemWinner = users.find((user) => {
+      
+      console.log(343, bidders)
+      user.id === winnerId});
     const data = {
       winner: itemWinner,
       listingTitle: listing.title,
@@ -80,6 +83,7 @@ export default function Countdown({
           .get(`/api/winner/${listingItem.id}`)
           .then((response) => {
             const resWinner = response.data.winner;
+            console.log(121, resWinner);
             const getWinner = users.find(
               (user) => user.id === resWinner.user_id
             );

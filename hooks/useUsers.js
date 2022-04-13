@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import cookie from "cookie-cutter";
+import { getSession } from "next-auth/react";
 
 const defaultUser = { id: "cl1urrhvl0000sdk1rzfgafx2" };
 
@@ -8,6 +9,9 @@ const useUsers = () => {
   const [loaded, setLoaded] = useState(false);
   const [user, setUser] = useState(defaultUser);
   const [users, setUsers] = useState([]);
+  
+  const { data: session } = getSession();
+  console.log(151, session)
 
   const switchUser = (id) => {
     let uId = id;
