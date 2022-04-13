@@ -65,7 +65,7 @@ export default function SignIn() {
           <label className="userRemember">Remember me</label>
         </div>
         <button
-          className="bg-gray-500 hover:bg-gray-600 text-white font-bold w-full py-3"
+          className="w-full text-center py-3 rounded bg-green text-white hover:bg-green-dark focus:outline-none my-1"
           type="submit"
         >
           Sign in

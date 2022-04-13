@@ -108,51 +108,14 @@ const Navbar = () => {
         onBlur={handleOnBlurDropDown}
         className={`${isHidden} mobile-menu flex-col mobile-dropDown items-center`}
       >
-        <div className="">
-          <label htmlFor="select-user">
-            <a
-              onClick={handleCLickUserIcon}
-              className={`xs:${userIconHidden} sm:${userIconHidden} md:hidden lg:hidden btn input input-ghost btn-sm rounded-btn mb-1.5`}
-            >
-              <svg
-                className="h-7 w-7 text-white"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-                />
-              </svg>
-            </a>
-          </label>
-          {loaded && (
-            <select
-              name="users"
-              onChange={(e) => {
-                switchUser(e.target.value);
-              }}
-              className={`xs:${userListHidden} sm:${userListHidden} md:hidden lg:hidden text-white w-20 btn btn-sm input input-ghost mb-1.5`}
-              value={user.id}
-            >
-              <option value="0" className="" disabled>
-                Switch user
-              </option>
-              {userList}
-            </select>
-          )}
-        </div>
         <ul className="">
           <Link href="/users/likes">
-            <a className=" btn input input-ghost btn-sm rounded-btn mb-1.5">
+            <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block w-7 h-7  hover:fill-red hover:text-red stroke-current"
+                className="inline-block w-5 h-5  hover:fill-red hover:text-red stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -166,10 +129,10 @@ const Navbar = () => {
         </ul>
         <a
           onClick={handleClickNew}
-          className=" btn input input-ghost btn-sm rounded-btn mb-1.5 mx-2"
+          className=" btn input input-ghost btn-xs rounded-btn mx-2"
         >
           <svg
-            className="h-7 w-7 text-white "
+            className="h-5 w-5 text-white "
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -183,6 +146,7 @@ const Navbar = () => {
             <line x1="8" y1="12" x2="16" y2="12" />
           </svg>
         </a>
+        <div className="">{loaded && <Auth />}</div>
       </div>
 
       {/* large-screen size */}
@@ -287,10 +251,10 @@ const Navbar = () => {
           </svg>
         </a>
       </div>
-      <div>
-        <Auth/>
-
-        {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
+      <div className="md:ml-2 lg:ml-0 md:flex lg:flex xs:hidden sm:hidden">
+        <Auth />
+      </div>
+      {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
           <label htmlFor="select-user">
             <svg
               className="mb-50 h-6 w-6 text-white mt-1 "
@@ -323,7 +287,6 @@ const Navbar = () => {
             </select>
           )}
         </div> */}
-      </div>
     </div>
   );
 };
