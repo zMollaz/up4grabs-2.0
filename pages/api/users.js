@@ -12,7 +12,6 @@ export default async function userHandler(req, res) {
   }
 
   if (req.method === "POST") {
-    console.log(777, req.body.state)
     const updateUser = await prisma.user.update({
       where: {
         email: req.body.state.email,

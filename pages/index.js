@@ -9,10 +9,7 @@ import useListings from "../hooks/useListings";
 export const getServerSideProps = async () => {
   const defaultListings = await prisma.listings.findMany();
   const dbUsers = await prisma.user.findMany();
-  console.log(111, dbUsers)
-  // const users = JSON.parse(JSON.stringify(dbUsers))
-  const users = JSON.stringify(dbUsers)
-  console.log(222, users)
+  const users = JSON.parse(JSON.stringify(dbUsers));
 
   return {
     props: { defaultListings, users },

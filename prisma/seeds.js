@@ -6,18 +6,18 @@ const main = async () => {
 
   await prisma.user.createMany({
     data: [
-      {name: "Bobby", email: "bobby@gmail.com", password: "password" },
-      {name: "Yewande", email: "yewande@gmail.com", password: "password" },
-      {name: "Merl", email: "merl@gmail.com", password: "password" },
-      {name: "Royal", email: "royal@gmail.com", password: "password" },
-      {name: "Capozzi", email: "capozzi@gmail.com", password: "password" },
-      {name: "Fanchette", email: "fanchette@gmail.com", password: "password" },
-      {name: "Adeline", email: "adeline@gmail.com", password: "password" },
-      {name: "Morissa", email: "morissa@gmail.com", password: "password" },
-      {name: "Colet", email: "colet@gmail.com", password: "password" },
-      {name: "Pierette", email: "pierette@gmail.com", password: "password" },
-      {name: "Sanson", email: "sanson@gmail.com", password: "password" },
-      {name: "Kelvin", email: "kelvin@gmail.com", password: "password" },
+      { name: "Bobby", email: "bobby@gmail.com", password: "password" },
+      { name: "Yewande", email: "yewande@gmail.com", password: "password" },
+      { name: "Merl", email: "merl@gmail.com", password: "password" },
+      { name: "Royal", email: "royal@gmail.com", password: "password" },
+      { name: "Capozzi", email: "capozzi@gmail.com", password: "password" },
+      { name: "Fanchette", email: "fanchette@gmail.com", password: "password" },
+      { name: "Adeline", email: "adeline@gmail.com", password: "password" },
+      { name: "Morissa", email: "morissa@gmail.com", password: "password" },
+      { name: "Colet", email: "colet@gmail.com", password: "password" },
+      { name: "Pierette", email: "pierette@gmail.com", password: "password" },
+      { name: "Sanson", email: "sanson@gmail.com", password: "password" },
+      { name: "Kelvin", email: "kelvin@gmail.com", password: "password" },
     ],
     skipDuplicates: false,
   });
@@ -36,7 +36,7 @@ const main = async () => {
   await prisma.listings.createMany({
     data: [
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 1,
         title: "Eagan Multipanel Mirror",
         description:
@@ -48,7 +48,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 2,
         title: "Zombie Tsunami Game",
         description:
@@ -60,7 +60,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 3,
         title: "Brother - Printer",
         description:
@@ -72,7 +72,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 4,
         title: "Tea Kettle Stainless Steel",
         description:
@@ -84,7 +84,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 5,
         title: "Toni Morrison - The Bluest Eye",
         description:
@@ -96,7 +96,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 1,
         title: "Vintage TV Shelf",
         description:
@@ -108,7 +108,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 2,
         title: "18ft. Single Water Slide",
         description:
@@ -120,7 +120,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 3,
         title: '26" flatscreen TV',
         description:
@@ -132,7 +132,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 4,
         title: "Microwave Oven",
         description:
@@ -144,7 +144,7 @@ const main = async () => {
       },
 
       {
-        user_id: 1,
+        user_id: "cl1urrhvl0000sdk1rzfgafx2",
         category_id: 5,
         title: "The Fault in Our Stars",
         description:
@@ -156,7 +156,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 1,
         title: "Outdoor Dinning Table",
         description:
@@ -168,7 +168,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 2,
         title: "R/C Monster Truck",
         description:
@@ -180,7 +180,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 3,
         title: "Industrial Flashlight",
         description:
@@ -192,7 +192,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 4,
         title: "Metal Toaster",
         description:
@@ -204,7 +204,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 5,
         title: "Daniell Steele Books",
         description:
@@ -216,7 +216,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 1,
         title: "Antique Chairs",
         description:
@@ -228,7 +228,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 2,
         title: "Rubber ducks",
         description:
@@ -240,7 +240,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 3,
         title: "Apple Keyboard",
         description:
@@ -252,7 +252,7 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 4,
         title: "Air Purifier",
         description:
@@ -264,14 +264,14 @@ const main = async () => {
       },
 
       {
-        user_id: 2,
+        user_id: "cl1urrhvl0001sdk1lqa2bndu",
         category_id: 5,
         title: "Misc Books",
         description:
           "Books from Kate Hewitt, Jen Sincero, and Delia Owens. Soft Covers, great condition.",
         img_src: "https://i.ibb.co/8PLzjhs/Misc-Books.jpg",
         start_date: "2022-02-10",
-       
+
         end_date: "2022-06-05",
         postal_code: "M6K",
       },
