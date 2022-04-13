@@ -19,6 +19,7 @@ const Register = (props) => {
     const newState = { ...state, [name]: value };
     setState(newState);
   };
+ 
 
   const submitHandler = async (e) => {
     e.preventDefault();
@@ -26,10 +27,9 @@ const Register = (props) => {
       alert("Password confirmation is not matching password");
     } else {
       console.log(111, state);
-      axios.post("/api/users", { state }).then((res) => {
-        console.log(232, res);
-        router.push("/");
-      });
+      axios.post("/api/users", { state });
+      router.push("/");
+
     }
   };
 

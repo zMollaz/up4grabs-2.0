@@ -30,7 +30,8 @@ export const getServerSideProps = async (context) => {
     },
   });
 
-  const users = await prisma.user.findMany();
+  const dbUsers = await prisma.user.findMany();
+  const users = JSON.parse(JSON.stringify(dbUsers));
   const listingWinner = await prisma.Winners.findFirst({
     where: {
       listing_id: Number(context.params.id),

@@ -288,7 +288,7 @@ const Navbar = () => {
         </a>
       </div>
       <div>
-        <Auth />
+        <Auth/>
 
         {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
           <label htmlFor="select-user">
