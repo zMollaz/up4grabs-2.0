@@ -31,10 +31,10 @@ const Navbar = () => {
     setShowDropdown(true);
   };
 
-  const handleCLickUserIcon = () => {
-    setHideUserIcon((prev) => !prev);
-    setHideUserList((prev) => !prev);
-  };
+  // const handleCLickUserIcon = () => {
+  //   setHideUserIcon((prev) => !prev);
+  //   setHideUserList((prev) => !prev);
+  // };
 
   const handleCLickSearchIcon = () => {
     onSearch(searchValue);
