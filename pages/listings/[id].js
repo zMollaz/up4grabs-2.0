@@ -72,6 +72,7 @@ export const getServerSideProps = async (context) => {
 export default function ListingPage(props) {
   const { data: session, status } = useSession();
   const user = props.users.find((user) => user.email === session?.user.email);
+  console.log(1212, user)
   const findWinner = props.users.find(
     (user) => user.id === props.listingWinner?.user_id
   );
