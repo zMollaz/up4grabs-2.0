@@ -8,6 +8,7 @@ export default async function winnerHandler(req, res) {
 
   if (req.method === "POST") {
     const { user_id, listing_id } = req.body;
+    console.log(555,user_id);
     const winner = await prisma.Winners.create({
       data: { user_id, listing_id },
     });

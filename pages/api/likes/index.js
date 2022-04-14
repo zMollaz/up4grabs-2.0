@@ -15,7 +15,6 @@ export default async function likeHandler(req, res) {
     const like = await prisma.biddings.create({
       data: { user_id, listing_id },
     });
-
     res.json({ like });
   }
 }

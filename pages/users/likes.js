@@ -7,18 +7,24 @@ import { useContext, useEffect, useState } from "react";
 import { UsersContext } from "../../context/UsersContext";
 import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
+import { getSession, useSession } from "next-auth/react";
 
 export async function getServerSideProps() {
   const defaultListings = await prisma.listings.findMany();
   const defaultLikes = await prisma.biddings.findMany();
+  const dbUsers = await prisma.user.findMany();
+  const users = JSON.parse(JSON.stringify(dbUsers));
 
   return {
-    props: { defaultListings, defaultLikes },
+    props: { defaultListings, defaultLikes, users },
   };
 }
 
 export default function UserLikes(props) {
-  const { user } = useContext(UsersContext);
+  // const { users } = useContext(UsersContext);
+  const { data: session, status } = useSession();
+  const user = props.users.find((user) => user.email === session?.user.email);
+
   const [view, setView] = useState(props.defaultListings);
   const myDate = function (date) {
     dayjs.extend(relativeTime);
@@ -26,7 +32,7 @@ export default function UserLikes(props) {
   };
 
   const filteredLikes = props.defaultLikes.filter(
-    (like) => like.user_id === user.id
+    (like) => like.user_id === user?.id
   );
 
   useEffect(() => {

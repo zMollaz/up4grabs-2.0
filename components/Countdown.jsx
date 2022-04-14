@@ -45,9 +45,14 @@ export default function Countdown({
   const randomWinner = async (users, listing) => {
     const response = await axios.get(`/api/likes/${listing.id}`);
     const biddings = response.data.likes;
+    console.log(111, biddings);
     const bidders = biddings.map((bidding) => bidding.user_id);
+    console.log(222, bidders);
     const winnerId = bidders[Math.floor(Math.random() * bidders.length)];
+    console.log(333, winnerId);
+    console.log(444, users);
     const itemWinner = users.find((user) => user.id === winnerId);
+    console.log(555,itemWinner);
     const data = {
       winner: itemWinner,
       listingTitle: listing.title,
@@ -72,7 +77,7 @@ export default function Countdown({
     }
   };
 
-  useEffect(async () => {
+  useEffect(() => {
     if (timeUp) {
       randomWinner(users, listingItem);
       setTimeout(() => {
@@ -88,7 +93,6 @@ export default function Countdown({
           .catch((err) => console.log(err));
       }, 400);
     }
-    console.log(444, winner.name);
 
     //might need clean up because of memory leak
   }, [timeUp]);

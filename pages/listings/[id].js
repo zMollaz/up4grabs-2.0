@@ -8,6 +8,7 @@ import { useContext, useState, useEffect } from "react";
 import { ListingsContext } from "../../context/ListingsContext";
 import { UsersContext } from "../../context/UsersContext";
 import useListings from "../../hooks/useListings";
+import { getSession, useSession } from "next-auth/react";
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import("../../components/Countdown"),
@@ -16,6 +17,15 @@ const DynamicComponentWithNoSSR = dynamic(
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiYWVsbW9sbGF6IiwiYSI6ImNremJpcmY4ZDJlbjIyb28yZWt3NjF5MmMifQ.03oFENowylydeoRfp732qg";
+
+// const sessionGetter = async (users) => {
+//   const session = await getSession();
+//   const sessionUser = users.find(
+//     (user) => user.email === session.user.email
+//   );
+//   // setUser(sessionUser);
+//   return sessionUser;
+// };
 
 export const getServerSideProps = async (context) => {
   const listingItem = await prisma.listings.findUnique({
@@ -60,34 +70,51 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function ListingPage(props) {
+  const { data: session, status } = useSession();
+  const user = props.users.find((user) => user.email === session?.user.email);
+  console.log(1212, user)
   const findWinner = props.users.find(
     (user) => user.id === props.listingWinner?.user_id
   );
 
+  // const sessionGetter = async () => {
+  //   const session = await getSession();
+  //   const sessionUser = props.users.find(
+  //     (user) => user.email === session.user.email
+  //   );
+  //   // setUser(sessionUser);
+  //   return sessionUser;
+  // };
+
   const { title, description, img_src, end_date } = props.listingItem;
-  const { user, users } = useContext(UsersContext);
+  // const { user, users } = useContext(UsersContext);
   const [color, setColor] = useState("none");
   const [timeUp, setTimeUp] = useState(false);
   const [winner, setWinner] = useState(findWinner || {});
   const [bidCount, setBidCount] = useState(0);
 
   const likeHistory = async () => {
-    const response = await axios.get(`/api/likes/${props.listingId}`);
-    const biddings = response.data.likes;
-    setBidCount(biddings.length);
-    const bidders = biddings.map((bidding) => bidding.user_id);
-    const userWithPriorLike = bidders.find((bidder) => bidder === user.id);
-    if (userWithPriorLike !== undefined) {
-      setColor("#DA4567");
-    } else {
-      setColor("none");
+    try {
+      const response = await axios.get(`/api/likes/${props.listingId}`);
+      const biddings = response.data.likes;
+      setBidCount(biddings.length);
+      const bidders = biddings.map((bidding) => bidding.user_id);
+      const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
+      if (userWithPriorLike !== undefined) {
+        setColor("#DA4567");
+      } else {
+        setColor("none");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
-  useEffect(() => likeHistory(), [user]);
+
+  useEffect(async () => likeHistory(), [props.user]);
 
   const handleLike = async () => {
     const postResponse = await axios.post("/api/likes", {
-      user_id: user.id,
+      user_id: user?.id,
       listing_id: props.listingId,
     });
 
@@ -150,7 +177,7 @@ export default function ListingPage(props) {
                 <DynamicComponentWithNoSSR
                   winner={winner}
                   setWinner={setWinner}
-                  user={user}
+                  user={props.user}
                   timeUp={timeUp}
                   setTimeUp={setTimeUp}
                   end_date={end_date}
