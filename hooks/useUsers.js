@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import cookie from "cookie-cutter";
-import { getSession, useSession } from "next-auth/react";
+import { getSession } from "next-auth/react";
 
 // const defaultUser = { id: "cl1urrhvl0000sdk1rzfgafx2" };
 
@@ -47,8 +47,6 @@ import { getSession, useSession } from "next-auth/react";
 // };
 
 const useUsers = () => {
-  const { data: session, status } = useSession();
-
   // const sessionGetter = async () => {
   //   const session = await getSession();
   //   const sessionUser = users.find((user) => user.email === session.user.email);
@@ -70,9 +68,17 @@ const useUsers = () => {
     }
   };
 
-  useEffect(() => {
+  useEffect(async () => {
     getUsers();
-    sessionGetter();
+    try {
+      const session = await getSession();
+      const sessionUser = users.find(
+        (user) => user.email === session?.user.email
+      );
+      setUser(sessionUser);
+    } catch (error) {
+      console.error(error);
+    }
   }, [user]);
 
   return { user, users, loaded }; // this is what's in the context app.js

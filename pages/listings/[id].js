@@ -70,7 +70,6 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function ListingPage(props) {
-
   const { data: session, status } = useSession();
   const user = props.users.find((user) => user.email === session?.user.email);
   const findWinner = props.users.find(
@@ -94,15 +93,19 @@ export default function ListingPage(props) {
   const [bidCount, setBidCount] = useState(0);
 
   const likeHistory = async () => {
-    const response = await axios.get(`/api/likes/${props.listingId}`);
-    const biddings = response.data.likes;
-    setBidCount(biddings.length);
-    const bidders = biddings.map((bidding) => bidding.user_id);
-    const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
-    if (userWithPriorLike !== undefined) {
-      setColor("#DA4567");
-    } else {
-      setColor("none");
+    try {
+      const response = await axios.get(`/api/likes/${props.listingId}`);
+      const biddings = response.data.likes;
+      setBidCount(biddings.length);
+      const bidders = biddings.map((bidding) => bidding.user_id);
+      const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
+      if (userWithPriorLike !== undefined) {
+        setColor("#DA4567");
+      } else {
+        setColor("none");
+      }
+    } catch (error) {
+      console.error(error);
     }
   };
 
@@ -110,10 +113,10 @@ export default function ListingPage(props) {
 
   const handleLike = async () => {
     const postResponse = await axios.post("/api/likes", {
-      user_id: user.id,
+      user_id: user?.id,
       listing_id: props.listingId,
     });
-    
+
     const getResponse = await axios.get(`/api/likes/${props.listingId}`);
     const biddings = getResponse.data.likes;
     setBidCount(biddings.length);
