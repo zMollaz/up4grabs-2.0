@@ -12,7 +12,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
   let listingOwner;
   let listingWinner;
   
-  if (user) {
+  if (user?.name) {
     listingOwner = winner?.id === user?.id; // && user.id === winner?.id; need to add poster
     listingWinner = listingItem?.user_id === user?.id;
   }
