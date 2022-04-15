@@ -8,7 +8,9 @@ const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
 export default function Footer({ setTimeUp, winner, listingItem }) {
   const { user, users } = useContext(UsersContext);
   const [chatDisplay, setChatDisplay] = useState(false);
-  const showChat = winner?.name === user?.name; // && user.id === winner?.id; need to add poster
+  console.log(333, winner, user.id);
+  const showChat = winner?.id === user?.id; // && user.id === winner?.id; need to add poster
+  
   const listingOwner = listingItem?.user_id === user?.id;
   const handleClickChat = () => {
     setChatDisplay((prev) => !prev);

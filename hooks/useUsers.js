@@ -47,12 +47,14 @@ import { getSession } from "next-auth/react";
 // };
 
 const useUsers = () => {
-  // const sessionGetter = async () => {
-  //   const session = await getSession();
-  //   const sessionUser = users.find((user) => user.email === session.user.email);
-  //   setUser(sessionUser);
-  //   return sessionUser;
-  // };
+  const sessionGetter = async () => {
+    const session = await getSession();
+    const sessionUser = users.find(
+      (user) => user.email === session?.user.email
+    );
+    setUser(sessionUser);
+    return sessionUser;
+  };
 
   const [loaded, setLoaded] = useState(false);
   const [users, setUsers] = useState([]);
@@ -63,22 +65,30 @@ const useUsers = () => {
       const response = await axios.get("/api/users");
       setUsers(response.data.users);
       setLoaded(true);
+      return response.data.users;
     } catch (error) {
       console.error(error);
     }
   };
 
+  useEffect(() => {
+    getUsers();
+    sessionGetter();
+  }, []);
+
   useEffect(async () => {
     getUsers();
-    try {
-      const session = await getSession();
-      const sessionUser = users.find(
-        (user) => user.email === session?.user.email
-      );
-      setUser(sessionUser);
-    } catch (error) {
-      console.error(error);
-    }
+    sessionGetter();
+
+    // try {
+    //   const session = await getSession();
+    //   const sessionUser = users.find(
+    //     (user) => user.email === session?.user.email
+    //   );
+    //   setUser(sessionUser);
+    // } catch (error) {
+    //   console.error(error);
+    // }
   }, [user]);
 
   return { user, users, loaded }; // this is what's in the context app.js

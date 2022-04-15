@@ -9,7 +9,6 @@ import Auth from "../components/Auth";
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { users, user, loaded } = useContext(UsersContext); //with this line can import into any component and access users/ state level step-up
-  // const [searchValue, setSearchValue] = useState("");
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
@@ -18,7 +17,7 @@ const Navbar = () => {
   const [hideLogo, setHideLogo] = useState(false);
 
   const searchInput = useRef(null);
-
+  
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
   };
