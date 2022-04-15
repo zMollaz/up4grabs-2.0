@@ -45,14 +45,9 @@ export default function Countdown({
   const randomWinner = async (users, listing) => {
     const response = await axios.get(`/api/likes/${listing.id}`);
     const biddings = response.data.likes;
-    console.log(111, biddings);
     const bidders = biddings.map((bidding) => bidding.user_id);
-    console.log(222, bidders);
     const winnerId = bidders[Math.floor(Math.random() * bidders.length)];
-    console.log(333, winnerId);
-    console.log(444, users);
     const itemWinner = users.find((user) => user.id === winnerId);
-    console.log(555,itemWinner);
     const data = {
       winner: itemWinner,
       listingTitle: listing.title,
@@ -68,6 +63,7 @@ export default function Countdown({
       const winnerData = {
         user_id: itemWinner.id,
         listing_id: listing.id,
+        email: itemWinner.email,
       };
       axios
         .post("/api/winner", winnerData)
