@@ -8,8 +8,15 @@ const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
 export default function Footer({ setTimeUp, winner, listingItem }) {
   const { user, users } = useContext(UsersContext);
   const [chatDisplay, setChatDisplay] = useState(false);
-  const showChat = winner?.name === user?.name; // && user.id === winner?.id; need to add poster
-  const listingOwner = listingItem?.user_id === user?.id;
+  
+  let listingOwner;
+  let listingWinner;
+  
+  if (user) {
+    listingOwner = winner?.id === user?.id; // && user.id === winner?.id; need to add poster
+    listingWinner = listingItem?.user_id === user?.id;
+  }
+
   const handleClickChat = () => {
     setChatDisplay((prev) => !prev);
   };
@@ -51,7 +58,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
       )}
 
       <div className="flex items-center">
-        {(showChat || listingOwner) && (
+        {(listingWinner || listingOwner) && (
           <span
             onClick={handleClickChat}
             className="text-white btn btn-sm input input-ghost"

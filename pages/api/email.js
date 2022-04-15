@@ -11,8 +11,8 @@ export default async function emailHandler(req, res) {
     sgMail.setApiKey(apiKey);
 
     const message = {
-      // to: req.body.winner.email,
-      to: "aelmollaz@gmail.com",
+      to: req.body.winner.email,
+      // to: "aelmollaz@gmail.com",
       // from: "up4grabs.app1@gmail.com",
       from: "up4grabs.app2@gmail.com",
       isMultiple: false,
