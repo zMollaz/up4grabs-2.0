@@ -9,6 +9,7 @@ import Auth from "../components/Auth";
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { users, user, loaded } = useContext(UsersContext); //with this line can import into any component and access users/ state level step-up
+  console.log(users, user)
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
@@ -17,7 +18,7 @@ const Navbar = () => {
   const [hideLogo, setHideLogo] = useState(false);
 
   const searchInput = useRef(null);
-  
+
   const handleClickNew = () => {
     setNewDisplay((prev) => !prev);
   };
@@ -70,13 +71,13 @@ const Navbar = () => {
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
 
-  const userList = users.map((oneUser) => {
-    return (
-      <option value={oneUser.id} key={oneUser.id} className="user-option">
-        {oneUser.name}
-      </option>
-    );
-  });
+  // const userList = users.map((oneUser) => {
+  //   return (
+  //     <option value={oneUser.id} key={oneUser.id} className="user-option">
+  //       {oneUser.name}
+  //     </option>
+  //   );
+  // });
 
   return (
     <div
@@ -145,7 +146,9 @@ const Navbar = () => {
             <line x1="8" y1="12" x2="16" y2="12" />
           </svg>
         </a>
-        <div className="">{loaded && <Auth />}</div>
+        <div className="">
+          <Auth />
+        </div>
       </div>
 
       {/* large-screen size */}
