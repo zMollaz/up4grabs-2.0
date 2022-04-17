@@ -5,7 +5,6 @@ import { UsersContext } from "../context/UsersContext";
 export default function New({ handleClick, setDisplay }) {
   const { addListing } = useContext(ListingsContext);
   const { user } = useContext(UsersContext);
-
   const defaultState = {
     title: "",
     description: "",
@@ -24,19 +23,21 @@ export default function New({ handleClick, setDisplay }) {
 
   const saveListing = async (e) => {
     e.preventDefault();
-    const response = await fetch("/api/new", {
-      body: JSON.stringify({ state, user }),
-      headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-      },
-      method: "POST",
-    });
+    if (user) {
+      const response = await fetch("/api/new", {
+        body: JSON.stringify({ state, user }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        method: "POST",
+      });
 
-    const newListing = await response.json();
-    setState(defaultState);
-    setDisplay((prev) => !prev);
-    addListing(newListing);
+      const newListing = await response.json();
+      setState(defaultState);
+      setDisplay((prev) => !prev);
+      addListing(newListing);
+    }
   };
 
   const imageToBase64 = (img) =>

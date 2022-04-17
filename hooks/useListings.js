@@ -1,14 +1,14 @@
 import { useState, useEffect } from "react";
 
-const useListings = ({defaultListings, defaultLikes}) => {
+const useListings = ({ defaultListings, defaultLikes }) => {
   const [listings, setListings] = useState(defaultListings);
   const [filteredListings, setFilteredListings] = useState(defaultListings);
   const [bidding, setBidding] = useState(false);
   const [likes, setLikes] = useState(defaultLikes);
   const [searchValue, setSearchValue] = useState("");
-  
-  useEffect(()=> {
-    setFilteredListings(listings)
+
+  useEffect(() => {
+    setFilteredListings(listings);
   }, [listings, setFilteredListings]);
 
   const onSearch = (searchValue) => {
@@ -21,14 +21,14 @@ const useListings = ({defaultListings, defaultLikes}) => {
   };
 
   const addListing = (response) => {
-    setListings(prev => [...prev, response.savedListing] )
-  }
-
+    // setListings((prev) => [...prev, response.savedListing]);
+    setListings((prev) => [response.savedListing, ...prev]);
+  };
 
   return {
     listings: listings,
     filteredListings: filteredListings,
-    setFilteredListings:setFilteredListings,
+    setFilteredListings: setFilteredListings,
     onSearch: onSearch,
     addListing: addListing,
     bidding: bidding,
