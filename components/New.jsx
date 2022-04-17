@@ -98,7 +98,7 @@ export default function New({ handleClick, setDisplay }) {
             className="text-black hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  absolute right-0 top-0"
           >
             <svg
-              className="w-7 h-7 bg-white rounded-lg"
+              className="w-7 h-7 bg-gray-dark rounded-lg"
               fill="currentColor"
               viewBox="0 0 20 20"
               xmlns="http://www.w3.org/2000/svg"
@@ -129,7 +129,7 @@ export default function New({ handleClick, setDisplay }) {
           <div>
             <label
               htmlFor="description"
-              className="block mb-2 font-bold text-sm text-gray-dark  "
+              className="block font-bold text-sm text-gray-dark  "
             >
               Description
             </label>
@@ -199,7 +199,7 @@ export default function New({ handleClick, setDisplay }) {
           <div className="flex justify-center">
             <div className="max-w-2xl rounded-lg bg-gray-50">
               <div className="">
-                <label className="inline-block font-bold mb-2 text-gray-dark">
+                <label className="inline-block font-bold text-gray-dark">
                   File Upload
                 </label>
                 <div className="flex items-center justify-center w-full">

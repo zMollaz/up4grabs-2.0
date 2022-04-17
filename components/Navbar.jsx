@@ -168,7 +168,7 @@ const Navbar = () => {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-2">
+            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-2 px-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -187,7 +187,7 @@ const Navbar = () => {
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn"
+            className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn px-1"
           >
             <svg
               className="pt-0.5 h-7 w-7 text-white "
@@ -234,7 +234,7 @@ const Navbar = () => {
         {/* for the search icon copy the starting a tag till the ending a tag  */}
         <a
           onClick={handleCLickSearchIcon}
-          className="btn btn-sm input input-ghost lg:mr-5 xs:mr-0 xs:justify-self-end"
+          className="btn btn-sm input input-ghost lg:mr-5 xs:mr-0 xs:justify-self-end px-1"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
