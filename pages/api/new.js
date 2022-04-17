@@ -1,9 +1,8 @@
+import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 dayjs.extend(utc);
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
 
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;

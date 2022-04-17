@@ -1,6 +1,4 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
-
+import prisma from "../../../lib/prisma";
 export default async function winnerHandler(req, res) {
   if (req.method !== "GET" && req.method !== "POST") {
     return res.status(405).json({ messsage: "Method not allowed" });

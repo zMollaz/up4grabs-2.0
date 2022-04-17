@@ -70,12 +70,6 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function ListingPage(props) {
-  const { data: session, status } = useSession();
-  const user = props.users.find((user) => user.email === session?.user.email);
-  const findWinner = props.users.find(
-    (user) => user.id === props.listingWinner?.user_id
-    );
-
   // const sessionGetter = async () => {
   //   const session = await getSession();
   //   const sessionUser = props.users.find(
@@ -84,6 +78,12 @@ export default function ListingPage(props) {
   //   // setUser(sessionUser);
   //   return sessionUser;
   // };
+
+  const { data: session, status } = useSession();
+  const user = props.users.find((user) => user.email === session?.user.email);
+  const findWinner = props.users.find(
+    (user) => user.id === props.listingWinner?.user_id
+  );
 
   const { title, description, img_src, end_date } = props.listingItem;
   // const { user, users } = useContext(UsersContext);
@@ -112,15 +112,17 @@ export default function ListingPage(props) {
   useEffect(async () => likeHistory(), [props.user]);
 
   const handleLike = async () => {
-    const postResponse = await axios.post("/api/likes", {
-      user_id: user?.id,
-      listing_id: props.listingId,
-    });
+    if (user) {
+      const postResponse = await axios.post("/api/likes", {
+        user_id: user?.id,
+        listing_id: props.listingId,
+      });
 
-    const getResponse = await axios.get(`/api/likes/${props.listingId}`);
-    const biddings = getResponse.data.likes;
-    setBidCount(biddings.length);
-    setColor("#DA4567"); // may want to remove this line
+      const getResponse = await axios.get(`/api/likes/${props.listingId}`);
+      const biddings = getResponse.data.likes;
+      setBidCount(biddings.length);
+      setColor("#DA4567"); // may want to remove this line
+    }
   };
 
   return (
@@ -140,6 +142,7 @@ export default function ListingPage(props) {
               />
               <div className="font-lucky w-42 pt-6 flex justify-center items-baseline text-4xl text-gray-dark">
                 Like to bid
+                {/* {user && ( */}
                 <button
                   onClick={handleLike}
                   className="rounded-full h-10 bg-gray-200 p-0 border-0 inline-flex items-start align-middle justify-between text-gray-500 ml-4"
@@ -157,6 +160,7 @@ export default function ListingPage(props) {
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                 </button>
+                {/* )} */}
               </div>
               <div className="flex ">
                 <button className="bg-gray-dark mt-[10px]  w-40 btn gap-2">
