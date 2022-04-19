@@ -72,7 +72,7 @@ export default function New({ handleClick, setDisplay }) {
         <form
           onSubmit={saveListing}
           // className="center w-5/12 overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white fixed inset-24 "
-          className="transform -translate-x-1/2 -translate-y-1/2 xs:h-[80%] xs:w-[80%] overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white  absolute top-[50%] left-[50%]"
+          className="transform -translate-x-1/2 -translate-y-1/2 xs:h-[80%] xs:w-[80%] sm:max-w-md overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white  absolute top-[50%] left-[50%]"
           action="#"
         >
           <button
@@ -142,8 +142,8 @@ export default function New({ handleClick, setDisplay }) {
               required=""
             />
           </div>
-          <div className="flex items-center right-0 top-0 s-between w-full">
-            <div>
+          <div className="flex sm:justify-between sm:flex-row sm:itemscenter xs:flex-col xs:items-start">
+            <div className="w-full">
               <label
                 htmlFor="end_date"
                 className="flow-root mt-2 font-bold text-sm text-gray-dark  "
@@ -154,18 +154,18 @@ export default function New({ handleClick, setDisplay }) {
                 onChange={changeHandler}
                 value={state.end_date}
                 name="end_date"
-                className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 block w-[210px] p-2.5"
+                className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500  xs:w-full sm:w-40 p-2.5"
                 type="date"
                 id="start"
                 min="2020-01-01"
                 max="2024-12-31"
               />
             </div>
-            <div>
+            <div className="w-full sm:flex sm:justify-end">
               <select
                 name="category_id"
                 onChange={changeHandler}
-                className="font-bold category-button mt-8 text-md rounded-md"
+                className="font-bold bg-gray-dark btn btn-sm mt-8 text-md xs:w-full sm:w-40 rounded-md"
                 defaultValue={0}
               >
                 <option disabled value={0}>
@@ -180,9 +180,9 @@ export default function New({ handleClick, setDisplay }) {
             </div>
           </div>
           <div className="flex justify-center">
-            <div className="max-w-2xl rounded-lg bg-gray-50">
+            <div className="w-full rounded-lg bg-gray-50">
               <div className="">
-                <label className="inline-block font-bold text-gray-dark">
+                <label className=" font-bold text-gray-dark">
                   File Upload
                 </label>
                 <div className="flex items-center justify-center w-full">
@@ -217,7 +217,7 @@ export default function New({ handleClick, setDisplay }) {
                 </div>
               </div>
               <div className="flex justify-center p-2">
-                <button className="w-full font-bold px-4 py-2 text-white bg-gray-dark rounded shadow-xl">
+                <button className="w-full mt-3 sm:w-[70%] font-bold px-4 py-2 text-white bg-gray-dark rounded shadow-xl">
                   Create
                 </button>
               </div>
