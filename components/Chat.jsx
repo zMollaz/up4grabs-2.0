@@ -51,20 +51,20 @@ export default function Chat() {
     });
   };
 
+  const sender = `width-fit max-w-[150px] bg-[#cfedff] rounded-lg self-end text-black shadow-xl`;
+  const reciever = `width-fit max-w-[150px] bg-[#cfedff] rounded-lg self-start text-black shadow-xl`;
+
   return (
-    <div className=" xs:max-w-[350px] xs:w-[80%] sm:w-[80%] h-[500px] absolute xs:right-[0%] sm:right-[0%] bottom-[100%] rounded-lg border-8 border-gray-dark overflow-auto  bg-t-gray shadow-2xl">
-      <div className="">
+    <div className=" xs:max-w-[350px] xs:w-[80%] sm:w-[80%] xs:h-[350px] md:h-[500px] absolute xs:right-[0%] sm:right-[0%] bottom-[100%] rounded-lg border-8 border-gray-dark overflow-auto  bg-t-gray shadow-2xl">
+      <div className="flex flex-col w-full">
         {messages.map((message, index) => {
-          const position =
-            message.sender === user.name ? "chat-receiver" : " chat-sender";
+          const position = message.sender === user.name ? reciever : sender;
           return (
-            <div key={index} className={`flex flex-col ${position} m-2`}>
-              <div className="flex w-full items-center justify-between">
-                <strong className="mb-1 p-1">@{message.sender}</strong>
+            <div key={index} className={`flex-col ${position} m-2`}>
+              <div className="">
+                <strong className="mb-1 p-1 text-gray-dark">@{message.sender}</strong>
               </div>
-              <div className="p-1 break-words w-full">
-                {message.content}
-              </div>
+              <div className="p-1 break-words w-full">{message.content}</div>
             </div>
           );
         })}
@@ -74,13 +74,12 @@ export default function Chat() {
         className="w-full flex justify-center self-end shadow-2xl mb-2"
       >
         <input
-          className="w-[90%] overflow-auto text-black rounded"
+          className="w-[90%] overflow-auto text-black rounded shadow-xl"
           placeholder=" Write a message"
           value={text}
           onChange={changeHandler}
         />
       </form>
     </div>
-
   );
 }
