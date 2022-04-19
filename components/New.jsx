@@ -78,7 +78,7 @@ export default function New({ handleClick, setDisplay }) {
           <button
             onClick={handleClick}
             type="button"
-            className="text-black hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center absolute right-0 top-0"
+            className="text-white hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center absolute right-0 top-0"
           >
             <svg
               className="w-7 h-7 bg-gray-dark rounded-lg"
