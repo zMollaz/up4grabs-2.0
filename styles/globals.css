@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-.speech-sender {
+.chat-sender {
   width: fit-content;
   align-items: flex-end;
   max-width: 150px;
@@ -14,7 +14,7 @@
 }
 
 
-.speech-sender:after {
+.chat-sender:after {
 	content: '';
 	position: absolute;
 	bottom: 0;
@@ -30,7 +30,7 @@
   padding-bottom: 12px;
 }
 
-.speech-receiver {
+.chat-receiver {
   align-items: flex-start;
   width: fit-content;
   max-width: 150px;
@@ -41,7 +41,7 @@
 
 }
 
-.speech-receiver:after {
+.chat-receiver:after {
   content: '';
 	position: absolute;
 	bottom: 0;
@@ -55,62 +55,4 @@
 	margin-left: -8.5px;
 	margin-bottom: -20px;
   padding-bottom: 12px;
-}
-
-.card-footer {
-  justify-content: space-between;
-  padding: 4%;
-}
-
-.icon:hover {
-  fill: #DA4567;
-}
-
-.mar-t {
-  margin-top: 0px;
-}
-
-.drop-button {
-  background-color: #1e3b50;
-}
-
-.chat {
-  position: fixed;
-  bottom: 8%;
-  right: 0%;
-  border-radius: 5%;
-  margin-right: 270px;
-}
-
-.border {
-  border-radius: 2%;
-  border: solid #1e3b50 2px;
-}
-
-.border-chat {
-  border-radius: 2%;
-  border: solid #1e3b50 5px;
-}
-
-.border-text-area {
-  border-radius: 15%;
-  background-color: #dddddd;
-  /* border: solid #1e3b50 5px; */
-}
-
-.chat-css {
-  position: absolute;
-  bottom: 2%;
-  margin-left: 5px;
-
-}
-
-.margin-bottom {
-  padding-bottom: 100px;
-}
-
-.margin {
-padding-top: 25px;
-background-color: #f7f9fb;
-padding-bottom: 75px;
 }

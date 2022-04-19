@@ -24,7 +24,7 @@ export default function Listings() {
     );
   });
   return (
-    <div className="margin bg-off-white pt-3 pb-4 pr-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
+    <div className=" bg-[#f7f9fb] pt-[25px] pb-[75px] pr-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
       {parsedListings}
     </div>
   );
