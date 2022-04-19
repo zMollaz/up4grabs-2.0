@@ -52,49 +52,35 @@ export default function Chat() {
   };
 
   return (
-    <div className="rounded chat absolute container w-3">
-      <div className="margin-bottom align-items-center border-chat overflow-auto d-flex flex-column align-items-stretch flex-shrink-0 bg-t-gray shadow-md shadow-2xl">
-        <div className="d-flex align-items-center flex-shrink-0 p-2 link-dark text-decoration-none border-bottom"></div>
-        <div
-          className="list-group list-group-flush text-black w-[250px] border-bottom scrollarea"
-          style={{
-            minHeight: "250px",
-            maxHeight: "250px",
-          }}
-        >
-          {messages.map((message, index) => {
-            const position =
-              message.sender === user.name
-                ? "speech-receiver"
-                : " speech-sender";
-            return (
-              <div key={index} className={`flex flex-col ${position} m-2`}>
-                <div className="d-flex w-fit align-items-center justify-content-between">
-                  <strong className="mb-1 p-1">@{message.sender}</strong>
-                </div>
-                <div className="mb-1 p-1 break-words w-full items-end small">
-                  {message.content}
-                </div>
+    <div className=" xs:max-w-[350px] xs:w-[80%] sm:w-[80%] h-[500px] absolute xs:right-[0%] sm:right-[0%] bottom-[100%] rounded-lg border-8 border-gray-dark overflow-auto  bg-t-gray shadow-2xl">
+      <div className="">
+        {messages.map((message, index) => {
+          const position =
+            message.sender === user.name ? "speech-receiver" : " speech-sender";
+          return (
+            <div key={index} className={`flex flex-col ${position} m-2`}>
+              <div className="flex w-full items-center justify-between">
+                <strong className="mb-1 p-1">@{message.sender}</strong>
               </div>
-            );
-          })}
-          <div>
-            <br />
-            <br />
-          </div>
-        </div>
-        <form
-          onSubmit={submitHandler}
-          className=" chat-css border-text-area shadow-2xl"
-        >
-          <input
-            className="w-[240px] form-control overflow-auto text-black rounded"
-            placeholder=" Write a message               ➢ "
-            value={text}
-            onChange={changeHandler}
-          />
-        </form>
+              <div className="p-1 break-words w-full">
+                {message.content}
+              </div>
+            </div>
+          );
+        })}
       </div>
+      <form
+        onSubmit={submitHandler}
+        className="w-full flex justify-center self-end shadow-2xl mb-2"
+      >
+        <input
+          className="w-[90%] overflow-auto text-black rounded"
+          placeholder=" Write a message"
+          value={text}
+          onChange={changeHandler}
+        />
+      </form>
     </div>
+
   );
 }

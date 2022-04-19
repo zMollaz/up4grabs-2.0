@@ -61,7 +61,7 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
         {(listingWinner || listingOwner) && (
           <span
             onClick={handleClickChat}
-            className="text-white btn btn-sm input input-ghost"
+            className="text-white btn btn-xs px-1 input input-ghost"
           >
             <svg
               className="h-6 w-6 text-white"
