@@ -62,28 +62,12 @@
   padding: 4%;
 }
 
-/* .z-index {
-  z-index: 500;
-} */
-
-
-
 .icon:hover {
   fill: #DA4567;
 }
 
 .mar-t {
   margin-top: 0px;
-}
-
-.category-button {
-  background-color: #1e3b50;
-  align-content: center;
-  margin-bottom: 3px;
-  text-align: center;
-  margin-left: 40px;
-  height: 45px;
-  width: 190px;
 }
 
 .drop-button {
@@ -124,44 +108,6 @@
 .margin-bottom {
   padding-bottom: 100px;
 }
-
-.mobile-dropDown {
-  position: absolute;
-  top: 60px;
-  left:0;
-  width:18%;
-  background-color: #1e3b50;
-  border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 10%;
-}
-
-/* @media (min-width: 500px) and (max-width: 768px) {
-  .hidden-mobile {
-    display: none;
-  } 
-  .full-modal {
-    width: 100vw;
-    height: 100vh;
-    top:0%;
-  } 
-}
-
-
-@media (min-width: 768px)  {
-  .mobile-menu {
-    display: none;
-  }
-} */
-
-
-/* .center {
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  height:75%;
-  width:50%;
-  transform: translate(-50%, -50%);
-} */
 
 .margin {
 padding-top: 25px;

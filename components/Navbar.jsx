@@ -105,11 +105,11 @@ const Navbar = () => {
       {/* Mobile menu  */}
       <div
         onBlur={handleOnBlurDropDown}
-        className={`${isHidden} mobile-menu flex-col mobile-dropDown items-center`}
+        className={`${isHidden} flex-col absolute top-[64%] rounded-lg left-0 bg-gray-dark items-center`}
       >
         <ul className="">
           <Link href="/users/likes">
-            <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5">
+            <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

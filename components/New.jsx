@@ -60,42 +60,25 @@ export default function New({ handleClick, setDisplay }) {
   return (
     <div
       aria-hidden="true"
-      className={`overflow-y-auto overflow-x-auto fixed left-0 top-0 z-50 justify-center items-center w-full h-full inset-0`}
+      className={`overflow-y-auto overflow-x-auto fixed  z-50 justify-center items-center w-full h-full inset-0`}
     >
-      <div className="absolute inset-0  w-full  h-full">
+      <div className="w-full  h-full">
         <div
           onClick={handleClick}
-          className="flex w-full h-full absolute opacity-75 bg-t-gray"
+          className="flex w-full h-full opacity-75 bg-t-gray"
         >
-          {/* <button
-            onClick={handleClick}
-            type="button"
-            className="text-black hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  absolute right-0 top-0"
-          >
-            <svg
-              className="w-7 h-7 bg-white rounded-lg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                fillRule="evenodd"
-                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                clipRule="evenodd"
-              ></path>
-            </svg>
-          </button> */}
+
         </div>
         <form
           onSubmit={saveListing}
           // className="center w-5/12 overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white fixed inset-24 "
-          className="transform -translate-x-1/2 -translate-y-1/2 h-fit w-fit overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white  absolute top-[50%] left-[50%]"
+          className="transform -translate-x-1/2 -translate-y-1/2 xs:h-[80%] xs:w-[80%] sm:max-w-md overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white  absolute top-[50%] left-[50%]"
           action="#"
         >
           <button
             onClick={handleClick}
             type="button"
-            className="text-black hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center  absolute right-0 top-0"
+            className="text-black hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm p-1.5 ml-auto inline-flex items-center absolute right-0 top-0"
           >
             <svg
               className="w-7 h-7 bg-gray-dark rounded-lg"
@@ -159,8 +142,8 @@ export default function New({ handleClick, setDisplay }) {
               required=""
             />
           </div>
-          <div className="flex items-center right-0 top-0 s-between w-full">
-            <div>
+          <div className="flex sm:justify-between sm:flex-row sm:itemscenter xs:flex-col xs:items-start">
+            <div className="w-full">
               <label
                 htmlFor="end_date"
                 className="flow-root mt-2 font-bold text-sm text-gray-dark  "
@@ -171,18 +154,18 @@ export default function New({ handleClick, setDisplay }) {
                 onChange={changeHandler}
                 value={state.end_date}
                 name="end_date"
-                className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 block w-[210px] p-2.5"
+                className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500  xs:w-full sm:w-40 p-2.5"
                 type="date"
                 id="start"
                 min="2020-01-01"
                 max="2024-12-31"
               />
             </div>
-            <div>
+            <div className="w-full sm:flex sm:justify-end">
               <select
                 name="category_id"
                 onChange={changeHandler}
-                className="font-bold category-button mt-8 text-md rounded-md"
+                className="font-bold bg-gray-dark btn btn-sm mt-8 text-md xs:w-full sm:w-40 rounded-md"
                 defaultValue={0}
               >
                 <option disabled value={0}>
@@ -197,9 +180,9 @@ export default function New({ handleClick, setDisplay }) {
             </div>
           </div>
           <div className="flex justify-center">
-            <div className="max-w-2xl rounded-lg bg-gray-50">
+            <div className="w-full rounded-lg bg-gray-50">
               <div className="">
-                <label className="inline-block font-bold text-gray-dark">
+                <label className=" font-bold text-gray-dark">
                   File Upload
                 </label>
                 <div className="flex items-center justify-center w-full">
@@ -234,7 +217,7 @@ export default function New({ handleClick, setDisplay }) {
                 </div>
               </div>
               <div className="flex justify-center p-2">
-                <button className="w-full font-bold px-4 py-2 text-white bg-gray-dark rounded shadow-xl">
+                <button className="w-full mt-3 sm:w-[70%] font-bold px-4 py-2 text-white bg-gray-dark rounded shadow-xl">
                   Create
                 </button>
               </div>
