@@ -56,7 +56,7 @@ export default function Chat() {
       <div className="">
         {messages.map((message, index) => {
           const position =
-            message.sender === user.name ? "speech-receiver" : " speech-sender";
+            message.sender === user.name ? "chat-receiver" : " chat-sender";
           return (
             <div key={index} className={`flex flex-col ${position} m-2`}>
               <div className="flex w-full items-center justify-between">
