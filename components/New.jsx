@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { ListingsContext } from "../context/ListingsContext";
-import { UsersContext } from "../context/UsersContext";
+import { DataContext } from "../context/DataContext";
 
 export default function New({ handleClick, setDisplay }) {
   const { addListing } = useContext(ListingsContext);
-  const { user } = useContext(UsersContext);
+  const { user } = useContext(DataContext);
   const defaultState = {
     title: "",
     description: "",

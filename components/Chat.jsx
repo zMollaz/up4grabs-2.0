@@ -1,12 +1,12 @@
 import { useEffect, useState, useContext } from "react";
-import { UsersContext } from "../context/UsersContext";
+import { DataContext } from "../context/DataContext";
 import Pusher from "pusher-js";
 import axios from "axios";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
-  const { user } = useContext(UsersContext);
+  const { user } = useContext(DataContext);
 
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {

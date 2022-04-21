@@ -26,17 +26,17 @@ const useListings = ({ defaultListings, defaultLikes }) => {
   };
 
   return {
-    listings: listings,
-    filteredListings: filteredListings,
-    setFilteredListings: setFilteredListings,
-    onSearch: onSearch,
-    addListing: addListing,
-    bidding: bidding,
-    setBidding: setBidding,
-    likes: likes,
-    setLikes: setLikes,
-    searchValue: searchValue,
-    setSearchValue: setSearchValue,
+    listings,
+    filteredListings,
+    setFilteredListings,
+    onSearch,
+    addListing,
+    bidding,
+    setBidding,
+    likes,
+    setLikes,
+    searchValue,
+    setSearchValue,
   };
 };
 
