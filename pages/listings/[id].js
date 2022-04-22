@@ -6,7 +6,7 @@ import axios from "axios";
 import dynamic from "next/dynamic";
 import { useContext, useState, useEffect } from "react";
 import { ListingsContext } from "../../context/ListingsContext";
-import { UsersContext } from "../../context/UsersContext";
+import { DataContext } from "../../context/DataContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
 
@@ -86,7 +86,7 @@ export default function ListingPage(props) {
   );
 
   const { title, description, img_src, end_date } = props.listingItem;
-  // const { user, users } = useContext(UsersContext);
+  // const { user, users } = useContext(DataContext);
   const [color, setColor] = useState("none");
   const [timeUp, setTimeUp] = useState(false);
   const [winner, setWinner] = useState(findWinner || {});

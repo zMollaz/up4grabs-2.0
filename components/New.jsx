@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { ListingsContext } from "../context/ListingsContext";
-import { UsersContext } from "../context/UsersContext";
+import { DataContext } from "../context/DataContext";
 
 export default function New({ handleClick, setDisplay }) {
   const { addListing } = useContext(ListingsContext);
-  const { user } = useContext(UsersContext);
+  const { user } = useContext(DataContext);
   const defaultState = {
     title: "",
     description: "",
@@ -165,7 +165,7 @@ export default function New({ handleClick, setDisplay }) {
               <select
                 name="category_id"
                 onChange={changeHandler}
-                className="font-bold bg-gray-dark btn btn-sm mt-8 text-md xs:w-full sm:w-40 rounded-md"
+                className="font-bold bg-gray-dark btn btn-sm mt-[42px] sm:ml-2 text-md xs:w-full sm:w-40 sm:h-[67px] rounded-md"
                 defaultValue={0}
               >
                 <option disabled value={0}>

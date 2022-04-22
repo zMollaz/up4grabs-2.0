@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import prisma from "../../lib/prisma";
 import { useContext, useEffect, useState } from "react";
-import { UsersContext } from "../../context/UsersContext";
+import { DataContext } from "../../context/DataContext";
 import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
@@ -21,7 +21,7 @@ export async function getServerSideProps() {
 }
 
 export default function UserLikes(props) {
-  // const { users } = useContext(UsersContext);
+  // const { users } = useContext(DataContext);
   const { data: session, status } = useSession();
   const user = props.users.find((user) => user.email === session?.user.email);
 
@@ -67,7 +67,7 @@ export default function UserLikes(props) {
           {filteredLikes.length > 0 ? (
             parsedListings
           ) : (
-            <div className="h-full">
+            <div className="h-full w-full font-bold text-black">
               You currently have no biddings to display
             </div>
           )}
