@@ -1,16 +1,18 @@
 import Link from "next/link";
 import New from "../components/New";
 import { useState, useContext, useRef } from "react";
+import { ListingsContext } from "../context/ListingsContext";
 import { DataContext } from "../context/DataContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 
 const Navbar = () => {
-  const { users, user, onSearch, searchValue, setSearchValue, loaded } = useContext(DataContext); //with this line can import into any component and access users/ state level step-up
+  const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
+  const { user } = useContext(DataContext); //with this line can import into any component and access users/ state level step-up
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
-  // const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
-  // const [hideUserList, setHideUserList] = useState(user ? false : true);
+  const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
+  const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
 
@@ -63,8 +65,8 @@ const Navbar = () => {
   };
 
   const isHidden = showDropdown ? "hidden" : "";
-  // const userIconHidden = hideUserIcon ? "hidden" : "";
-  // const userListHidden = hideUserList ? "hidden" : "";
+  const userIconHidden = hideUserIcon ? "hidden" : "";
+  const userListHidden = hideUserList ? "hidden" : "";
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
 

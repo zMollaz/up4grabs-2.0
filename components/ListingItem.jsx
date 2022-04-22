@@ -16,7 +16,7 @@ export default function Listings(props) {
             </h5>
 
             <footer className=" absolute bottom-0 flex flex-col right-0 s-between w-full">
-              <div className="bg-gray-light w-xs p-1/4 font-bold text-sm rounded-lg overflow-hidden shadow-lg text-center text-black self-end ">
+              <div className="bg-gray-light mb-1 mr-1 w-xs p-1/4 font-bold text-sm rounded-lg overflow-hidden shadow-lg text-center text-black self-end ">
                 {date}
               </div>
             </footer>

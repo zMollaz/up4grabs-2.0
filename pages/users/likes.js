@@ -4,7 +4,7 @@ import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import prisma from "../../lib/prisma";
 import { useContext, useEffect, useState } from "react";
-import { DataContext } from "../context/DataContext";
+import { DataContext } from "../../context/DataContext";
 import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";

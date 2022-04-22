@@ -2,12 +2,13 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { getSession } from "next-auth/react";
 
-const useData = () => {
+const useData = (props) => {
+
   const [data, setData] = useState({});
-  // const [listings, setListings] = useState(data.listings);
-  // const [filteredListings, setFilteredListings] = useState(data.listings);
+  // const [listings, setListings] = useState(defaultListings);
+  // const [filteredListings, setFilteredListings] = useState(defaultListings);
   // const [bidding, setBidding] = useState(false);
-  // const [biddings, setBiddings] = useState(data.likes);
+  // const [biddings, setBiddings] = useState(defaultLikes);
   // const [searchValue, setSearchValue] = useState("");
 
   // const onSearch = (searchValue) => {
@@ -31,13 +32,13 @@ const useData = () => {
     const user = users.find((user) => user.email === session?.user.email);
 
     const dbListings = await axios.get("/api/listings");
-    const listings = dbListings.data.listings;
+    const apiListings = dbListings.data.listings;
 
     const dbLikes = await axios.get("/api/likes");
     const likes = dbLikes.data.likes;
     // const allData = {user, users, listings, likes};
   
-    setData({ user, users, listings, likes });
+    setData({ user, users, apiListings, likes });
   };
 
   useEffect(() => {
@@ -47,13 +48,15 @@ const useData = () => {
   // useEffect(() => {
   //   setFilteredListings(listings);
   // }, [listings, setFilteredListings]);
-  const { user, users, likes, listings } = data;
+
+  const { user, users, likes, apiListings } = data;
 
   return {
     user,
     users,
     likes,
-    listings,
+    apiListings,
+    // listings,
     // filteredListings,
     // setFilteredListings,
     // onSearch,
