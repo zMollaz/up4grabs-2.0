@@ -67,7 +67,7 @@ export default function UserLikes(props) {
           {filteredLikes.length > 0 ? (
             parsedListings
           ) : (
-            <div className="h-full">
+            <div className="h-full w-full font-bold text-black">
               You currently have no biddings to display
             </div>
           )}
