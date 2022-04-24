@@ -156,13 +156,13 @@ const Navbar = () => {
         className={`xs:${logoHidden} sm:inline-flex md:inline-flex  pr-2 mr-2`}
       >
         <Link href="/">
-          <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font- font-bold">
+          <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font-bold">
             Up4Grabs
           </a>
         </Link>
       </div>
       {newDisplay && (
-        <New handleClick={handleClickNew} setDisplay={setNewDisplay} />
+        <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} />
       )}
 
       <div className="flex-1">
