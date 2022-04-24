@@ -1,8 +1,11 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import { DataContext } from "../context/DataContext";
+import { useSession, getSession } from "next-auth/react";
+import onClickOutside from "react-onclickoutside";
+import Restricted from "../components/Restricted";
 
-export default function New({ handleClick, setDisplay }) {
+const New = ({ handleClick, setDisplay }) => {
   const { addListing } = useContext(ListingsContext);
   const { user } = useContext(DataContext);
   const defaultState = {
@@ -14,6 +17,14 @@ export default function New({ handleClick, setDisplay }) {
   };
 
   const [state, setState] = useState(defaultState);
+  // const [PopUp, setPopUp] = useState(false);
+  const restrictedDiv = useRef(null);
+  // const popUpHidden = PopUp ? "hidden" : "";
+
+  New.handleClickOutside = () => {
+    setDisplay((prev) => !prev);
+
+  };
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -56,6 +67,16 @@ export default function New({ handleClick, setDisplay }) {
       setState({ ...state, img_src: parsedImage });
     }
   };
+  const { data: session, status } = useSession();
+
+  if (status === "loading") {
+    return <p>Loading...</p>;
+  }
+
+  if (status === "unauthenticated") {
+    // return !popUpHidden && <Restricted ref={restrictedDiv} />;
+    return <Restricted />;
+  }
 
   return (
     <div
@@ -66,9 +87,7 @@ export default function New({ handleClick, setDisplay }) {
         <div
           onClick={handleClick}
           className="flex w-full h-full opacity-75 bg-t-gray"
-        >
-
-        </div>
+        ></div>
         <form
           onSubmit={saveListing}
           // className="center w-5/12 overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white fixed inset-24 "
@@ -182,9 +201,7 @@ export default function New({ handleClick, setDisplay }) {
           <div className="flex justify-center">
             <div className="w-full rounded-lg bg-gray-50">
               <div className="">
-                <label className=" font-bold text-gray-dark">
-                  File Upload
-                </label>
+                <label className=" font-bold text-gray-dark">File Upload</label>
                 <div className="flex items-center justify-center w-full">
                   <label className="flex flex-col rounded w-full h-32 border-4 border-gray-dark border-dashed hover:bg-gray-light hover:border-gray">
                     <div className="flex flex-col items-center justify-center pt-7">
@@ -227,4 +244,10 @@ export default function New({ handleClick, setDisplay }) {
       </div>
     </div>
   );
-}
+};
+
+const clickOutsideConfig = {
+  handleClickOutside: () => New.handleClickOutside,
+};
+
+export default onClickOutside(New, clickOutsideConfig);
