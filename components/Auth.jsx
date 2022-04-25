@@ -11,8 +11,8 @@ const Auth = () => {
   if (session) {
     if (session.user.name !== null) {
       return (
-        <div className="flex items-center">
-          <strong> {session.user.name} </strong> <br />
+        <div className="flex items-center mt-2 font-lucky text-lg">
+          <strong className="pt-2"> {session.user.name} </strong> <br />
           <svg
             className="xs:h-6 xs:w-6 text-white ml-2"
             onClick={() => signOut()}

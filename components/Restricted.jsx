@@ -21,7 +21,7 @@ const Restricted = ({ handleClickNew }) => {
           ></path>
         </svg>
       </button>
-      <h1 className="text-red mt-6 mb-2 pr-5">You must be signed in to view this content !</h1>
+      <h1 className="text-red mt-6 mb-8 pr-5">You must be signed in to view this content !</h1>
       <Auth/>
     </div>
   );
