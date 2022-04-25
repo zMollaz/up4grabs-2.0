@@ -1,8 +1,8 @@
-import Link from "next/link";
 import Auth from "../components/Auth";
 const Restricted = ({ handleClickNew }) => {
   return (
-    <div className="flex items-end justify-center text-gray-dark text-4xl md:text-3xl lg:text-4xl xs:text-2xl font fixed top-[10%] left-[20%] xs:h-[30%] opacity-[95%] xs:w-[80%] sm:max-w-md overflow-auto px-4 pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white">
+    // fixed top-[10%] left-[10%]
+    <div className="transform -translate-x-1/2 -translate-y-1/2 top-[30%] left-[50%] flex-col items-center justify-center mt-0 text-gray-dark text-4xl md:text-3xl lg:text-4xl xs:text-2xl fixed inset-0 md:max-w-md xs:h-[30%] opacity-[95%] xs:w-[80%]  text-center px-4 pb-4 rounded-lg lg:px-8 sm:pb-6  bg-white">
       <button
         onClick={handleClickNew}
         type="button"
@@ -21,6 +21,7 @@ const Restricted = ({ handleClickNew }) => {
           ></path>
         </svg>
       </button>
+      <h1 className="text-red mt-6 mb-2 pr-5">You must be signed in to view this content !</h1>
       <Auth/>
     </div>
   );
