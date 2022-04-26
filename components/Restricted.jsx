@@ -2,8 +2,9 @@ import Link from "next/link";
 import Auth from "../components/Auth";
 import { useRouter } from "next/router";
 
-const Restricted = ({ handleClickNew, listingId, setShowRestricted }) => {
+const Restricted = ({ handleClickNew, setShowRestricted, newDisplay }) => {
   const router = useRouter();
+
   let url;
   if (router.asPath === "/") {
     url = "";
@@ -11,17 +12,17 @@ const Restricted = ({ handleClickNew, listingId, setShowRestricted }) => {
   if (router.asPath === "/users/likes") {
     url = "/";
   }
-  if (router.asPath === `/listings/${listingId}`) {
-    // url = {
-    //   pathname: '/listings/[id]',
-    //   query: { id: listingId },
-    // };
-    url = `${listingId}`;
+  if (router.pathname === `/listings/[id]`) {
+    url = {
+      pathname: '/listings/[id]',
+      query: router.query,
+    };
+
   }
 
   const clickHandler = () => {
-    if (router.asPath === `/listings/${listingId}`) {
-      setShowRestricted((prev) => !prev);
+    if (router.pathname === `/listings/[id]`) {
+      newDisplay ? handleClickNew() : setShowRestricted(prev => !prev);
     }
     if (router.asPath === "/users/likes") {
       return;
@@ -35,6 +36,7 @@ const Restricted = ({ handleClickNew, listingId, setShowRestricted }) => {
   return (
     <div className="z-50 transform -translate-x-1/2 -translate-y-1/2 top-[30%] left-[50%] flex-col items-center justify-center mt-0 text-gray-dark text-4xl md:text-3xl lg:text-4xl xs:text-2xl fixed inset-0 md:max-w-md xs:h-[30%] opacity-[95%] xs:w-[80%] text-center rounded-lg bg-white">
       <Link href={url}>
+      {/* <Link href="/listings/7"> */}
         <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font-bold">
           {/* Up4Grabs */}
           <button

@@ -5,6 +5,7 @@ import { ListingsContext } from "../context/ListingsContext";
 import { DataContext } from "../context/DataContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
+import { useSession, getSession } from "next-auth/react";
 import Restricted from "../components/Restricted";
 
 const Navbar = () => {
@@ -65,6 +66,7 @@ const Navbar = () => {
   const clickableOutsideInput = (e) => {
     e.stopPropagation();
   };
+  const { data: session, status } = useSession();
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
@@ -165,7 +167,7 @@ const Navbar = () => {
         </Link>
       </div>
       {newDisplay && (
-        <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} />
+        <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} newDisplay={newDisplay}/>
       )}
       {/* 
       {hideRestricted && (

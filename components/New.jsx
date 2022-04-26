@@ -5,7 +5,7 @@ import { useSession, getSession } from "next-auth/react";
 import onClickOutside from "react-onclickoutside";
 import Restricted from "../components/Restricted";
 
-const New = ({ handleClickNew, setDisplay }) => {
+const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   const { addListing } = useContext(ListingsContext);
   const { user } = useContext(DataContext);
   const defaultState = {
@@ -74,7 +74,7 @@ const New = ({ handleClickNew, setDisplay }) => {
 
   if (status === "unauthenticated") {
     // return !popUpHidden && <Restricted ref={restrictedDiv} />;
-    return <Restricted handleClickNew={handleClickNew} />;
+    return <Restricted handleClickNew={handleClickNew} newDisplay={newDisplay}/>;
   }
 
   return (
