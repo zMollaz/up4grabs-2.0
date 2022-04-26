@@ -125,8 +125,9 @@ export default function ListingPage(props) {
       const biddings = getResponse.data.likes;
       setBidCount(biddings.length);
       setColor("#DA4567"); // may want to remove this line
+    } else {
+      setShowRestricted((prev) => !prev);
     }
-    setShowRestricted((prev) => !prev);
   };
 
   return (
@@ -164,7 +165,9 @@ export default function ListingPage(props) {
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                 </button>
-                {showRestricted && <Restricted setShowRestricted={setShowRestricted} />}
+                {showRestricted && (
+                  <Restricted setShowRestricted={setShowRestricted} />
+                )}
               </div>
               <div className="flex ">
                 <button className="bg-gray-dark mt-[10px]  w-40 btn gap-2">
