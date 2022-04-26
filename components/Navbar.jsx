@@ -5,6 +5,8 @@ import { ListingsContext } from "../context/ListingsContext";
 import { DataContext } from "../context/DataContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
+import { useSession, getSession } from "next-auth/react";
+import Restricted from "../components/Restricted";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
@@ -15,6 +17,7 @@ const Navbar = () => {
   const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
+  // const [hideRestricted, setHideRestricted] = useState(false);
 
   const searchInput = useRef(null);
 
@@ -63,12 +66,14 @@ const Navbar = () => {
   const clickableOutsideInput = (e) => {
     e.stopPropagation();
   };
+  const { data: session, status } = useSession();
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
   const userListHidden = hideUserList ? "hidden" : "";
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
+  // const restrictedHidden = hideRestricted ? "hidden" : "";
 
   // const userList = users.map((oneUser) => {
   //   return (
@@ -156,14 +161,18 @@ const Navbar = () => {
         className={`xs:${logoHidden} sm:inline-flex md:inline-flex  pr-2 mr-2`}
       >
         <Link href="/">
-          <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font- font-bold">
+          <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font-bold">
             Up4Grabs
           </a>
         </Link>
       </div>
       {newDisplay && (
-        <New handleClick={handleClickNew} setDisplay={setNewDisplay} />
+        <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} newDisplay={newDisplay}/>
       )}
+      {/* 
+      {hideRestricted && (
+        <Restricted />
+      )} */}
 
       <div className="flex-1">
         <div className="items-stretch flex">
