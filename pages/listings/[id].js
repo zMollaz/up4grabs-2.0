@@ -9,6 +9,7 @@ import { ListingsContext } from "../../context/ListingsContext";
 import { DataContext } from "../../context/DataContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
+import Restricted from "../../components/Restricted";
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import("../../components/Countdown"),
@@ -65,6 +66,7 @@ export const getServerSideProps = async (context) => {
       listingId,
       biddings,
       listingWinner,
+      session: await getSession(context),
     },
   };
 };
@@ -91,6 +93,7 @@ export default function ListingPage(props) {
   const [timeUp, setTimeUp] = useState(false);
   const [winner, setWinner] = useState(findWinner || {});
   const [bidCount, setBidCount] = useState(0);
+  const [showRestricted, setShowRestricted] = useState(false);
 
   const likeHistory = async () => {
     try {
@@ -123,6 +126,7 @@ export default function ListingPage(props) {
       setBidCount(biddings.length);
       setColor("#DA4567"); // may want to remove this line
     }
+    setShowRestricted((prev) => !prev);
   };
 
   return (
@@ -160,7 +164,7 @@ export default function ListingPage(props) {
                     <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z" />
                   </svg>
                 </button>
-                {/* )} */}
+                {showRestricted && <Restricted setShowRestricted={setShowRestricted} listingId={props.listingId}/>}
               </div>
               <div className="flex ">
                 <button className="bg-gray-dark mt-[10px]  w-40 btn gap-2">

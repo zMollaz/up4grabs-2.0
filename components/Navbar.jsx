@@ -5,6 +5,7 @@ import { ListingsContext } from "../context/ListingsContext";
 import { DataContext } from "../context/DataContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
+import Restricted from "../components/Restricted";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
@@ -15,6 +16,7 @@ const Navbar = () => {
   const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
+  // const [hideRestricted, setHideRestricted] = useState(false);
 
   const searchInput = useRef(null);
 
@@ -69,6 +71,7 @@ const Navbar = () => {
   const userListHidden = hideUserList ? "hidden" : "";
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
+  // const restrictedHidden = hideRestricted ? "hidden" : "";
 
   // const userList = users.map((oneUser) => {
   //   return (
@@ -164,6 +167,10 @@ const Navbar = () => {
       {newDisplay && (
         <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} />
       )}
+      {/* 
+      {hideRestricted && (
+        <Restricted />
+      )} */}
 
       <div className="flex-1">
         <div className="items-stretch flex">

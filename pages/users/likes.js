@@ -8,24 +8,34 @@ import { DataContext } from "../../context/DataContext";
 import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
+import Restricted from "../../components/Restricted";
 
-export async function getServerSideProps() {
+export const getServerSideProps = async (context) => {
   const defaultListings = await prisma.listings.findMany();
   const defaultLikes = await prisma.biddings.findMany();
   const dbUsers = await prisma.user.findMany();
   const users = JSON.parse(JSON.stringify(dbUsers));
 
   return {
-    props: { defaultListings, defaultLikes, users },
+    props: {
+      session: await getSession(context),
+      defaultListings,
+      defaultLikes,
+      users,
+    },
   };
-}
+};
 
 export default function UserLikes(props) {
   // const { users } = useContext(DataContext);
   const { data: session, status } = useSession();
+  
   const user = props.users.find((user) => user.email === session?.user.email);
-
+  
+  const listingsHook = useListings(props);
+  
   const [view, setView] = useState(props.defaultListings);
+  
   const myDate = function (date) {
     dayjs.extend(relativeTime);
     return dayjs(date).fromNow();
@@ -55,26 +65,32 @@ export default function UserLikes(props) {
     );
   });
 
-  return (
-    <ListingsContext.Provider value={useListings(props)}>
-      <Layout>
-        {/* <div
+  if (typeof window === "undefined") return null;
+
+  if (session) {
+    return (
+      <ListingsContext.Provider value={listingsHook}>
+        <Layout>
+          {/* <div
           aria-hidden="true"
           className="max-w-fill h-full relative overflow-y-auto overflow-x-auto right-0 left-0 top-4 z-100 justify-center items-center h-modal md:h-full md:inset-0"
         > */}
-        {/* <div className=" flex-1 flex-col inset-0  w-full  h-full md:h-auto"> */}
-        <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
-          {filteredLikes.length > 0 ? (
-            parsedListings
-          ) : (
-            <div className="h-full w-full font-bold text-black">
-              You currently have no biddings to display
-            </div>
-          )}
-        </div>
-        {/* </div> */}
-        {/* </div> */}
-      </Layout>
-    </ListingsContext.Provider>
-  );
+          {/* <div className=" flex-1 flex-col inset-0  w-full  h-full md:h-auto"> */}
+          <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
+            {filteredLikes.length > 0 ? (
+              parsedListings
+            ) : (
+              <div className="h-full w-full font-bold text-black">
+                You currently have no biddings to display
+              </div>
+            )}
+          </div>
+          {/* </div> */}
+          {/* </div> */}
+        </Layout>
+      </ListingsContext.Provider>
+    );
+  }
+
+  return <Restricted />;
 }
