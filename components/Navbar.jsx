@@ -110,16 +110,17 @@ const Navbar = () => {
       {/* Mobile menu  */}
       <div
         onBlur={handleOnBlurDropDown}
-        className={`${isHidden} flex-col h-full w-[50%] max-w-[300px] fixed top-14  left-0 bg-gray-dark items-center`}
+        className={`${isHidden} flex-col h-full w-[50%] max-w-[300px] fixed top-14  left-0 bg-gray-dark items-start`}
       >
-        <ul className="">
+        <div className="">
           <Link href="/users/likes">
             <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
+              <p>Biddings</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="inline-block w-5 h-5  hover:fill-red hover:text-red stroke-current"
+                className="ml-1 inline-block w-5 h-5  hover:fill-red hover:text-red stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -130,13 +131,14 @@ const Navbar = () => {
               </svg>
             </a>
           </Link>
-        </ul>
+        </div>
         <a
           onClick={handleClickNew}
-          className=" btn input input-ghost btn-xs rounded-btn mx-2"
-        >
+          className=" btn input input-ghost btn-xs rounded-btn "
+          >
+          <p className="">Add listing</p>
           <svg
-            className="h-5 w-5 text-white "
+            className="ml-1 h-5 w-5 text-white "
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -150,7 +152,7 @@ const Navbar = () => {
             <line x1="8" y1="12" x2="16" y2="12" />
           </svg>
         </a>
-        <div className="">
+        <div className="ml-2">
           <Auth />
         </div>
       </div>
