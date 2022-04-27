@@ -110,7 +110,7 @@ const Navbar = () => {
       {/* Mobile menu  */}
       <div
         onBlur={handleOnBlurDropDown}
-        className={`${isHidden} flex-col absolute top-[64%] rounded-lg left-0 bg-gray-dark items-center`}
+        className={`${isHidden} flex-col h-full w-[50%] max-w-[300px] fixed top-14  left-0 bg-gray-dark items-center`}
       >
         <ul className="">
           <Link href="/users/likes">
