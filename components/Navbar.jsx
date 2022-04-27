@@ -203,7 +203,7 @@ const Navbar = () => {
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn px-1"
+            className="xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn px-1"
           >
             <svg
               className="pt-0.5 h-7 w-7 text-white "
