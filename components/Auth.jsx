@@ -37,7 +37,7 @@ const Auth = () => {
     }
   }
   return (
-    <button className="mt-2 font-lucky font-bold" onClick={() => signIn()}>
+    <button className="mt-2 font-lucky font-bold text-xl" onClick={() => signIn()}>
       Sign in
     </button>
   );
