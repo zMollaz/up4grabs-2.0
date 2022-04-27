@@ -135,7 +135,7 @@ const Navbar = () => {
         <a
           onClick={handleClickNew}
           className=" btn input input-ghost btn-xs rounded-btn "
-          >
+        >
           <p className="">Add listing</p>
           <svg
             className="ml-1 h-5 w-5 text-white "
@@ -169,7 +169,11 @@ const Navbar = () => {
         </Link>
       </div>
       {newDisplay && (
-        <New handleClickNew={handleClickNew} setDisplay={setNewDisplay} newDisplay={newDisplay}/>
+        <New
+          handleClickNew={handleClickNew}
+          setDisplay={setNewDisplay}
+          newDisplay={newDisplay}
+        />
       )}
       {/* 
       {hideRestricted && (
@@ -179,12 +183,12 @@ const Navbar = () => {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn mx-2 px-1">
+            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn mx-2 px-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
-                className="mb-2 inline-block w-7 h-7  hover:fill-red hover:text-red stroke-current"
+                className=" w-7 h-7  hover:fill-red hover:text-red stroke-current"
               >
                 <path
                   strokeLinecap="round"
@@ -193,12 +197,13 @@ const Navbar = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
+              <p>Biddings</p>
             </a>
           </Link>
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:hidden lg:inline btn input input-ghost btn-sm rounded-btn px-1"
+            className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn px-1"
           >
             <svg
               className="pt-0.5 h-7 w-7 text-white "
@@ -214,6 +219,7 @@ const Navbar = () => {
               <line x1="12" y1="8" x2="12" y2="16" />{" "}
               <line x1="8" y1="12" x2="16" y2="12" />
             </svg>
+            <p>Add listing</p>
           </a>
         </div>
       </div>
