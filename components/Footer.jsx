@@ -1,14 +1,15 @@
-import { useState, useContext } from "react";
-import { DataContext } from "../context/DataContext";
+import { useState } from "react";
+import { useSession, getSession } from "next-auth/react";
 import dynamic from "next/dynamic";
 const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
   ssr: false,
 });
 
 export default function Footer({ setTimeUp, winner, listingItem }) {
-  const { user, users } = useContext(DataContext);
   const [chatDisplay, setChatDisplay] = useState(false);
-  
+  const { data: session, status } = useSession();
+  const user = session?.user.name;
+
   let listingOwner;
   let listingWinner;
   

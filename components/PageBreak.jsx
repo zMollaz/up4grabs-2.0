@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function PageBreak() {
   return (
     <div className="bg-off-white">

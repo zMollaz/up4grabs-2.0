@@ -1,12 +1,13 @@
 import { useEffect, useState, useContext } from "react";
-import { DataContext } from "../context/DataContext";
+import { useSession, getSession } from "next-auth/react";
 import Pusher from "pusher-js";
 import axios from "axios";
 
 export default function Chat() {
   const [messages, setMessages] = useState([]);
   const [text, setText] = useState("");
-  const { user } = useContext(DataContext);
+  const { data: session, status } = useSession();
+  const user = session?.user.name;
 
   useEffect(() => {
     const pusher = new Pusher(process.env.NEXT_PUBLIC_KEY, {
@@ -62,7 +63,9 @@ export default function Chat() {
           return (
             <div key={index} className={`flex-col ${position} m-2`}>
               <div className="">
-                <strong className="mb-1 p-1 text-gray-dark">@{message.sender}</strong>
+                <strong className="mb-1 p-1 text-gray-dark">
+                  @{message.sender}
+                </strong>
               </div>
               <div className="p-1 break-words w-full">{message.content}</div>
             </div>
