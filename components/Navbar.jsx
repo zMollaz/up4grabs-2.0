@@ -10,7 +10,10 @@ import Restricted from "../components/Restricted";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
-  const { user } = useContext(DataContext); //with this line can import into any component and access users/ state level step-up
+  // const { user } = useContext(DataContext); //with this line can import into any component and access users/ state level step-up
+  const { data: session, status } = useSession();
+  const user = session?.user.name;
+
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
@@ -66,7 +69,6 @@ const Navbar = () => {
   const clickableOutsideInput = (e) => {
     e.stopPropagation();
   };
-  const { data: session, status } = useSession();
 
   const isHidden = showDropdown ? "hidden" : "";
   const userIconHidden = hideUserIcon ? "hidden" : "";
