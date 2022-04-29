@@ -4,9 +4,8 @@ import Map, { Marker } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import axios from "axios";
 import dynamic from "next/dynamic";
-import { useContext, useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import { ListingsContext } from "../../context/ListingsContext";
-import { DataContext } from "../../context/DataContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
 import Restricted from "../../components/Restricted";
@@ -18,15 +17,6 @@ const DynamicComponentWithNoSSR = dynamic(
 
 const MAPBOX_TOKEN =
   "pk.eyJ1IjoiYWVsbW9sbGF6IiwiYSI6ImNremJpcmY4ZDJlbjIyb28yZWt3NjF5MmMifQ.03oFENowylydeoRfp732qg";
-
-// const sessionGetter = async (users) => {
-//   const session = await getSession();
-//   const sessionUser = users.find(
-//     (user) => user.email === session.user.email
-//   );
-//   // setUser(sessionUser);
-//   return sessionUser;
-// };
 
 export const getServerSideProps = async (context) => {
   const listingItem = await prisma.listings.findUnique({
@@ -72,15 +62,6 @@ export const getServerSideProps = async (context) => {
 };
 
 export default function ListingPage(props) {
-  // const sessionGetter = async () => {
-  //   const session = await getSession();
-  //   const sessionUser = props.users.find(
-  //     (user) => user.email === session.user.email
-  //   );
-  //   // setUser(sessionUser);
-  //   return sessionUser;
-  // };
-
   const { data: session, status } = useSession();
   const user = props.users.find((user) => user.email === session?.user.email);
   const findWinner = props.users.find(
@@ -88,7 +69,6 @@ export default function ListingPage(props) {
   );
 
   const { title, description, img_src, end_date } = props.listingItem;
-  // const { user, users } = useContext(DataContext);
   const [color, setColor] = useState("none");
   const [timeUp, setTimeUp] = useState(false);
   const [winner, setWinner] = useState(findWinner || {});
@@ -147,7 +127,6 @@ export default function ListingPage(props) {
               />
               <div className="font-lucky w-42 pt-6 flex justify-center items-baseline text-4xl text-gray-dark">
                 Like to bid
-                {/* {user && ( */}
                 <button
                   onClick={handleLike}
                   className="rounded-full h-10 bg-gray-200 p-0 border-0 inline-flex items-start align-middle justify-between text-gray-500 ml-4"

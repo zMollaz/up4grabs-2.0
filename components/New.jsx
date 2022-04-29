@@ -1,13 +1,14 @@
 import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
-import { DataContext } from "../context/DataContext";
 import { useSession, getSession } from "next-auth/react";
 import onClickOutside from "react-onclickoutside";
 import Restricted from "../components/Restricted";
 
 const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   const { addListing } = useContext(ListingsContext);
-  const { user } = useContext(DataContext);
+  const { data: session, status } = useSession();
+  const user = session?.user.name;
+
   const defaultState = {
     title: "",
     description: "",
@@ -17,9 +18,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   };
 
   const [state, setState] = useState(defaultState);
-  // const [PopUp, setPopUp] = useState(false);
   const restrictedDiv = useRef(null);
-  // const popUpHidden = PopUp ? "hidden" : "";
 
   New.handleClickOutside = () => {
     setDisplay((prev) => !prev);
@@ -66,7 +65,6 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
       setState({ ...state, img_src: parsedImage });
     }
   };
-  const { data: session, status } = useSession();
 
   if (status === "loading") {
     return <p>Loading...</p>;
