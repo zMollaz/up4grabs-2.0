@@ -2,25 +2,19 @@ import Link from "next/link";
 import New from "../components/New";
 import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
-import { DataContext } from "../context/DataContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 import { useSession, getSession } from "next-auth/react";
-import Restricted from "../components/Restricted";
 
 const Navbar = () => {
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
-  // const { user } = useContext(DataContext); //with this line can import into any component and access users/ state level step-up
   const { data: session, status } = useSession();
   const user = session?.user.name;
 
   const [newDisplay, setNewDisplay] = useState(false);
   const [showDropdown, setShowDropdown] = useState(true);
-  const [hideUserIcon, setHideUserIcon] = useState(user ? true : false);
-  const [hideUserList, setHideUserList] = useState(user ? false : true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
-  // const [hideRestricted, setHideRestricted] = useState(false);
 
   const searchInput = useRef(null);
 
@@ -35,11 +29,6 @@ const Navbar = () => {
   Navbar.handleClickOutside = () => {
     setShowDropdown(true);
   };
-
-  // const handleCLickUserIcon = () => {
-  //   setHideUserIcon((prev) => !prev);
-  //   setHideUserList((prev) => !prev);
-  // };
 
   const handleCLickSearchIcon = () => {
     onSearch(searchValue);
@@ -71,19 +60,8 @@ const Navbar = () => {
   };
 
   const isHidden = showDropdown ? "hidden" : "";
-  const userIconHidden = hideUserIcon ? "hidden" : "";
-  const userListHidden = hideUserList ? "hidden" : "";
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
-  // const restrictedHidden = hideRestricted ? "hidden" : "";
-
-  // const userList = users.map((oneUser) => {
-  //   return (
-  //     <option value={oneUser.id} key={oneUser.id} className="user-option">
-  //       {oneUser.name}
-  //     </option>
-  //   );
-  // });
 
   return (
     <div
@@ -177,10 +155,6 @@ const Navbar = () => {
           newDisplay={newDisplay}
         />
       )}
-      {/* 
-      {hideRestricted && (
-        <Restricted />
-      )} */}
 
       <div className="flex-1">
         <div className="items-stretch flex">
@@ -274,39 +248,6 @@ const Navbar = () => {
       <div className="md:ml-2 lg:ml-0 md:flex lg:flex xs:hidden sm:hidden">
         <Auth />
       </div>
-      {/* <div className="md:flex lg:flex xs:hidden sm:hidden">
-          <label htmlFor="select-user">
-            <svg
-              className="mb-50 h-6 w-6 text-white mt-1 "
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-              />
-            </svg>
-          </label>
-          {loaded && (
-            <select
-              name="users"
-              onChange={(e) => {
-                switchUser(e.target.value);
-                
-              }}
-              className=" text-white w-fit btn btn-sm input input-ghost"
-              value={user.id}
-            >
-              <option value="0" className="" disabled>
-                Switch user
-              </option>
-              {userList}
-            </select>
-          )}
-        </div> */}
     </div>
   );
 };
