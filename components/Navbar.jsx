@@ -95,7 +95,7 @@ const Navbar = () => {
         <div className="">
           <Link href="/users/likes">
             <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
-              <p className="text-base">Biddings</p>
+              <p className="text-base">My Biddings</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -118,7 +118,7 @@ const Navbar = () => {
         >
           <p className="text-base">Add listing</p>
           <svg
-            className="ml-1 h-6 w-6 text-white "
+            className="ml-1 h-6 w-6 text-white hover:text-orange"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -159,7 +159,7 @@ const Navbar = () => {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn mx-2 px-1">
+            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:items-center lg:flex rounded-btn mx-2 px-1">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -173,16 +173,16 @@ const Navbar = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
-              <p>Biddings</p>
+              <p className="w-max btn input input-ghost btn-sm">My Biddings</p>
             </a>
           </Link>
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex-col lg:flex btn input input-ghost btn-sm rounded-btn px-1"
+            className="xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex-col lg:flex lg:items-center rounded-btn px-1"
           >
             <svg
-              className="pt-0.5 h-7 w-7 text-white "
+              className="pt-0.5 h-7 w-7 text-white  hover:text-orange "
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
@@ -195,7 +195,7 @@ const Navbar = () => {
               <line x1="12" y1="8" x2="12" y2="16" />{" "}
               <line x1="8" y1="12" x2="16" y2="12" />
             </svg>
-            <p>Add listing</p>
+            <p className="w-max btn input input-ghost btn-sm">Add listing</p>
           </a>
         </div>
       </div>
@@ -221,7 +221,7 @@ const Navbar = () => {
             }}
             type="text"
             // placeholder="Search"
-            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-60 sm:w-28 md:w-24 lg:w-[90%] sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
+            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-[80%] sm:w-28 md:w-24 lg:w-[90%] sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
           />
         </div>
         {/* for the search icon copy the starting a tag till the ending a tag  */}
