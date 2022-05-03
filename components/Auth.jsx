@@ -14,7 +14,7 @@ const Auth = () => {
         <div className="flex items-center mt-2 font-lucky text-lg">
           <strong className="pt-2 text-xl"> {session.user.name} </strong> <br />
           <svg
-            className="xs:h-6 xs:w-6 text-white ml-2"
+            className="xs:h-7 xs:w-7 text-white ml-2 hover:text-red"
             onClick={() => signOut()}
             width="24"
             height="24"
