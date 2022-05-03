@@ -159,7 +159,7 @@ const Navbar = () => {
       <div className="flex-1">
         <div className="items-stretch flex">
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:items-center lg:flex rounded-btn mx-2 px-1">
+            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:items-center lg:flex rounded-btn px-1 mb-4 ml-2">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"

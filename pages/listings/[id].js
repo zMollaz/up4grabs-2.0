@@ -148,8 +148,8 @@ export default function ListingPage(props) {
                   <Restricted setShowRestricted={setShowRestricted} />
                 )}
               </div>
-              <div className="flex ">
-                <button className="bg-gray-dark mt-[10px]  w-40 btn gap-2">
+              <div className="flex w-[48%]">
+                <button className="bg-gray-dark mt-[10px] w-full btn btn-sm gap-2">
                   Bid Count
                   <div className="badge badge-secondary">{bidCount}</div>
                 </button>
@@ -159,7 +159,7 @@ export default function ListingPage(props) {
               <h2 className="text-sm title-font text-gray-dark tracking-widest">
                 Up4Grabs
               </h2>
-              <h1 className="text-gray-dark font-bold text-3xl title-font mb-1">
+              <h1 className="text-gray-dark text-center font-bold text-3xl title-font mb-1">
                 {title}
               </h1>
               <div className="flex mb-">

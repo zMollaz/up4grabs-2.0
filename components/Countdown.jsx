@@ -98,40 +98,43 @@ export default function Countdown({
       {/* {!timeUp ? ( */}
       {!winner.name ? (
         <div className="flex flex-col items-center py-2 border-gray-200 text-red xs:text-[19.5px] sm:text-lg md:text-xl lg:text-lg">
-          <p className=" grid grid-flow-col gap-2 text-center auto-cols-max">{data}</p>
+          <p className=" grid grid-flow-col gap-2 text-center auto-cols-max">
+            {data}
+          </p>
           <strong>until draw!</strong>
         </div>
       ) : (
-        <div className="flex mt-3 ">
-          <div className="m-auto ">
-            <div className="bg-[#DCFCE7] shadow-md px-4 flex rounded-lg animate-bounce">
-              <svg
-                className="h-8 w-8 text-[#15803D]"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <line x1="8" y1="21" x2="16" y2="21" />{" "}
-                <line x1="12" y1="17" x2="12" y2="21" />{" "}
-                <line x1="7" y1="4" x2="17" y2="4" />{" "}
-                <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />{" "}
-                <circle cx="5" cy="9" r="2" /> <circle cx="19" cy="9" r="2" />
-              </svg>
-              <b className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl">
+        <div className="bg-[#DCFCE7] text-center shadow-md px-4 flex flex-row justify-center rounded-lg animate-bounce">
+          <svg
+            className="h-8 w-8 text-[#15803D]"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+            <line x1="8" y1="21" x2="16" y2="21" />{" "}
+            <line x1="12" y1="17" x2="12" y2="21" />{" "}
+            <line x1="7" y1="4" x2="17" y2="4" />{" "}
+            <path d="M17 4v8a5 5 0 0 1 -10 0v-8" />{" "}
+            <circle cx="5" cy="9" r="2" /> <circle cx="19" cy="9" r="2" />
+          </svg>
+          {/* <b className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl">
                 Our lucky winner is
-              </b>
-              <p className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold font-lucky mt-1">
-                {winner?.name}
-              </p>
-            </div>
-          </div>
+              </b> */}
+          <p className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold">
+            
+            Our lucky winner is
+            <span className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold font-lucky mt-1">
+              {" "}
+              {winner?.name}
+            </span>
+          </p>
         </div>
       )}
     </>
