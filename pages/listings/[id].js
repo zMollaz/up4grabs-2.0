@@ -109,13 +109,13 @@ export default function ListingPage(props) {
       setShowRestricted((prev) => !prev);
     }
   };
-
   return (
     <ListingsContext.Provider value={useListings(props)}>
       <Layout
         setTimeUp={setTimeUp}
         winner={winner}
         listingItem={props.listingItem}
+        users={props.users}
       >
         <section className="text-gray-700 body-font overflow-hidden bg-white">
           <div className="lg:flex lg:flex-row lg:items-start xs:flex xs:flex-col xs:items-center pb-[270px]">
