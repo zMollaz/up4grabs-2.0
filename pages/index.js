@@ -7,7 +7,13 @@ import { ListingsContext } from "../context/ListingsContext";
 import useListings from "../hooks/useListings";
 
 export const getServerSideProps = async () => {
-  const defaultListings = await prisma.listings.findMany();
+  const defaultListings = await prisma.listings.findMany({
+    orderBy: [
+      {
+        start_date: "desc",
+      },
+    ],
+  });
   const dbUsers = await prisma.user.findMany();
   const users = JSON.parse(JSON.stringify(dbUsers));
 
