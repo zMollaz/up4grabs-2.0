@@ -71,9 +71,9 @@ export default function SignIn() {
           Sign in
         </button>
       </form>
-      <a href="#" className="self-start">
+      {/* <a href="#" className="self-start">
         Forgot the password?
-      </a>
+      </a> */}
     </div>
   );
 }
