@@ -29,8 +29,8 @@ export default async function formHandler(req, res) {
   console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
   dayjs.extend(utc);
-  const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  const startDate = dayjs(Date.now()).format("YYYY-MM-DDTHH:mm:ss");
+  const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
+  const startDate = dayjs(Date.now()).local().format("YYYY-MM-DDTHH:mm:ss");
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
