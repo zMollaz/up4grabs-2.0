@@ -20,7 +20,13 @@ export default async function formHandler(req, res) {
   }
   const retrievedState = req.body.state;
   const categoryToInteger = Number(retrievedState.category_id);
-  const user = req.body.user.id;
+  const reqUser = req.body.user;
+  const user = await prisma.user.findUnique({
+    where: {
+      email: reqUser.email,
+    },
+  })
+  console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
   dayjs.extend(utc);
   const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
@@ -28,7 +34,7 @@ export default async function formHandler(req, res) {
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
-    user_id: user,
+    user_id: user.id,
     category_id: categoryToInteger,
     start_date: startDate,
     end_date: endDate,

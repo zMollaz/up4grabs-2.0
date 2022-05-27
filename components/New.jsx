@@ -7,7 +7,7 @@ import Restricted from "../components/Restricted";
 const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   const { addListing } = useContext(ListingsContext);
   const { data: session, status } = useSession();
-  const user = session?.user.name;
+  const user = session?.user;
 
   const defaultState = {
     title: "",
