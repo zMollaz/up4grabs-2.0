@@ -5,19 +5,21 @@ const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
   ssr: false,
 });
 
-export default function Footer({ setTimeUp, winner, listingItem }) {
+export default function Footer({ setTimeUp, winner, users, listingItem }) {
+  console.log(121, users);
+
   const [chatDisplay, setChatDisplay] = useState(false);
   const { data: session, status } = useSession();
-  const user = session?.user.name;
-  console.log("winnder", winner);
-  console.log("listingItem", listingItem);
-  console.log("user", session?.user);
+  const user = users?.find((user) => user.email === session?.user.email);
+  // console.log("winner", winner);
+  // console.log("listingItem", listingItem);
+  // console.log("user", user);
   let listingOwner;
   let listingWinner;
   
   if (user) {
-    listingWinner = winner?.name === user; // && user.id === winner?.id; need to add poster
-    // listingOwner = listingItem?.user_id === user?.id;
+    listingWinner = winner?.id === user.id; // && user.id === winner?.id; need to add poster
+    listingOwner = listingItem?.user_id === user?.id;
   }
 
   const handleClickChat = () => {
