@@ -9,13 +9,15 @@ export default function Footer({ setTimeUp, winner, listingItem }) {
   const [chatDisplay, setChatDisplay] = useState(false);
   const { data: session, status } = useSession();
   const user = session?.user.name;
-
+  console.log("winnder", winner);
+  console.log("listingItem", listingItem);
+  console.log("user", session?.user);
   let listingOwner;
   let listingWinner;
   
-  if (user?.name) {
-    listingOwner = winner?.id === user?.id; // && user.id === winner?.id; need to add poster
-    listingWinner = listingItem?.user_id === user?.id;
+  if (user) {
+    listingWinner = winner?.name === user; // && user.id === winner?.id; need to add poster
+    // listingOwner = listingItem?.user_id === user?.id;
   }
 
   const handleClickChat = () => {

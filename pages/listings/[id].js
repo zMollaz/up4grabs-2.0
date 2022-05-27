@@ -122,7 +122,7 @@ export default function ListingPage(props) {
             <div className="w-full flex flex-col items-center">
               <img
                 alt="ecommerce"
-                className=" xs:w-[90%] sm:w-[65%] md:w-[65%] lg:w-[90%] lg:ml-6 sticky mt-6  object-contain rounded border border-gray-200"
+                className="lg:max-w-[70%] xs:w-[90%] sm:w-[65%] md:w-[65%] lg:w-[90%] lg:ml-6 sticky mt-6  object-contain rounded border border-gray-200"
                 src={img_src}
               />
               <div className="font-lucky w-42 pt-6 flex justify-center items-baseline text-4xl text-gray-dark">
