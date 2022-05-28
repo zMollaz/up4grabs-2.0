@@ -6,7 +6,7 @@ const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
 });
 
 export default function Footer({ setTimeUp, winner, users, listingItem }) {
-  console.log(121, users);
+  // console.log(121, users);
 
   const [chatDisplay, setChatDisplay] = useState(false);
   const { data: session, status } = useSession();

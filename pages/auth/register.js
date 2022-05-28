@@ -26,7 +26,7 @@ const Register = (props) => {
     if (state.password !== state.confirmPassword) {
       alert("Password confirmation is not matching password");
     } else {
-      console.log(111, state);
+      // console.log(111, state);
       axios.post("/api/users", { state });
       router.push("/");
 

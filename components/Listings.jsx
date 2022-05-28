@@ -1,14 +1,14 @@
 import ListingItem from "./ListingItem";
 import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
 import { useContext } from "react";
 import { ListingsContext } from "../context/ListingsContext";
+import relativeTime from "dayjs/plugin/relativeTime";
+dayjs.extend(relativeTime);
 
 export default function Listings() {
   const { filteredListings } = useContext(ListingsContext);
 
   const myDate = function (date) {
-    dayjs.extend(relativeTime);
     return dayjs(date).fromNow();
   };
 
