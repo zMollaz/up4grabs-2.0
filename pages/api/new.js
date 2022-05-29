@@ -3,10 +3,9 @@ import axios from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
-import customParseFormat from "dayjs/plugin/customParseFormat";
-dayjs.extend(utc)
-dayjs.extend(timezone)
-dayjs.extend(customParseFormat)
+dayjs.extend(utc);
+dayjs.extend(timezone);
+
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;
   const form = new URLSearchParams();
@@ -28,25 +27,24 @@ export default async function formHandler(req, res) {
     where: {
       email: reqUser.email,
     },
-  })
+  });
   // console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  const nowDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
- const timezone = dayjs.tz.guess()
- const startDate = dayjs.tz(nowDate, "YYYY-MM-DDTHH:mm:ss", timezone)
- console.log(333, startDate);
+  const timezone = dayjs.tz.guess();
+  const startDate = dayjs().tz(timezone).format("YYYY-MM-DDTHH:mm:ss")
+  console.log(333, startDate);
 
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
     user_id: user.id,
     category_id: categoryToInteger,
-    start_date: startDate.local().format('YYYY-MM-DDTHH:mm:ss'),
+    start_date: startDate,
     end_date: endDate,
   };
-console.log(999, newListing);
+  console.log(999, newListing);
   const savedListing = await prisma.listings.create({
     data: newListing,
   });
