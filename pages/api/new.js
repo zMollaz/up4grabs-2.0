@@ -31,8 +31,8 @@ export default async function formHandler(req, res) {
   const imageUrl = await uploadToWebApi(retrievedState);
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  const startDate = dayjs.utc().local().format("YYYY-MM-DDTHH:mm:ss");
-  // const startDate = dayjs(Date.now()).format('YYYY-MM-DDTHH:mm:ss')
+  const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
+  console.log(222, Date.now());
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
@@ -41,7 +41,7 @@ export default async function formHandler(req, res) {
     start_date: startDate,
     end_date: endDate,
   };
-
+console.log(111, newListing);
   const savedListing = await prisma.listings.create({
     data: newListing,
   });
