@@ -32,7 +32,7 @@ export default async function formHandler(req, res) {
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
   const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
-  console.log(222, Date.now());
+ 
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
