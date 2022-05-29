@@ -9,11 +9,4 @@ export default async function listingsHandler(req, res) {
 
     res.json({ listings });
   }
-  // if (req.method === "POST") {
-  //   const { user_id, listing_id } = req.body;
-  //   const like = await prisma.listings.create({
-  //     data: { user_id, listing_id },
-  //   });
-  //   res.json({ listings });
-  // }
 }
