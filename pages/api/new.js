@@ -1,6 +1,7 @@
 import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
+import utc from "dayjs/plugin/utc";
 
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;
@@ -27,9 +28,10 @@ export default async function formHandler(req, res) {
   // console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
+  dayjs.extend(utc);
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
   // const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
-  const startDate = dayjs()
+  const startDate = dayjs.utc().local().format('YYYY-MM-DDTHH:mm:ss')
 
   const newListing = {
     ...retrievedState,
