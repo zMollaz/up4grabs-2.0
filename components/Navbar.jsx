@@ -63,8 +63,6 @@ const Navbar = () => {
   const searchBarHidden = hideSearchBar ? "hidden" : "";
   const logoHidden = hideLogo ? "hidden" : "";
 
-  console.log(222, Date.now());
-
   return (
     <div
       onClick={handleClickNav}
