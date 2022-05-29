@@ -41,7 +41,7 @@ export default async function formHandler(req, res) {
     start_date: startDate,
     end_date: endDate,
   };
-console.log(111, newListing);
+console.log(999, newListing);
   const savedListing = await prisma.listings.create({
     data: newListing,
   });

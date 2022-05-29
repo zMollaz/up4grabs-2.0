@@ -4,11 +4,18 @@ import { useContext } from "react";
 import { ListingsContext } from "../context/ListingsContext";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
+import utc from "dayjs/plugin/utc";
+dayjs.extend(utc);
 
 export default function Listings() {
   const { filteredListings } = useContext(ListingsContext);
 
   const myDate = function (date) {
+    const startDate1 = dayjs().format('YYYY-MM-DDTHH:mm:ss')
+    const startDate2 = dayjs.utc().format('YYYY-MM-DDTHH:mm:ss')
+    console.log(111, startDate1);
+    console.log(222, startDate2);
+    
     return dayjs(date).fromNow();
   };
 
