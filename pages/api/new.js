@@ -1,7 +1,9 @@
 import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import utc from "dayjs/plugin/utc";
+dayjs.extend(relativeTime);
 dayjs.extend(utc);
 
 
@@ -32,7 +34,7 @@ export default async function formHandler(req, res) {
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
   const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
- 
+
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
