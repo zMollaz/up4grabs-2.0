@@ -1,10 +1,6 @@
 import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
-import utc from "dayjs/plugin/utc";
-import timezone from "dayjs/plugin/timezone";
-dayjs.extend(utc);
-dayjs.extend(timezone);
 
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;
@@ -23,6 +19,7 @@ export default async function formHandler(req, res) {
   const retrievedState = req.body.state;
   const categoryToInteger = Number(retrievedState.category_id);
   const reqUser = req.body.user;
+  const startDate = req.body.startDate
   const user = await prisma.user.findUnique({
     where: {
       email: reqUser.email,
@@ -32,17 +29,13 @@ export default async function formHandler(req, res) {
   const imageUrl = await uploadToWebApi(retrievedState);
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  const timezone = dayjs.tz.guess();
-  const startDate = dayjs().tz(timezone).format("YYYY-MM-DDTHH:mm:ss")
-  console.log(333, startDate);
-
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
     user_id: user.id,
     category_id: categoryToInteger,
-    start_date: startDate,
     end_date: endDate,
+    start_date: startDate,
   };
   console.log(999, newListing);
   const savedListing = await prisma.listings.create({

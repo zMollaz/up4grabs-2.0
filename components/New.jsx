@@ -3,6 +3,7 @@ import { ListingsContext } from "../context/ListingsContext";
 import { useSession, getSession } from "next-auth/react";
 import onClickOutside from "react-onclickoutside";
 import Restricted from "../components/Restricted";
+import dayjs from "dayjs";
 
 const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   const { addListing } = useContext(ListingsContext);
@@ -32,9 +33,12 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
 
   const saveListing = async (e) => {
     e.preventDefault();
+    const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss")
+    console.log(333, startDate);
+
     if (user) {
       const response = await fetch("/api/new", {
-        body: JSON.stringify({ state, user }),
+        body: JSON.stringify({ state, user, startDate }),
         headers: {
           "Content-Type": "application/json",
           Accept: "application/json",
