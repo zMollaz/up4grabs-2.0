@@ -34,7 +34,6 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   const saveListing = async (e) => {
     e.preventDefault();
     const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss")
-    console.log(333, startDate);
 
     if (user) {
       const response = await fetch("/api/new", {

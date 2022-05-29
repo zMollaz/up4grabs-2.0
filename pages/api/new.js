@@ -27,7 +27,6 @@ export default async function formHandler(req, res) {
   });
   // console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
-  // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
   const newListing = {
     ...retrievedState,
@@ -37,7 +36,6 @@ export default async function formHandler(req, res) {
     end_date: endDate,
     start_date: startDate,
   };
-  console.log(999, newListing);
   const savedListing = await prisma.listings.create({
     data: newListing,
   });

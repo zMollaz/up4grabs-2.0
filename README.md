@@ -1,5 +1,5 @@
 ## Up4Grabs-2.0 (updated)
-Up4grabs is now deployed on (up4grabs.vercel.app) with major updates such as secured pages and restricted access with passwordless user login and registration utilizing "NextAuth" authentication solution and a live chat function using "Pusher" . Up4grabs-2.0 is now fully responsive over 4 different screen sizes with major improvemnts to UI and UX.
+[Up4grabs-2.0](up4grabs.vercel.app) is now deployed on with major updates such as secured pages and restricted access with passwordless user login and registration utilizing "NextAuth" authentication solution and a live chat function using "Pusher" . Up4grabs-2.0 is now fully responsive over 4 different screen sizes with major improvemnts to UI and UX.
 
 ## About Up4Grabs
 Up4Grabs seeks to foster a community of like-minded individuals inspired by the idea of repurposing and giving new life to items that would otherwise occupy our landfills. Whether moving between living spaces, purging during spring-cleaning, or maybe you’ve held onto an item to be regifted for a little too long, we’ve all faced moments where we just needed to “let go”. 
