@@ -31,14 +31,15 @@ export default async function formHandler(req, res) {
   dayjs.extend(utc);
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
   // const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
-  const startDate = dayjs.utc().local().format('YYYY-MM-DDTHH:mm:ss')
+  const startDate = dayjs.utc()
+  // .local().format('YYYY-MM-DDTHH:mm:ss')
 
   const newListing = {
     ...retrievedState,
     img_src: imageUrl,
     user_id: user.id,
     category_id: categoryToInteger,
-    start_date: startDate,
+    start_date: startDate.local().format('YYYY-MM-DDTHH:mm:ss'),
     end_date: endDate,
   };
 console.log(999, newListing);
