@@ -2,7 +2,11 @@ import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
 import utc from "dayjs/plugin/utc";
-
+import timezone from "dayjs/plugin/timezone";
+import customParseFormat from "dayjs/plugin/customParseFormat";
+dayjs.extend(utc)
+dayjs.extend(timezone)
+dayjs.extend(customParseFormat)
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;
   const form = new URLSearchParams();
@@ -28,11 +32,11 @@ export default async function formHandler(req, res) {
   // console.log(343, user);
   const imageUrl = await uploadToWebApi(retrievedState);
   // const endDate = dayjs(retrievedState.end_date).local().format("YYYY-MM-DDTHH:mm:ss");
-  dayjs.extend(utc);
   const endDate = dayjs(retrievedState.end_date).format("YYYY-MM-DDTHH:mm:ss");
-  // const startDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
-  const startDate = dayjs.utc()
-  // .local().format('YYYY-MM-DDTHH:mm:ss')
+  const nowDate = dayjs().format('YYYY-MM-DDTHH:mm:ss')
+ const timezone = dayjs.tz.guess()
+ const startDate = dayjs.tz(nowDate, "YYYY-MM-DDTHH:mm:ss", timezone)
+ console.log(333, startDate);
 
   const newListing = {
     ...retrievedState,
