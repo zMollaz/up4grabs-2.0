@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { useSelector } from 'react-redux';
 
 export default function Countdown({
   end_date,
-  users,
+  // users,
   listingItem,
   timeUp,
   winner,
   setWinner,
 }) {
+  const users = useSelector(state => state.users);
+  console.log(222, users);
+
   const timeRemaining = new Date(end_date) - new Date();
   const getCountdown = () => {
     const year = new Date().getFullYear() + 1;

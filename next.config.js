@@ -10,6 +10,9 @@ module.exports = {
         net: false,
         crypto: false,
       };
+      // config.experiments = {
+      //   topLevelAwait: true
+      // };
       return config;
     },
 }
