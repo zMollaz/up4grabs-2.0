@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersAsync } from "../redux/usersSlice";
 
 export default function Countdown({
   end_date,
@@ -10,8 +11,14 @@ export default function Countdown({
   winner,
   setWinner,
 }) {
-  const users = useSelector(state => state.users);
-  console.log(222, users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsersAsync());
+  }, [dispatch]);
+
+  const users = useSelector((state) => state.users);
+  // console.log(222, users);
 
   const timeRemaining = new Date(end_date) - new Date();
   const getCountdown = () => {
@@ -132,7 +139,6 @@ export default function Countdown({
                 Our lucky winner is
               </b> */}
           <p className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold">
-            
             Our lucky winner is
             <span className="p-1 text-[#15803D] xs:text-sm sm:text-lg md:text-xl font-bold font-lucky mt-1">
               {" "}

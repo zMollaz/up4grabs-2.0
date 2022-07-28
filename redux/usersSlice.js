@@ -1,14 +1,30 @@
-import {createSlice} from '@reduxjs/toolkit';
-import prisma from "../lib/prisma";
+import {createSlice, createAsyncThunk} from '@reduxjs/toolkit';
+import axios from 'axios';
 
-const dbUsers = await prisma.user.findMany();
-const users = JSON.parse(JSON.stringify(dbUsers));
-// console.log(111, users);
+export const getUsersAsync = createAsyncThunk('users/getUsersAsync',
+async() => {
+  const dbUsers = await (await axios.get('/api/users'))
+  // console.log(111, dbUser);
+  const users = JSON.parse(JSON.stringify(dbUsers));
+  return {users};
+});
 
 export const usersSlice = createSlice({
   name: 'users',
-  initialState: users,
-  reducers: {},
+  initialState: [],
+  reducers: {
+    getUsers: (state, action) => {
+      // return action.payload.users;
+    }
+  },
+  extraReducers: {
+    [getUsersAsync.fulfilled]: (state, action) => {
+      const users = action.payload.users.data.users;
+      return users;
+    }
+  },
 })
+
+export const {getUsers} = usersSlice.actions;
 
 export default usersSlice.reducer;
