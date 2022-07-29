@@ -21,7 +21,7 @@ export const getServerSideProps = async () => {
     props: { defaultListings, users },
   };
 };
-//add somehting like Array.isArayy && map function
+//add something like Array.isArayy && map function
 export default function Home(props) {
   return (
     <ListingsContext.Provider value={useListings(props)}>
