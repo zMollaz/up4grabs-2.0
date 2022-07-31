@@ -5,8 +5,8 @@ import PageBreak from "../components/PageBreak";
 import prisma from "../lib/prisma";
 import { ListingsContext } from "../context/ListingsContext";
 import useListings from "../hooks/useListings";
-import {useSelector, useDispatch} from "react-redux";
-import {useEffect} from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
 import { getUsersAsync } from "../redux/usersSlice";
 
 export const getServerSideProps = async () => {
@@ -21,19 +21,16 @@ export const getServerSideProps = async () => {
   // const users = JSON.parse(JSON.stringify(dbUsers));
 
   return {
-    props: { defaultListings, 
-      // users 
-    },
+    props: { defaultListings },
   };
 };
 //add something like Array.isArayy && map function
 export default function Home(props) {
-
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
 
   useEffect(() => {
-    dispatch((getUsersAsync()));
+    dispatch(getUsersAsync());
   }, [dispatch]);
 
   return (

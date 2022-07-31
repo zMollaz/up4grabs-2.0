@@ -74,7 +74,7 @@ export default function UserLikes(props) {
   if (session) {
     return (
       <ListingsContext.Provider value={listingsHook}>
-        <Layout>
+        <Layout users={users}>
           <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
             {filteredLikes.length > 0 ? (
               parsedListings
