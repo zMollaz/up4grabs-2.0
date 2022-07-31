@@ -21,7 +21,7 @@ export default function Chat() {
     channel.bind("chat-event", function (data) {
       setMessages((prevState) => [
         ...prevState,
-        { sender: data.sender.name, content: data.message },
+        { sender: data.sender, content: data.message },
         //may need to change sender into user instead of data.sender
       ]);
     });
@@ -44,7 +44,7 @@ export default function Chat() {
     //   socket.emit("sent", newMessages);
     //   return newMessages;
     // });
-
+    
     await axios.post("/api/pusher", { message: text, sender: user });
 
     setText((prev) => {
