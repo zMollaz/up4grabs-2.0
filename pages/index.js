@@ -31,10 +31,11 @@ export default function Home(props) {
 
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
+
   useEffect(() => {
     dispatch((getUsersAsync()));
   }, [dispatch]);
-  
+
   return (
     <ListingsContext.Provider value={useListings(props)}>
       <Layout users={users}>

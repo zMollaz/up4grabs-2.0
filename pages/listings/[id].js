@@ -9,6 +9,8 @@ import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
 import Restricted from "../../components/Restricted";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersAsync } from "../../redux/usersSlice";
 
 const DynamicComponentWithNoSSR = dynamic(
   () => import("../../components/Countdown"),
@@ -31,8 +33,8 @@ export const getServerSideProps = async (context) => {
     },
   });
 
-  const dbUsers = await prisma.user.findMany();
-  const users = JSON.parse(JSON.stringify(dbUsers));
+  // const dbUsers = await prisma.user.findMany();
+  // const users = JSON.parse(JSON.stringify(dbUsers));
   const listingWinner = await prisma.Winners.findFirst({
     where: {
       listing_id: Number(context.params.id),
@@ -51,7 +53,6 @@ export const getServerSideProps = async (context) => {
     props: {
       listingItem,
       coordinates,
-      users,
       defaultListings,
       listingId,
       biddings,
@@ -63,8 +64,16 @@ export const getServerSideProps = async (context) => {
 
 export default function ListingPage(props) {
   const { data: session, status } = useSession();
-  const user = props.users.find((user) => user.email === session?.user.email);
-  const findWinner = props.users.find(
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsersAsync());
+  }, [dispatch]);
+
+  const users = useSelector(state => state.users);
+
+  const user = users.find((user) => user.email === session?.user.email);
+  const findWinner = users.find(
     (user) => user.id === props.listingWinner?.user_id
   );
 
@@ -115,7 +124,7 @@ export default function ListingPage(props) {
         setTimeUp={setTimeUp}
         winner={winner}
         listingItem={props.listingItem}
-        users={props.users}
+        users={users}
       >
         <section className="text-gray-700 body-font overflow-hidden bg-white">
           <div className="lg:flex lg:flex-row lg:items-start xs:flex xs:flex-col xs:items-center pb-[270px]">
@@ -171,7 +180,7 @@ export default function ListingPage(props) {
                   setTimeUp={setTimeUp}
                   end_date={end_date}
                   biddings={props.biddings}
-                  users={props.users}
+                  users={users}
                   listingItem={props.listingItem}
                 />
               </div>

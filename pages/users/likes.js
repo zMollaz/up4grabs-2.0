@@ -8,32 +8,38 @@ import { ListingsContext } from "../../context/ListingsContext";
 import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
 import Restricted from "../../components/Restricted";
+import { useSelector, useDispatch } from "react-redux";
+import { getUsersAsync } from "../../redux/usersSlice";
 
 export const getServerSideProps = async (context) => {
   const defaultListings = await prisma.listings.findMany();
   const defaultLikes = await prisma.biddings.findMany();
-  const dbUsers = await prisma.user.findMany();
-  const users = JSON.parse(JSON.stringify(dbUsers));
 
   return {
     props: {
       session: await getSession(context),
       defaultListings,
       defaultLikes,
-      users,
     },
   };
 };
 
 export default function UserLikes(props) {
   const { data: session, status } = useSession();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(getUsersAsync());
+  }, [dispatch]);
   
-  const user = props.users.find((user) => user.email === session?.user.email);
-  
+  const users = useSelector((state) => state.users);
+
+  const user = users.find((user) => user.email === session?.user.email);
+
   const listingsHook = useListings(props);
-  
+
   const [view, setView] = useState(props.defaultListings);
-  
+
   const myDate = function (date) {
     dayjs.extend(relativeTime);
     return dayjs(date).fromNow();
