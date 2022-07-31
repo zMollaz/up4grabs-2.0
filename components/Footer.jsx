@@ -1,17 +1,15 @@
 import { useState } from "react";
 import { useSession, getSession } from "next-auth/react";
-import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 const DynamicComponentWithNoSSR = dynamic(() => import("../components/Chat"), {
   ssr: false,
 });
 
-export default function Footer({ setTimeUp, winner, listingItem }) {
+export default function Footer({ setTimeUp, winner, users, listingItem }) {
   // console.log(121, users);
 
   const [chatDisplay, setChatDisplay] = useState(false);
   const { data: session, status } = useSession();
-  const users = useSelector((state) => state.users);
   const user = users?.find((user) => user.email === session?.user.email);
   // console.log("winner", winner);
   // console.log("listingItem", listingItem);
