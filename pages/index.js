@@ -8,6 +8,7 @@ import useListings from "../hooks/useListings";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getUsersAsync } from "../redux/usersSlice";
+import {getListingsAsync} from "../redux/listingsSlice";
 
 export const getServerSideProps = async () => {
   const defaultListings = await prisma.listings.findMany({
@@ -28,13 +29,15 @@ export const getServerSideProps = async () => {
 export default function Home(props) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
+  const defaultListings = useSelector((state) => state.listings);
 
   useEffect(() => {
     dispatch(getUsersAsync());
+    dispatch(getListingsAsync());
   }, [dispatch]);
-
+  console.log(555, defaultListings);
   return (
-    <ListingsContext.Provider value={useListings(props)}>
+    <ListingsContext.Provider value={useListings({defaultListings})}>
       <Layout users={users}>
         <Header />
         <PageBreak />
