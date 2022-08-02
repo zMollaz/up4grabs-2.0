@@ -5,7 +5,13 @@ export default async function listingsHandler(req, res) {
     return res.status(405).json({ messsage: "Method not allowed" });
   }
   if (req.method === "GET") {
-    const listings = await prisma.listings.findMany();
+    const listings = await prisma.listings.findMany({
+      orderBy: [
+        {
+          start_date: "desc",
+        },
+      ],
+    });
 
     res.json({ listings });
   }

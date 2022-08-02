@@ -8,7 +8,8 @@ dayjs.extend(relativeTime);
 
 export default function Listings() {
   // const { filteredListings } = useContext(ListingsContext);
-  const filteredListings = useSelector(state => state.listings)
+  const filteredListings = useSelector(state => state.listings);
+  
   const myDate = function (date) {
     return dayjs(date).fromNow();
   };

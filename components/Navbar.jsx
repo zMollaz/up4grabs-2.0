@@ -5,8 +5,11 @@ import { ListingsContext } from "../context/ListingsContext";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 import { useSession, getSession } from "next-auth/react";
+import { useDispatch } from "react-redux";
+import {getFilteredListings} from "../redux/listingsSlice";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
   const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { data: session, status } = useSession();
   const user = session?.user.name;
@@ -204,19 +207,23 @@ const Navbar = () => {
           <input
             ref={searchInput}
             placeholder="Search"
-            defaultValue={searchValue}
+            // defaultValue={searchValue}
+            defaultValue=""
             onClick={clickableOutsideInput}
             onBlur={handleOnBlurSearchInput}
             onChange={(e) => {
-              setSearchValue(e.target.value);
-              onSearch(searchValue);
+              // setSearchValue(e.target.value);
+              // onSearch(searchValue);
+              dispatch(getFilteredListings(e.target.value));
               if (e.target.value === "") {
-                onSearch("");
+                // onSearch("");
+                dispatch(getFilteredListings(""));
               }
             }}
             onKeyDown={(e) => {
               if (e.keyCode === 13) {
-                onSearch(searchValue);
+                // onSearch(searchValue);
+                dispatch(getFilteredListings(e.target.value));
               }
             }}
             type="text"
