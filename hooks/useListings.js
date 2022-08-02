@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useListings = ({ defaultListings, defaultLikes }) => {
+  console.log(444,defaultListings);
   const [listings, setListings] = useState(defaultListings);
   const [filteredListings, setFilteredListings] = useState(defaultListings);
   const [bidding, setBidding] = useState(false);

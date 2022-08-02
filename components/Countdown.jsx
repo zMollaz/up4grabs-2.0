@@ -1,24 +1,14 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-import { useSelector, useDispatch } from "react-redux";
-import { getUsersAsync } from "../redux/usersSlice";
 
 export default function Countdown({
   end_date,
-  // users,
+  users,
   listingItem,
   timeUp,
   winner,
   setWinner,
 }) {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(getUsersAsync());
-  }, [dispatch]);
-
-  const users = useSelector((state) => state.users);
-  // console.log(222, users);
 
   const timeRemaining = new Date(end_date) - new Date();
   const getCountdown = () => {
