@@ -10,7 +10,7 @@ import {getFilteredListings} from "../redux/listingsSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
-  const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
+  // const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
   const { data: session, status } = useSession();
   const user = session?.user.name;
 
@@ -18,6 +18,7 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
+  const [searchValue, setSearchValue] = useState("");
 
   const searchInput = useRef(null);
 
@@ -34,7 +35,8 @@ const Navbar = () => {
   };
 
   const handleCLickSearchIcon = () => {
-    onSearch(searchValue);
+    // onSearch(searchValue);
+    dispatch(getFilteredListings(searchValue));
     setHideSearchBar((prev) => !prev);
     setHideLogo((prev) => !prev);
     setTimeout(() => {
@@ -207,23 +209,22 @@ const Navbar = () => {
           <input
             ref={searchInput}
             placeholder="Search"
-            // defaultValue={searchValue}
-            defaultValue=""
+            defaultValue={searchValue}
             onClick={clickableOutsideInput}
             onBlur={handleOnBlurSearchInput}
             onChange={(e) => {
-              // setSearchValue(e.target.value);
+              setSearchValue(e.target.value);
               // onSearch(searchValue);
-              dispatch(getFilteredListings(e.target.value));
+              dispatch(getFilteredListings(searchValue));
               if (e.target.value === "") {
                 // onSearch("");
-                dispatch(getFilteredListings(""));
+                dispatch(getFilteredListings());
               }
             }}
             onKeyDown={(e) => {
               if (e.keyCode === 13) {
                 // onSearch(searchValue);
-                dispatch(getFilteredListings(e.target.value));
+                dispatch(getFilteredListings(searchValue));
               }
             }}
             type="text"
