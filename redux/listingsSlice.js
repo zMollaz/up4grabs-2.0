@@ -15,10 +15,10 @@ export const listingsSlice = createSlice({
   initialState: [],
   reducers: {
     getFilteredListings: (state, action) => {
-      console.log(343, action.payload);
+      console.log("listings slice", action.payload === "");
       // return state.filter((listing) => {
       const filtered = state.filter((listing) => {
-        if (!action.payload) {
+        if (action.payload === "") {
           return true;
         } else {
           return listing.title

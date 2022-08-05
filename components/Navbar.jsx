@@ -6,7 +6,7 @@ import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 import { useSession, getSession } from "next-auth/react";
 import { useDispatch } from "react-redux";
-import {getFilteredListings} from "../redux/listingsSlice";
+import {getFilteredListings, getListingsAsync} from "../redux/listingsSlice";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -209,16 +209,16 @@ const Navbar = () => {
           <input
             ref={searchInput}
             placeholder="Search"
-            defaultValue={searchValue}
             onClick={clickableOutsideInput}
             onBlur={handleOnBlurSearchInput}
+            defaultValue={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value);
               // onSearch(searchValue);
               dispatch(getFilteredListings(searchValue));
               if (e.target.value === "") {
                 // onSearch("");
-                dispatch(getFilteredListings());
+                dispatch(getListingsAsync());
               }
             }}
             onKeyDown={(e) => {
@@ -228,7 +228,6 @@ const Navbar = () => {
               }
             }}
             type="text"
-            // placeholder="Search"
             className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-[80%] sm:w-28 md:w-24 lg:w-[90%] sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
           />
         </div>

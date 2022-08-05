@@ -35,7 +35,7 @@ export default function Home(props) {
     dispatch(getUsersAsync());
     dispatch(getListingsAsync());
   }, [dispatch]);
-  console.log(555, defaultListings);
+
   return (
     <ListingsContext.Provider value={useListings({defaultListings})}>
       <Layout users={users}>
