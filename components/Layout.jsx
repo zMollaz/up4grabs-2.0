@@ -7,11 +7,14 @@ export default function Layout({
   setTimeUp,
   winner,
   listingItem,
+  onSearch,
+  searchValue,
+  setSearchValue,
 }) {
 
   return (
     <div className="font-zen bg-grey w-full h-full">
-      <Navbar />
+      <Navbar onSearch={onSearch} searchValue={searchValue} setSearchValue={setSearchValue} />
       <div className="flex flex-col">{children}</div>
       <Footer
         setTimeUp={setTimeUp}

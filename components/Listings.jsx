@@ -1,16 +1,10 @@
 import ListingItem from "./ListingItem";
 import dayjs from "dayjs";
-import { useContext } from "react";
-import { ListingsContext } from "../context/ListingsContext";
-import {useSelector} from "react-redux";
 import relativeTime from "dayjs/plugin/relativeTime";
 dayjs.extend(relativeTime);
 
-export default function Listings() {
-  // const { filteredListings } = useContext(ListingsContext);
-  const filteredListings = useSelector(state => state.listings);
-  console.log("listings.jsx", filteredListings);
-  
+export default function Listings({filteredListings}) {
+
   const myDate = function (date) {
     return dayjs(date).fromNow();
   };

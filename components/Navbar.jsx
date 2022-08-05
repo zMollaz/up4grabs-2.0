@@ -1,16 +1,11 @@
 import Link from "next/link";
 import New from "../components/New";
-import { useState, useContext, useRef } from "react";
-import { ListingsContext } from "../context/ListingsContext";
+import { useState, useRef } from "react";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 import { useSession, getSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
-import {getFilteredListings, getListingsAsync} from "../redux/listingsSlice";
 
-const Navbar = () => {
-  const dispatch = useDispatch();
-  // const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
+const Navbar = ({onSearch, searchValue, setSearchValue}) => {
   const { data: session, status } = useSession();
   const user = session?.user.name;
 
@@ -18,7 +13,6 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
 
   const searchInput = useRef(null);
 
@@ -35,8 +29,7 @@ const Navbar = () => {
   };
 
   const handleCLickSearchIcon = () => {
-    // onSearch(searchValue);
-    dispatch(getFilteredListings(searchValue));
+    onSearch(searchValue);
     setHideSearchBar((prev) => !prev);
     setHideLogo((prev) => !prev);
     setTimeout(() => {
@@ -214,17 +207,14 @@ const Navbar = () => {
             defaultValue={searchValue}
             onChange={(e) => {
               setSearchValue(e.target.value);
-              // onSearch(searchValue);
-              dispatch(getFilteredListings(searchValue));
+              onSearch(searchValue);
               if (e.target.value === "") {
-                // onSearch("");
-                dispatch(getListingsAsync());
+                onSearch(searchValue);
               }
             }}
             onKeyDown={(e) => {
               if (e.keyCode === 13) {
-                // onSearch(searchValue);
-                dispatch(getFilteredListings(searchValue));
+                onSearch(searchValue);
               }
             }}
             type="text"
