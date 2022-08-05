@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 const useListings = ({ defaultListings, defaultLikes }) => {
-  console.log(444,defaultListings);
+  console.log("listings hook",defaultListings);
   const [listings, setListings] = useState(defaultListings);
   const [filteredListings, setFilteredListings] = useState(defaultListings);
   const [bidding, setBidding] = useState(false);
@@ -10,7 +10,7 @@ const useListings = ({ defaultListings, defaultLikes }) => {
 
   useEffect(() => {
     setFilteredListings(listings);
-  }, [listings, setFilteredListings]);
+  }, [listings]);
 
   const onSearch = (searchValue) => {
     setFilteredListings(
