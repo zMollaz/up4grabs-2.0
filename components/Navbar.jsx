@@ -93,7 +93,7 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
         <div className="">
           <Link href="/users/likes">
             <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
-              <p className="text-base">My Biddings</p>
+              <p className="text-base">Biddings</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -114,7 +114,7 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
           onClick={handleClickNew}
           className=" btn input input-ghost btn-xs rounded-btn "
         >
-          <p className="text-base">Add listing</p>
+          <p className="text-base">Upload</p>
           <svg
             className="ml-1 h-6 w-6 text-white hover:text-orange"
             viewBox="0 0 24 24"
@@ -155,9 +155,9 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
       )}
 
       <div className="flex-1">
-        <div className="flex items-center">
+        <div className="flex items-center w-max">
           <Link href="/users/likes">
-            <a className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:h-full lg:items-center lg:flex lg:mt-2 font-bold rounded-btn px-1  ml-2 lg:mr-2 lg:text-base">
+            <a className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1  lg:ml-2 lg:mr-2 lg:text-base">
               Biddings
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
 
           <a
             onClick={handleClickNew}
-            className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1 lg:text-base"
+            className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1 lg:text-base"
           >
             Upload
             <svg
