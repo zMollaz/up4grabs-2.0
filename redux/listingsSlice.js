@@ -4,7 +4,7 @@ import axios from "axios";
 export const getListingsAsync = createAsyncThunk(
   "listings/getListingsAsync",
   async () => {
-    const dbListings = await axios.get("api/listings");
+    const dbListings = await axios.get("http://localhost:3000/api/listings");
     const listings = dbListings.data.listings;
     return { listings };
   }

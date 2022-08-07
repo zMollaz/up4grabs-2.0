@@ -2,27 +2,13 @@ import ListingItem from "../../components/ListingItem";
 import Layout from "../../components/Layout";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import prisma from "../../lib/prisma";
 import { useEffect, useState } from "react";
-import { ListingsContext } from "../../context/ListingsContext";
-import useListings from "../../hooks/useListings";
 import { getSession, useSession } from "next-auth/react";
 import Restricted from "../../components/Restricted";
 import { useSelector, useDispatch } from "react-redux";
 import { getUsersAsync } from "../../redux/usersSlice";
-
-export const getServerSideProps = async (context) => {
-  const defaultListings = await prisma.listings.findMany();
-  const defaultLikes = await prisma.biddings.findMany();
-
-  return {
-    props: {
-      session: await getSession(context),
-      defaultListings,
-      defaultLikes,
-    },
-  };
-};
+import { getListingsAsync } from "../../redux/listingsSlice";
+import { getLikesAsync } from "../../redux/likesSlice";
 
 export default function UserLikes(props) {
   const { data: session, status } = useSession();
@@ -30,28 +16,27 @@ export default function UserLikes(props) {
 
   useEffect(() => {
     dispatch(getUsersAsync());
+    dispatch(getListingsAsync());
+    dispatch(getLikesAsync());
   }, [dispatch]);
-  
-  const users = useSelector((state) => state.users);
 
+  const users = useSelector((state) => state.users);
+  const listings = useSelector((state) => state.listings);
+  const likes = useSelector((state) => state.likes);
   const user = users.find((user) => user.email === session?.user.email);
 
-  const listingsHook = useListings(props);
-
-  const [view, setView] = useState(props.defaultListings);
+  const [view, setView] = useState(listings);
 
   const myDate = function (date) {
     dayjs.extend(relativeTime);
     return dayjs(date).fromNow();
   };
 
-  const filteredLikes = props.defaultLikes.filter(
-    (like) => like.user_id === user?.id
-  );
+  const filteredLikes = likes.filter((like) => like.user_id === user?.id);
 
   useEffect(() => {
     const listingsArr = filteredLikes.map((like) => like.listing_id);
-    const userListings = props.defaultListings.filter((listing) =>
+    const userListings = listings.filter((listing) =>
       listingsArr.includes(listing.id)
     );
     setView(userListings);
@@ -73,19 +58,17 @@ export default function UserLikes(props) {
 
   if (session) {
     return (
-      <ListingsContext.Provider value={listingsHook}>
-        <Layout users={users}>
-          <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
-            {filteredLikes.length > 0 ? (
-              parsedListings
-            ) : (
-              <div className="h-full w-full font-bold text-black">
-                You currently have no biddings to display
-              </div>
-            )}
-          </div>
-        </Layout>
-      </ListingsContext.Provider>
+      <Layout users={users}>
+        <div className="bg-off-white pr-8 flex-1 h-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6 ">
+          {filteredLikes.length > 0 ? (
+            parsedListings
+          ) : (
+            <div className="h-full w-full font-bold text-black">
+              You currently have no biddings to display
+            </div>
+          )}
+        </div>
+      </Layout>
     );
   }
 

@@ -3,8 +3,8 @@ import Header from "../components/Header";
 import Listings from "../components/Listings";
 import PageBreak from "../components/PageBreak";
 // import prisma from "../lib/prisma";
-import { ListingsContext } from "../context/ListingsContext";
-import useListings from "../hooks/useListings";
+// import { ListingsContext } from "../context/ListingsContext";
+// import useListings from "../hooks/useListings";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getUsersAsync } from "../redux/usersSlice";
@@ -56,17 +56,17 @@ export default function Home(props) {
   }, [defaultListings]);
 
   return (
-    <ListingsContext.Provider value={useListings({ defaultListings })}>
-      <Layout
-        users={users}
-        onSearch={onSearch}
-        searchValue={searchValue}
-        setSearchValue={setSearchValue}
-      >
-        <Header />
-        <PageBreak />
-        <Listings filteredListings={filteredListings} />
-      </Layout>
-    </ListingsContext.Provider>
+    // <ListingsContext.Provider value={useListings({ defaultListings })}>
+    <Layout
+      users={users}
+      onSearch={onSearch}
+      searchValue={searchValue}
+      setSearchValue={setSearchValue}
+    >
+      <Header />
+      <PageBreak />
+      <Listings filteredListings={filteredListings} />
+    </Layout>
+    // </ListingsContext.Provider>
   );
 }
