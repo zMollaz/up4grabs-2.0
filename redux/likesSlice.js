@@ -6,7 +6,6 @@ export const getLikesAsync = createAsyncThunk(
   async (payload) => {
     const dbLikes = await axios.get("/api/likes");
     const likes = dbLikes.data.likes;
-    console.log(111, likes);
     return { likes };
   }
 );
@@ -17,7 +16,6 @@ export const likesSlice = createSlice({
   reducers: {},
   extraReducers: {
     [getLikesAsync.fulfilled]: (state, action) => {
-      console.log(333, action.payload.likes);
       const likes = action.payload.likes;
       return likes;
     },
