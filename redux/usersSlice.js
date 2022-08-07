@@ -4,7 +4,7 @@ import axios from "axios";
 export const getUsersAsync = createAsyncThunk(
   "users/getUsersAsync",
   async () => {
-    const dbUsers = await axios.get("http://localhost:3000/api/users");
+    const dbUsers = await axios.get("/api/users");
     // console.log(111, dbUser);
     const users = JSON.parse(JSON.stringify(dbUsers));
     return { users };

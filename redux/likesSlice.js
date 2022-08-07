@@ -4,7 +4,7 @@ import axios from "axios";
 export const getLikesAsync = createAsyncThunk(
   "likes/getLikesAsync",
   async (payload) => {
-    const dbLikes = await axios.get("http://localhost:3000/api/likes");
+    const dbLikes = await axios.get("/api/likes");
     const likes = dbLikes.data.likes;
     console.log(111, likes);
     return { likes };
