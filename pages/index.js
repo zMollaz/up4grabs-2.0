@@ -29,13 +29,12 @@ import { getListingsAsync } from "../redux/listingsSlice";
 export default function Home(props) {
   const dispatch = useDispatch();
   const users = useSelector((state) => state.users);
-  const defaultListings = useSelector((state) => state.listings);
-
-  const [filteredListings, setFilteredListings] = useState(defaultListings);
+  const listings = useSelector((state) => state.listings);
+  const [filteredListings, setFilteredListings] = useState(listings);
   const [searchValue, setSearchValue] = useState("");
 
   const onSearch = (searchValue) => {
-    const filtered = defaultListings.filter((listing) => {
+    const filtered = listings.filter((listing) => {
       if (searchValue === "") {
         return true;
       } else {
@@ -52,8 +51,8 @@ export default function Home(props) {
   }, [dispatch]);
 
   useEffect(() => {
-    setFilteredListings(defaultListings);
-  }, [defaultListings]);
+    setFilteredListings(listings);
+  }, [listings]);
 
   return (
     // <ListingsContext.Provider value={useListings({ defaultListings })}>
