@@ -31,7 +31,7 @@ export default function UserLikes(props) {
       listingsArr.includes(listing.id)
     );
     setFilteredLikes(userListings);
-  }, [user]);
+  }, [user, likes]);
 
   if (typeof window === "undefined") return null;
 
