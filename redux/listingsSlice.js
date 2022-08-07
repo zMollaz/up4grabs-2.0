@@ -4,30 +4,34 @@ import axios from "axios";
 export const getListingsAsync = createAsyncThunk(
   "listings/getListingsAsync",
   async () => {
-    const dbListings = await axios.get("api/listings");
+    const dbListings = await axios.get("http://localhost:3000/api/listings");
     const listings = dbListings.data.listings;
     return { listings };
   }
 );
 
+// export const addListingAsync = createAsyncThunk("listings/addListingsAsync", async(payload) => {
+//   const resp = await fetch("/api/new", {
+//     body: JSON.stringify({ state, user, startDate }),
+//     headers: {
+//       "Content-Type": "application/json",
+//       Accept: "application/json",
+//     },
+//     method: "POST",
+//   });
+
+//   const newListing = await response.json();
+
+// })
+
 export const listingsSlice = createSlice({
   name: "listings",
   initialState: [],
   reducers: {
-    getFilteredListings: (state, action) => {
-      console.log("listings slice", action.payload === "");
-      // return state.filter((listing) => {
-      const filtered = state.filter((listing) => {
-        if (action.payload === "") {
-          return true;
-        } else {
-          return listing.title
-            .toLowerCase()
-            .includes(action.payload.toLowerCase());
-        }
-      });
-      return filtered;
-    },
+    addListing: (state, action) => {
+      // return [action.payload.newListing, ...state];
+      state.unshift(action.payload.newListing);
+    }
   },
   extraReducers: {
     [getListingsAsync.fulfilled]: (state, action) => {
@@ -37,5 +41,5 @@ export const listingsSlice = createSlice({
   },
 });
 
-export const { getFilteredListings } = listingsSlice.actions;
+export const { addListing } = listingsSlice.actions;
 export default listingsSlice.reducer;

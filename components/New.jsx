@@ -1,12 +1,15 @@
 import { useState, useContext, useRef } from "react";
 import { ListingsContext } from "../context/ListingsContext";
+import {addListing} from "../redux/listingsSlice";
+import {useDispatch} from "react-redux";
 import { useSession, getSession } from "next-auth/react";
 import onClickOutside from "react-onclickoutside";
 import Restricted from "../components/Restricted";
 import dayjs from "dayjs";
 
 const New = ({ handleClickNew, setDisplay, newDisplay }) => {
-  const { addListing } = useContext(ListingsContext);
+  // const { addListing } = useContext(ListingsContext);
+  const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const user = session?.user;
 
@@ -31,27 +34,6 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
     setState(newState);
   };
 
-  const saveListing = async (e) => {
-    e.preventDefault();
-    const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss")
-
-    if (user) {
-      const response = await fetch("/api/new", {
-        body: JSON.stringify({ state, user, startDate }),
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        method: "POST",
-      });
-
-      const newListing = await response.json();
-      setState(defaultState);
-      setDisplay((prev) => !prev);
-      addListing(newListing);
-    }
-  };
-
   const imageToBase64 = (img) =>
     new Promise((resolve, reject) => {
       const reader = new FileReader();
@@ -66,6 +48,28 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
       const convertedImage = await imageToBase64(savedImage);
       const parsedImage = convertedImage.split(",")[1];
       setState({ ...state, img_src: parsedImage });
+    }
+  };
+
+  const saveListing = async (e) => {
+    e.preventDefault();
+    const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss")
+
+    if (user) {
+      const response = await fetch("/api/new", {
+        body: JSON.stringify({ state, user, startDate }),
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        method: "POST",
+      });
+
+      const resp = await response.json();
+      const newListing = resp.savedListing;
+      setState(defaultState);
+      setDisplay((prev) => !prev);
+      dispatch(addListing({newListing}));
     }
   };
 

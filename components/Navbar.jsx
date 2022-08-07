@@ -1,16 +1,11 @@
 import Link from "next/link";
 import New from "../components/New";
-import { useState, useContext, useRef } from "react";
-import { ListingsContext } from "../context/ListingsContext";
+import { useState, useRef } from "react";
 import onClickOutside from "react-onclickoutside";
 import Auth from "../components/Auth";
 import { useSession, getSession } from "next-auth/react";
-import { useDispatch } from "react-redux";
-import {getFilteredListings, getListingsAsync} from "../redux/listingsSlice";
 
-const Navbar = () => {
-  const dispatch = useDispatch();
-  // const { onSearch, searchValue, setSearchValue } = useContext(ListingsContext);
+const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
   const { data: session, status } = useSession();
   const user = session?.user.name;
 
@@ -18,7 +13,6 @@ const Navbar = () => {
   const [showDropdown, setShowDropdown] = useState(true);
   const [hideSearchBar, setHideSearchBar] = useState(true);
   const [hideLogo, setHideLogo] = useState(false);
-  const [searchValue, setSearchValue] = useState("");
 
   const searchInput = useRef(null);
 
@@ -35,8 +29,7 @@ const Navbar = () => {
   };
 
   const handleCLickSearchIcon = () => {
-    // onSearch(searchValue);
-    dispatch(getFilteredListings(searchValue));
+    onSearch(searchValue);
     setHideSearchBar((prev) => !prev);
     setHideLogo((prev) => !prev);
     setTimeout(() => {
@@ -162,9 +155,10 @@ const Navbar = () => {
       )}
 
       <div className="flex-1">
-        <div className="items-stretch flex">
+        <div className="flex items-center">
           <Link href="/users/likes">
-            <a className="xs:hidden sm:hidden md:hidden lg:h-full lg:flex-col lg:items-center lg:flex rounded-btn px-1 mb-4 ml-2">
+            <a className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:h-full lg:items-center lg:flex lg:mt-2 font-bold rounded-btn px-1  ml-2 lg:mr-2 lg:text-base">
+              Biddings
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -178,14 +172,14 @@ const Navbar = () => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
-              <p className="w-max btn input input-ghost btn-sm">My Biddings</p>
             </a>
           </Link>
 
           <a
             onClick={handleClickNew}
-            className="xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex-col lg:flex lg:items-center rounded-btn px-1"
+            className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:w-max lg:h-full lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1 lg:text-base"
           >
+            Upload
             <svg
               className="pt-0.5 h-7 w-7 text-white  hover:text-orange "
               viewBox="0 0 24 24"
@@ -200,58 +194,52 @@ const Navbar = () => {
               <line x1="12" y1="8" x2="12" y2="16" />{" "}
               <line x1="8" y1="12" x2="16" y2="12" />
             </svg>
-            <p className="w-max btn input input-ghost btn-sm">Add listing</p>
+            {/* <p className="w-max btn input input-ghost btn-sm">Add listing</p> */}
           </a>
         </div>
       </div>
-      <div className=" ">
-        <div className="form-control">
-          <input
-            ref={searchInput}
-            placeholder="Search"
-            onClick={clickableOutsideInput}
-            onBlur={handleOnBlurSearchInput}
-            defaultValue={searchValue}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-              // onSearch(searchValue);
-              dispatch(getFilteredListings(searchValue));
-              if (e.target.value === "") {
-                // onSearch("");
-                dispatch(getListingsAsync());
-              }
-            }}
-            onKeyDown={(e) => {
-              if (e.keyCode === 13) {
-                // onSearch(searchValue);
-                dispatch(getFilteredListings(searchValue));
-              }
-            }}
-            type="text"
-            className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-[80%] sm:w-28 md:w-24 lg:w-[90%] sm:inline-flex md:inline-flex lg:inline-flex focus:bg-white text-white btn btn-sm input input-ghost h-7`}
-          />
-        </div>
-        {/* for the search icon copy the starting a tag till the ending a tag  */}
-        <a
-          onClick={handleCLickSearchIcon}
-          className="btn btn-sm input input-ghost lg:mr-5 xs:mr-0 xs:justify-self-end px-1"
+      <input
+        ref={searchInput}
+        placeholder="Search"
+        onClick={clickableOutsideInput}
+        onBlur={handleOnBlurSearchInput}
+        defaultValue={searchValue}
+        onChange={(e) => {
+          setSearchValue(e.target.value);
+          onSearch(searchValue);
+          if (e.target.value === "") {
+            onSearch(searchValue);
+          }
+        }}
+        onKeyDown={(e) => {
+          if (e.keyCode === 13) {
+            onSearch(searchValue);
+          }
+        }}
+        type="text"
+        className={`ml-2 mr-2 xs:${searchBarHidden} xs:w-[80%] sm:w-28 md:w-24 lg:w-[15vw] sm:inline-flex md:inline-flex lg:inline-flex lg:mt-2 focus:bg-white text-white btn btn-sm input input-ghost h-7`}
+      />
+      {/* for the search icon copy the starting a tag till the ending a tag  */}
+      <a
+        onClick={handleCLickSearchIcon}
+        className="btn btn-sm input input-ghost lg:mt-2 lg:mr-5 xs:mr-0 xs:justify-self-end px-1"
+      >
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          className="h-6 w-6 "
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            className="h-6 w-6 "
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-            />
-          </svg>
-        </a>
-      </div>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </a>
+
       <div className="md:ml-2 lg:ml-0 md:flex lg:flex xs:hidden sm:hidden">
         <Auth />
       </div>

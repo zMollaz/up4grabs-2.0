@@ -2,6 +2,14 @@ import prisma from "../../lib/prisma";
 import axios from "axios";
 import dayjs from "dayjs";
 
+export const config = {
+  api: {
+    bodyParser: {
+      sizeLimit: "10mb", // Set desired value here
+    },
+  },
+};
+
 const uploadToWebApi = async (listing) => {
   const image = listing.img_src;
   const form = new URLSearchParams();
@@ -19,7 +27,7 @@ export default async function formHandler(req, res) {
   const retrievedState = req.body.state;
   const categoryToInteger = Number(retrievedState.category_id);
   const reqUser = req.body.user;
-  const startDate = req.body.startDate
+  const startDate = req.body.startDate;
   const user = await prisma.user.findUnique({
     where: {
       email: reqUser.email,
