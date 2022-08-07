@@ -10,6 +10,7 @@ export default function Listings({filteredListings}) {
   };
 
   const parsedListings = filteredListings?.map((listing) => {
+
     return (
       <ListingItem
         title={listing.title}
