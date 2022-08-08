@@ -78,6 +78,7 @@ export default function ListingPage(props) {
   const [winner, setWinner] = useState(findWinner || {});
   const [bidCount, setBidCount] = useState(0);
   const [showRestricted, setShowRestricted] = useState(false);
+  const [liked, setLiked] = useState(false);
 
   const likeHistory = async () => {
     try {
@@ -88,6 +89,7 @@ export default function ListingPage(props) {
       const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
       if (userWithPriorLike !== undefined) {
         setColor("#DA4567");
+        setLiked(true);
       } else {
         setColor("none");
       }
@@ -96,19 +98,24 @@ export default function ListingPage(props) {
     }
   };
 
-  useEffect(async () => likeHistory(), [props.user]);
+  useEffect(async () => likeHistory(), [user, liked]);
 
   const handleLike = async () => {
-    if (user) {
-      const postResponse = await axios.post("/api/likes", {
-        user_id: user?.id,
-        listing_id: props.listingId,
-      });
 
-      const getResponse = await axios.get(`/api/likes/${props.listingId}`);
-      const biddings = getResponse.data.likes;
-      setBidCount(biddings.length);
-      setColor("#DA4567"); // may want to remove this line
+    if (user) {
+      if (!liked) {
+
+        const postResponse = await axios.post("/api/likes", {
+          user_id: user?.id,
+          listing_id: props.listingId,
+        });
+        
+        const getResponse = await axios.get(`/api/likes/${props.listingId}`);
+        const biddings = getResponse.data.likes;
+        setBidCount(biddings.length);
+        setLiked(true);
+        setColor("#DA4567"); // may want to remove this line
+      }
     } else {
       setShowRestricted((prev) => !prev);
     }
@@ -169,7 +176,7 @@ export default function ListingPage(props) {
               <DynamicComponentWithNoSSR
                 winner={winner}
                 setWinner={setWinner}
-                user={props.user}
+                user={user}
                 timeUp={timeUp}
                 setTimeUp={setTimeUp}
                 end_date={end_date}

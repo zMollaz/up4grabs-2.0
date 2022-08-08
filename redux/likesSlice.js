@@ -22,5 +22,5 @@ export const likesSlice = createSlice({
   },
 });
 
-// export const {} = favoritesSlice.actions;
+// export const {} = likesSlice.actions;
 export default likesSlice.reducer;
