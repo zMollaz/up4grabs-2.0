@@ -17,7 +17,10 @@ export default function UserLikes(props) {
   const listings = useSelector((state) => state.listings);
   const likes = useSelector((state) => state.likes);
   const userLikes = likes.filter((like) => like.user_id === user?.id);
-  const [filteredLikes, setFilteredLikes] = useState(listings);
+  const likesIdArr = userLikes.map((like) => like.listing_id);
+  const userLikedListings = listings.filter((listing) =>
+    likesIdArr.includes(listing.id));
+  const [filteredLikes, setFilteredLikes] = useState(userLikedListings);
 
   useEffect(() => {
     dispatch(getUsersAsync());
@@ -26,12 +29,8 @@ export default function UserLikes(props) {
   }, [dispatch]);
 
   useEffect(() => {
-    const listingsArr = userLikes.map((like) => like.listing_id);
-    const userListings = listings.filter((listing) =>
-      listingsArr.includes(listing.id)
-    );
-    setFilteredLikes(userListings);
-  }, [user, likes]);
+    setFilteredLikes(userLikedListings);
+  }, [user, users, likes, listings]);
 
   if (typeof window === "undefined") return null;
 
