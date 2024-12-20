@@ -91,8 +91,7 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
         className={`${isHidden} flex-col h-full w-[50%] max-w-[300px] fixed top-14  left-0 bg-gray-dark items-start`}
       >
         <div className="">
-          <Link href="/users/likes">
-            <a className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
+          <Link href="/users/likes" className=" btn input input-ghost btn-xs rounded-btn mb-1.5 mt-5">
               <p className="text-base">Biddings</p>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -107,7 +106,6 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
-            </a>
           </Link>
         </div>
         <a
@@ -140,10 +138,8 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
       <div
         className={`xs:${logoHidden} sm:inline-flex md:inline-flex  pr-2 mr-2`}
       >
-        <Link href="/">
-          <a className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font-bold">
+        <Link href="/" className="text-4xl md:text-3xl lg:text-4xl xs:text-2xl mt-2 ml-2 font-lucky font-bold">
             Up4Grabs
-          </a>
         </Link>
       </div>
       {newDisplay && (
@@ -156,8 +152,7 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
 
       <div className="flex-1">
         <div className="flex items-center w-max">
-          <Link href="/users/likes">
-            <a className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1  lg:ml-2 lg:mr-2 lg:text-base">
+          <Link href="/users/likes" className="btn input input-ghost btn-sm xs:hidden sm:hidden md:hidden lg:flex lg:items-center lg:mt-2 font-bold rounded-btn px-1  lg:ml-2 lg:mr-2 lg:text-base">
               Biddings
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -172,7 +167,6 @@ const Navbar = ({ onSearch, searchValue, setSearchValue }) => {
                   d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
                 ></path>
               </svg>
-            </a>
           </Link>
 
           <a
