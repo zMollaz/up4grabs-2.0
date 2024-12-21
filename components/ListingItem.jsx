@@ -5,7 +5,6 @@ export default function Listings(props) {
 
   return (
     <Link href={`/listings/${id}`}>
-      <a>
         <div className="bg-off-white w-full shadow-md hover:shadow-2xl mx-4 rounded-lg">
           <header>
             <img src={img} className="rounded-lg object-cover h-60 w-full" />
@@ -22,7 +21,6 @@ export default function Listings(props) {
             </footer>
           </div>
         </div>
-      </a>
     </Link>
   );
 }

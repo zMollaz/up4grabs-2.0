@@ -1,14 +1,31 @@
-import { useState, useContext, useRef } from "react";
-import { ListingsContext } from "../context/ListingsContext";
-import {addListing} from "../redux/listingsSlice";
-import {useDispatch} from "react-redux";
-import { useSession, getSession } from "next-auth/react";
-import onClickOutside from "react-onclickoutside";
+import { useState, useRef, useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { useSession } from "next-auth/react";
+import { addListing } from "../redux/listingsSlice";
 import Restricted from "../components/Restricted";
 import dayjs from "dayjs";
 
+// Custom hook for handling clicks outside an element
+const useOnClickOutside = (ref, handler) => {
+  useEffect(() => {
+    const listener = (event) => {
+      if (!ref.current || ref.current.contains(event.target)) {
+        return;
+      }
+      handler(event);
+    };
+
+    document.addEventListener("mousedown", listener);
+    document.addEventListener("touchstart", listener);
+
+    return () => {
+      document.removeEventListener("mousedown", listener);
+      document.removeEventListener("touchstart", listener);
+    };
+  }, [ref, handler]);
+};
+
 const New = ({ handleClickNew, setDisplay, newDisplay }) => {
-  // const { addListing } = useContext(ListingsContext);
   const dispatch = useDispatch();
   const { data: session, status } = useSession();
   const user = session?.user;
@@ -23,10 +40,12 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
 
   const [state, setState] = useState(defaultState);
   const restrictedDiv = useRef(null);
+  const formRef = useRef(null); // Ref for the form to detect clicks outside
 
-  New.handleClickOutside = () => {
+  // Handle click outside the form
+  useOnClickOutside(formRef, () => {
     setDisplay((prev) => !prev);
-  };
+  });
 
   const changeHandler = (e) => {
     const { name, value } = e.target;
@@ -53,7 +72,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
 
   const saveListing = async (e) => {
     e.preventDefault();
-    const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss")
+    const startDate = dayjs().format("YYYY-MM-DDTHH:mm:ss");
 
     if (user) {
       const response = await fetch("/api/new", {
@@ -69,7 +88,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
       const newListing = resp.savedListing;
       setState(defaultState);
       setDisplay((prev) => !prev);
-      dispatch(addListing({newListing}));
+      dispatch(addListing({ newListing }));
     }
   };
 
@@ -78,22 +97,19 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   }
 
   if (status === "unauthenticated") {
-    // return !popUpHidden && <Restricted ref={restrictedDiv} />;
-    return <Restricted handleClickNew={handleClickNew} newDisplay={newDisplay}/>;
+    return <Restricted handleClickNew={handleClickNew} newDisplay={newDisplay} />;
   }
 
   return (
-    <div
-      className={`fixed w-full h-full inset-0`}
-    >
+    <div className="fixed w-full h-full inset-0">
       <div
         onClick={handleClickNew}
         className="flex w-full h-full opacity-75 bg-t-gray fixed inset-0"
       ></div>
       <form
+        ref={formRef} // Attach ref to the form
         onSubmit={saveListing}
-        // className="center w-5/12 overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white fixed inset-24 "
-        className="transform -translate-x-1/2 -translate-y-1/2 xs:h-[80%] xs:w-[80%] sm:max-w-md overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6  bg-white  absolute top-[50%] left-[50%]"
+        className="transform -translate-x-1/2 -translate-y-1/2 xs:h-[80%] xs:w-[80%] sm:max-w-md overflow-auto px-4 items-center pb-4 space-y-8 rounded-lg lg:px-8 sm:pb-6 bg-white absolute top-[50%] left-[50%]"
         action="#"
       >
         <button
@@ -117,7 +133,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
         <div>
           <label
             htmlFor="title"
-            className="block mt-6 font-bold text-sm text-gray-dark  "
+            className="block mt-6 font-bold text-sm text-gray-dark"
           >
             Title
           </label>
@@ -125,7 +141,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
             value={state.title}
             onChange={changeHandler}
             name="title"
-            className="bg-white border-2 text-gray-dark  text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-white border-2 text-gray-dark text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="What's Up4Grabs?"
             required=""
           />
@@ -133,7 +149,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
         <div>
           <label
             htmlFor="description"
-            className="block font-bold text-sm text-gray-dark  "
+            className="block font-bold text-sm text-gray-dark"
           >
             Description
           </label>
@@ -150,7 +166,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
         <div>
           <label
             htmlFor="postal_code"
-            className="block mt-6 font-bold text-sm  text-gray-dark  "
+            className="block mt-6 font-bold text-sm text-gray-dark"
           >
             Postal Code
           </label>
@@ -158,7 +174,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
             onChange={changeHandler}
             value={state.postal_code}
             name="postal_code"
-            className="bg-gray-50 rounded-lg border-2 text-gray-dark  text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+            className="bg-gray-50 rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
             placeholder="Let other Grabbers know the whereabouts of your Grab."
             required=""
           />
@@ -167,7 +183,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
           <div className="w-full">
             <label
               htmlFor="end_date"
-              className="flow-root mt-2 font-bold text-sm text-gray-dark  "
+              className="flow-root mt-2 font-bold text-sm text-gray-dark"
             >
               Draw Date
             </label>
@@ -175,7 +191,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
               onChange={changeHandler}
               value={state.end_date}
               name="end_date"
-              className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500  xs:w-full sm:w-40 p-2.5"
+              className="bg-gray-50 font-bold rounded-lg border-2 text-gray-dark text-sm focus:ring-blue-500 focus:border-blue-500 xs:w-full sm:w-40 p-2.5"
               type="date"
               id="start"
               min="2020-01-01"
@@ -203,7 +219,7 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
         <div className="flex justify-center">
           <div className="w-full rounded-lg bg-gray-50">
             <div className="">
-              <label className=" font-bold text-gray-dark">File Upload</label>
+              <label className="font-bold text-gray-dark">File Upload</label>
               <div className="flex items-center justify-center w-full">
                 <label className="flex flex-col rounded w-full h-32 border-4 border-gray-dark border-dashed hover:bg-gray-light hover:border-gray">
                   <div className="flex flex-col items-center justify-center pt-7">
@@ -221,13 +237,12 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
                         d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"
                       />
                     </svg>
-                    <p className="pt-1 text-sm font-bold tracking-wider text-gray-dark group-hover:textblack">
+                    <p className="pt-1 text-sm font-bold tracking-wider text-gray-dark group-hover:text-black">
                       Attach a file
                     </p>
                   </div>
                   <input
                     onChange={saveImage}
-                    // value={state.img_src}
                     type="file"
                     className="opacity-0"
                     name="img_src"
@@ -247,8 +262,4 @@ const New = ({ handleClickNew, setDisplay, newDisplay }) => {
   );
 };
 
-const clickOutsideConfig = {
-  handleClickOutside: () => New.handleClickOutside,
-};
-
-export default onClickOutside(New, clickOutsideConfig);
+export default New;
