@@ -15,7 +15,7 @@ const Auth = () => {
           <strong className="pt-2 text-xl"> {session.user.name} </strong> <br />
           <svg
             className="xs:h-7 xs:w-7 text-white ml-2 hover:text-red"
-            onClick={() => signOut()}
+            onClick={signOut}
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -37,7 +37,7 @@ const Auth = () => {
     }
   }
   return (
-    <button className="mt-2 font-lucky font-bold text-xl" onClick={() => signIn()}>
+    <button className="mt-2 font-lucky font-bold text-xl" onClick={signIn}>
       Sign in
     </button>
   );
