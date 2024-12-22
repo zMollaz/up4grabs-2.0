@@ -5,6 +5,7 @@ import PageBreak from "../components/PageBreak";
 // import prisma from "../lib/prisma";
 // import { ListingsContext } from "../context/ListingsContext";
 // import useListings from "../hooks/useListings";
+import useSearch from "../hooks/useSearch";
 import { useSelector, useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import { getUsersAsync } from "../redux/usersSlice";
@@ -31,19 +32,6 @@ export default function Home(props) {
   const users = useSelector((state) => state.users);
   const listings = useSelector((state) => state.listings);
   const [filteredListings, setFilteredListings] = useState(listings);
-  const [searchValue, setSearchValue] = useState("");
-
-  const onSearch = (searchValue) => {
-    const filtered = listings.filter((listing) => {
-      if (searchValue === "") {
-        return true;
-      } else {
-        return listing.title.toLowerCase().includes(searchValue.toLowerCase());
-      }
-    });
-    setFilteredListings(filtered);
-    return filtered;
-  };
 
   useEffect(() => {
     dispatch(getUsersAsync());
@@ -58,9 +46,8 @@ export default function Home(props) {
     // <ListingsContext.Provider value={useListings({ defaultListings })}>
     <Layout
       users={users}
-      onSearch={onSearch}
-      searchValue={searchValue}
-      setSearchValue={setSearchValue}
+      listings={listings}
+      setFilteredListings={setFilteredListings}
     >
       <Header />
       <PageBreak />
