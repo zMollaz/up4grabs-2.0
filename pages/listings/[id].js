@@ -62,16 +62,16 @@ export default function ListingPage(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getUsersAsync());
-  }, [dispatch]);
+    if (session?.user) {
+      dispatch(getUsersAsync());
+    }
+  }, [session, dispatch]);
 
   const users = useSelector((state) => state.users);
-
   const user = users.find((user) => user.email === session?.user.email);
   const findWinner = users.find(
     (user) => user.id === props.listingWinner?.user_id
   );
-
   const { title, description, img_src, end_date } = props.listingItem;
   const [color, setColor] = useState("none");
   const [timeUp, setTimeUp] = useState(false);
@@ -80,36 +80,36 @@ export default function ListingPage(props) {
   const [showRestricted, setShowRestricted] = useState(false);
   const [liked, setLiked] = useState(false);
 
-  const likeHistory = async () => {
-    try {
-      const response = await axios.get(`/api/likes/${props.listingId}`);
-      const biddings = response.data.likes;
-      setBidCount(biddings.length);
-      const bidders = biddings.map((bidding) => bidding.user_id);
-      const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
-      if (userWithPriorLike !== undefined) {
-        setColor("#DA4567");
-        setLiked(true);
-      } else {
-        setColor("none");
+  useEffect(() => {
+    const fetchLikesHistory = async () => {
+      try {
+        const response = await axios.get(`/api/likes/${props.listingId}`);
+        const biddings = response.data.likes;
+        setBidCount(biddings.length);
+        const bidders = biddings.map((bidding) => bidding.user_id);
+        const userWithPriorLike = bidders.find((bidder) => bidder === user?.id);
+        if (userWithPriorLike !== undefined) {
+          setColor("#DA4567");
+          setLiked(true);
+        } else {
+          setColor("none");
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
-    }
-  };
+    };
 
-  useEffect(async () => likeHistory(), [user, liked]);
+    fetchLikesHistory();
+  }, [user, liked]);
 
   const handleLike = async () => {
-
     if (user) {
       if (!liked) {
-
         const postResponse = await axios.post("/api/likes", {
           user_id: user?.id,
           listing_id: props.listingId,
         });
-        
+
         const getResponse = await axios.get(`/api/likes/${props.listingId}`);
         const biddings = getResponse.data.likes;
         setBidCount(biddings.length);
@@ -120,6 +120,7 @@ export default function ListingPage(props) {
       setShowRestricted((prev) => !prev);
     }
   };
+
   return (
     <Layout
       setTimeUp={setTimeUp}
